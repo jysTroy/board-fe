@@ -1,0 +1,55 @@
+server:
+  port: 3000
+  servlet:
+    session.cookie.name: 66e56riA66e56riA
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.url}
+    username: ${db.username}
+    password: ${db.password}
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddlAuto: ${ddl.auto}
+
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 60MB
+      fileSizeThreshold: 30MB
+
+logging:
+  level:
+    org.hibernate.type: trace
+    org.hibernate.orm.jdbc.bind: trace
+
+file:
+  upload:
+    url: ${file.url}
+    path: ${file.path}
+
+springdoc:
+  version: '1.0.0'
+  api-docs:
+    path: /docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /api.html
+    disable-swagger-default-url: true
+    doc-expansion: none
+  paths-to-match:
+    - /api/**
