@@ -37,7 +37,7 @@ public class FileDeleteServiceTest {
         Long seq = saved.getSeq();
 
         // 삭제 처리
-        FileInfo deleted = fileDeleteService.deleteProcess(seq);
+        fileDeleteService.deleteProcess(seq);
 
     }
 }
