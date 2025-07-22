@@ -1,6 +1,7 @@
 package org.maengle.global.configs;
 
 import lombok.RequiredArgsConstructor;
+import org.maengle.member.libs.MemberUtil;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuditorAwareImpl implements AuditorAware<String> {
 
-//    private final MemberUtil memberUtil;
+    //private final MemberUtil memberUtil;
 
     @Override
     public Optional<String> getCurrentAuditor() {
