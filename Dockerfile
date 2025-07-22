@@ -1,4 +1,4 @@
-ARG JAR_PATH=build/libs/secondhand-0.0.1-SNAPSHOT.jar
+ARG JAR_PATH=build/libs/.jar
 ARG PORT=3000
 COPY ${JAR_PATH} app.jar
 RUN mkdir uploads
