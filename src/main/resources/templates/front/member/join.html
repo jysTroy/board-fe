@@ -3,7 +3,34 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-    <main layout:fragment="content">
-        <h1>회원 가입 페이지</h1>
-    </main>
+<main layout:fragment="content">
+    <h1>회원 가입 페이지</h1>
+
+    <!-- 기본 구성, 컨트롤러에서 모델 객체 구현되면 requestJoin 구성해야됨-->
+    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off">
+        <ul>
+            <li>
+                <input type="text" name="email" placeholder="이메일">
+            </li>
+            <li>
+                <input type="password" name="password" placeholder="비밀번호">
+            </li>
+            <li>
+                <input type="password" name="confirmPassword" placeholder="비밀번호 확인">
+            </li>
+            <li>
+                <input type="text" name="name" placeholder="회원명">
+            </li>
+            <li>
+                <input type="text" name="mobile" placeholder="휴대전화번호">
+            </li>
+        </ul>
+
+        <h3>약관동의</h3>
+        <div class="terms">약관이 들어갈 곳</div>
+        <input type="checkbox" name="termsAgree" id="terms-agree" value="true">
+        <label for="terms-agree">회원가입 약관에 동의합니다</label>
+        <button type="submit">가입하기</button>
+    </form>
+</main>
 </html>

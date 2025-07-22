@@ -10,29 +10,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class FileInfoServiceTest {
 
-	@Autowired
-	private FileInfoService service;
+    @Autowired
+    private FileInfoService service;
 
-	@Autowired
-	private FileInfoRepository repository;
+    @Autowired
+    private FileInfoRepository repository;
 
-	@Test
-	void test() {
-		// 1. 테스트용 FileInfo 생성
-		FileInfo file = new FileInfo();
-		file.setGid("testGid");
-		file.setFileName("testFile.jpg");
-		file.setLocation("uploads/testFile.jpg");
-		file.setExtension("jpg");
-		file.setContentType("image/jpeg");
-		file.setDone(false);
+    @Test
+    void test() {
+        // 1. 테스트용 FileInfo 생성
+        FileInfo file = new FileInfo();
+        file.setGid("testGid");
+        file.setFileName("testFile.jpg");
+        file.setLocation("uploads/testFile.jpg");
+        file.setExtension("jpg");
+        file.setContentType("image/jpeg");
+        file.setDone(false);
 
-		// 2. 저장
-		FileInfo saved = repository.save(file);
+        // 2. 저장
+        FileInfo saved = repository.save(file);
 
-		// 3. 서비스로 조회
-		FileInfo fetched = service.get(saved.getSeq()); // ID는 seq 필드
-		System.out.println(fetched);
+        // 3. 서비스로 조회
+        FileInfo fetched = service.get(saved.getSeq()); // ID는 seq 필드
+        System.out.println(fetched);
 
-	}
+    }
 }
