@@ -3,6 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta charset="UTF-8">
+
+        <!-- common.css 받기위한 링크 기본 연결(css 미구현, addCommonCSS는 선언만 했음, 쓰는곳 없음) -->
+        <link rel="stylesheet" th:href="@{/common/css/common.css}">
+        <th:block layout:fragment="addCommonCss" />
+
     </head>
     <body>
         <header th:replace="~{front/outlines/_header::common}"></header>
