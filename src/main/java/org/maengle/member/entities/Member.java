@@ -5,6 +5,8 @@ import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.constants.Gender;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(indexes = {
@@ -38,4 +40,8 @@ public class Member extends BaseEntity {
     private String mobile;
 
     private boolean termsAgree;
+
+    private boolean accountLocked; // 계정 정지 상태
+    private LocalDateTime expired; // 계정 만료 일자
+    private LocalDateTime credentialChangedAt; // PW 변경일
 }
