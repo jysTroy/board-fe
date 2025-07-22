@@ -1,4 +1,4 @@
 package org.maengle.member.libs;
 
-public class MemberUtils {
+public class MemberUtil {
 }
