@@ -1,6 +1,5 @@
 package org.maengle.file.services;
 
-import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.repositories.FileInfoRepository;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-@Slf4j
 @SpringBootTest
 @Transactional
 public class FileDeleteServiceTest {
