@@ -24,6 +24,8 @@ public class FileInfoService {
     private final HttpServletRequest request;
     private final FileProperties fileProperties;
 
+    // 하나의 파일 조회
+
     public FileInfo get(Long seq) {
         FileInfo item = repository.findById(seq).orElseThrow(FileNotFoundException::new);
 
@@ -31,6 +33,8 @@ public class FileInfoService {
 
         return item;
     }
+
+    // 파일 목록 조회
 
     public List<FileInfo> getList(String gid, String location, FileStatus status) {
         status = Objects.requireNonNullElse(status, FileStatus.ALL);
