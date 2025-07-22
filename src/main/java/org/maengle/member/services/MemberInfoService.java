@@ -11,4 +11,6 @@ public class MemberInfoService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
+
+
 }

@@ -3,6 +3,7 @@ package org.maengle.member.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
+import org.maengle.member.constants.Authority;
 import org.maengle.member.constants.Gender;
 
 import java.time.LocalDateTime;
@@ -38,6 +39,10 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 15)
     private String mobile;
+
+    // 회원 권한 Default : MEMBER (일반회원)
+    @Enumerated(EnumType.STRING)
+    private Authority authority = Authority.MEMBER;
 
     private boolean termsAgree;
 
