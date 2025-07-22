@@ -35,9 +35,12 @@ public class FileDeleteServiceTest {
 
         FileInfo saved = fileInfoRepository.saveAndFlush(fileInfo);
         Long seq = saved.getSeq();
+        System.out.println(seq);
 
         // 삭제 처리
         fileDeleteService.deleteProcess(seq);
+        boolean exists = fileInfoRepository.findById(seq).isPresent();
+        System.out.println(exists);
 
     }
 }
