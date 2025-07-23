@@ -1,6 +1,5 @@
 package org.maengle.member.services;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.member.MemberInfo;
 import org.maengle.member.constants.Authority;
@@ -22,18 +21,18 @@ import java.util.Objects;
 public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository repository;
-    private final HttpServletRequest request;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = repository.findById(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        //QMember _member = QMember.member;
+        Member member = repository.findByUserId(username).orElseThrow(() -> new UsernameNotFoundException(username));
 
         Authority authority = Objects.requireNonNullElse(member.getAuthority(), Authority.MEMBER);
 
         List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(authority.name()));
 
         return MemberInfo.builder()
-                .id(member.getId())
+                .userId(member.getUserId())
                 .password(member.getPassword())
                 .member(member)
                 .authorities(authorities)

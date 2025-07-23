@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class RequestLogin {
-    private String id;
+    private String userId;
     private String password;
     private boolean autoLogin;
     private String redirectUrl;

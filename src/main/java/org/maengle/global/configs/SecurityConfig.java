@@ -17,7 +17,7 @@ public class SecurityConfig {
 
         httpSecurity.formLogin(c -> {
             c.loginPage("/member/login")
-                    .usernameParameter("username")
+                    .usernameParameter("userId")
                     .passwordParameter("password")
                     .successHandler(new LoginSuccessHandler())
                     .failureHandler(new LoginFailHandler());

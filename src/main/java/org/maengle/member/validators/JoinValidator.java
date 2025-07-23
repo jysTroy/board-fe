@@ -42,8 +42,8 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
         String mobile = form.getMobile();
 
         // 1. 아이디 중복 여부
-        if (repository.existsById(form.getId())) {
-            errors.rejectValue("id", "Duplicated");
+        if (repository.existsByUserId(form.getUserId())){
+            errors.rejectValue("userId", "Duplicated");
         }
 
         // 2. 비밀번호 복잡성

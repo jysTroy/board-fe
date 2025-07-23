@@ -10,7 +10,7 @@ import org.maengle.member.constants.Gender;
 public class RequestJoin {
 
     @NotBlank
-    private String id;
+    private String userId;
 
     @Size(min=8)
     @NotBlank

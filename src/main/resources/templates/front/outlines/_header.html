@@ -3,7 +3,7 @@
     <header th:fragment="common">
         <div>
             <th:block th:if="${isLogin}">
-                <a th:href="@{/mypage/index}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.id)}"></a>
+                <a th:href="@{/mypage/index}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.userId)}"></a>
                 <a th:href="@{/logout}" th:text="#{로그아웃}"></a>
             </th:block>
             <th:block th:unless="${isLogin}">

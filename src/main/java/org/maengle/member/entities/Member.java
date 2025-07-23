@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String seq;
+    private String userUuid;
 
     @Column(nullable = false, length = 50)
-    private String id;
+    private String userId;
 
     @Column(length = 65)
     private String password;

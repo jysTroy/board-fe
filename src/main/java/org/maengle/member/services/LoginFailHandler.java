@@ -25,20 +25,20 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
         // form이 null일 때 RequestLogin 객체를 생성해서 form에 대입
         form = Objects.requireNonNullElseGet(form, RequestLogin::new);
 
-        String id = request.getParameter("username");
+        String userId = request.getParameter("userId");
         String password = request.getParameter("password");
 
         List<String> fieldErrors = new ArrayList<>();
         List<String> globalErrors = new ArrayList<>();
 
-        form.setId(id);
+        form.setUserId(userId);
         form.setPassword(password);
         form.setFieldErrors(fieldErrors);
         form.setGlobalErrors(globalErrors);
 
         // 로그인 실패 사유 : 필드 값(사용자가 입력하는 값)이 누락된 경우, 혹은 잘못 입력한 경우 -> BadCredentialsException
         if(exception instanceof BadCredentialsException){
-            if(!StringUtils.hasText(id)){
+            if(!StringUtils.hasText(userId)){
                 // id 란이 비어있는 경우
                 fieldErrors.add("id_NotBlank");
             }

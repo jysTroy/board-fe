@@ -12,7 +12,7 @@
         <th:block layout:fragment="addCommonCss" />
 
 
-        <script th:src="@{/front/js/common.js?v={v}(v=${@utils.version()})}"></script>
+        <script th:src="@{common/js/common.js?v={v}(v=${@utils.version()})}"></script>
     </head>
     <body>
         <header th:replace="~{front/outlines/_header::common}"></header>
