@@ -4,33 +4,54 @@
       layout:decorate="~{front/layouts/index}">
 
 <main layout:fragment="content">
-    <h1>회원 가입 페이지</h1>
-
-    <!-- 기본 구성, 컨트롤러에서 모델 객체 구현되면 requestJoin 구성해야됨-->
-    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off">
+    <h1 th:text="${pageTitle}"></h1>
+    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <ul>
             <li>
-                <input type="text" name="email" placeholder="이메일">
+                <input type="text" name="id" th:field="*{id}" th:placeholder="#{아이디}">
+                <div class="error" th:each="err : ${#fields.errors('id')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="password" name="password" placeholder="비밀번호">
+                <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
+                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="password" name="confirmPassword" placeholder="비밀번호 확인">
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
+                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="text" name="name" placeholder="회원명">
+                <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}">
+                <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="text" name="mobile" placeholder="휴대전화번호">
+                <input type="text" name="idNumber" th:field="*{idNumber}" th:placeholder="#{주민등록번호}">
+                <div class="error" th:each="err : ${#fields.errors('idNumber')}" th:text="${err}"></div>
+            </li>
+            <li>
+                <span th:each="gen : ${genders}">
+                    <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}">
+                    <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
+                </span>
+
+                <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
+            </li>
+            <li>
+                <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+                <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+            </li>
+            <li>
+                <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}">
+                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
             </li>
         </ul>
 
-        <h3>약관동의</h3>
-        <div class="terms">약관이 들어갈 곳</div>
-        <input type="checkbox" name="termsAgree" id="terms-agree" value="true">
-        <label for="terms-agree">회원가입 약관에 동의합니다</label>
-        <button type="submit">가입하기</button>
+        <h3 th:text="#{약관동의}"></h3>
+        <div class="terms">약관...</div>
+        <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
+        <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
+        <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>
+
+        <button type="submit" th:text="#{가입하기}"></button>
     </form>
 </main>
 </html>
