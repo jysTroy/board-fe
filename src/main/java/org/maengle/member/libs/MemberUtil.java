@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Lazy
 @Component
 public class MemberUtil {
-    // 로그인 여부
     public boolean isLogin() {
         return getMember() != null;
     }
