@@ -63,7 +63,7 @@ public class ThumbnailService {
 
         String thumbPath = ""; // thumPath에 담기
         if (seq != null && seq > 0L) { // seq가 존재(DB에 있다면) 그 기준으로 경로 생성
-            FileInfo item = infoService.get(seq); // inforService로 DB조회
+            FileInfo item = infoService.get(seq); // infoService로 DB조회
             String folder = infoService.folder(seq); // 해당 파일이 저장 된 서브 폴더 이름을 계산
             File file = new File(basePath + "/" + folder); // 썸네일이 저장 될 폴더의 전체 경로를 File 객체로 생성
             if (!file.exists() || !file.isDirectory()) {
@@ -72,8 +72,6 @@ public class ThumbnailService {
 
             // 문자열 포맷으로 경로 만들기
             thumbPath = basePath + String.format("/%s/%s_%s_%s_%s%s", folder, width, height, crop, seq, Objects.requireNonNullElse(item.getExtension(), ""));
-        } else if (StringUtils.hasText(url)) { // 만약 seq 대신 url이 있는 경우 (아직 구현 x)
-
         }
 
         return thumbPath; // 계산한 썸네일 경로 문자열 반환
@@ -85,13 +83,5 @@ public class ThumbnailService {
      */
     public String getThumbPath(Long seq, int width, int height, boolean crop) {
         return getThumbPath(seq, null, width, height, crop);
-    }
-
-    /*
-     * 원격 주소 기준의 썸네일 서버 경로 url, width, height
-     * URL 기준 썸네일 경로 반환 (아직 동작 x)
-     */
-    public String getThumbPath(String url, int width, int height, boolean crop) {
-        return getThumbPath(null, url, width, height, crop);
     }
 }
