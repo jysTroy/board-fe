@@ -24,11 +24,9 @@ public class CommonInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
             // 로그인 회원 정보 modelAndView에 담기
-            System.out.println("interceptor 시작");
             modelAndView.addObject("isLogin", memberUtil.isLogin());
             modelAndView.addObject("isAdmin", memberUtil.isAdmin());
             modelAndView.addObject("loggedMember", memberUtil.getMember());
-            System.out.println(modelAndView.getModel().values());
         }
     }
 }
