@@ -109,7 +109,7 @@ public class MemberInfoService implements UserDetailsService {
         long total = data.getTotalElements();
         Pagination pagination = new Pagination(page, (int)total, 10, limit, request);
 
-        return new ListData<>();
+        return new ListData<>(items, pagination);
     }
 
     /**
