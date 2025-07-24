@@ -62,6 +62,15 @@ public class FileInfoService {
         return getList(gid, location, FileStatus.DONE);
     }
 
+    public List<FileInfo> getList(String gid) {
+        return getList(gid, null);
+    }
+
+    public FileInfo get(String gid) {
+        List<FileInfo> items = getList(gid);
+        return items == null || items.isEmpty() ? null : items.getFirst();
+    }
+
 
     public void addInfo(FileInfo item) {
         item.setFileUrl(getFileUrl(item));

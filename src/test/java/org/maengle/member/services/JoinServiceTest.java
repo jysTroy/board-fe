@@ -19,7 +19,7 @@ public class JoinServiceTest {
 
         RequestJoin form = new RequestJoin();
 
-        form.setId("userID01");
+        // form.setId("userID01");
         form.setPassword("123456789");
         form.setConfirmPassword("123456789");
         form.setGender(Gender.MALE);

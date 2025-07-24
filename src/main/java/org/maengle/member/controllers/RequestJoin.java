@@ -4,10 +4,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.maengle.file.entities.FileInfo;
 import org.maengle.member.constants.Gender;
 
 @Data
 public class RequestJoin {
+
+    private String gid;
 
     @NotBlank
     private String userId;
@@ -35,5 +38,7 @@ public class RequestJoin {
     private String mobile;
 
     private boolean termsAgree;
+
+    private FileInfo profileImage;
 
 }

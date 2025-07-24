@@ -8,5 +8,7 @@ public class AlertException extends CommonException {
         super(message, status);
     }
 
-    // status를 고정하고 예외를 출력하는 기능도 넣을 수 있음
+    public AlertException(String message) {
+        this(message, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -43,6 +43,18 @@
                 <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}">
                 <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
             </li>
+            <li>
+                <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                    <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
+                    <div class="inner">
+                        <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                            <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
+                            <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
         </ul>
 
         <h3 th:text="#{약관동의}"></h3>
@@ -53,5 +65,7 @@
 
         <button type="submit" th:text="#{가입하기}"></button>
     </form>
+    <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+
 </main>
 </html>
