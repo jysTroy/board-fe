@@ -11,7 +11,8 @@ public class MainController {
     @GetMapping
     public String mainPage(){
         return "front/main/main";
-    }
 
-    // 하이용
+
+        // asdasd
+    }
 }
