@@ -98,10 +98,11 @@ public class Utils {
         return String.format("%s://%s%s%s%s",
                 protocol, domain, port, request.getContextPath(), url);
     }
-
+  
     // 이름으로 파라미터 값 쉽게 가져오기 위해서 써놨습니다.
     public String getParam(String name) {
         return request.getParameter(name);
     }
+
 
 }

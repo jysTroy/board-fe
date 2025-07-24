@@ -18,7 +18,7 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
     @Override
     public boolean supports(Class<?> clazz) {
-
+        // 어떤 타입의 객체를 검증할지 지정
         return clazz.isAssignableFrom(RequestJoin.class);
     }
 
