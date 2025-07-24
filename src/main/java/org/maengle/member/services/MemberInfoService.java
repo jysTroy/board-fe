@@ -81,15 +81,18 @@ public class MemberInfoService implements UserDetailsService {
                 fields = member.email;
             } else if (sopt.equals("MOBILE")) {
                 fields = member.mobile;
+            } else if (sopt.equals("ID")) {
+                fields = member.userId;
             } else {
                 fields = member.name.concat(member.email)
-                        .concat(member.mobile);
+                        .concat(member.mobile).concat(member.userId);
             }
             andBuilder.and(fields.contains(skey));
         }
 
         // 권한 조건 넣은거임
-        // 강사님 코드랑 다른 이유는 null값 체크를 안하면 오류가 나서 집어넣었습니다,,
+        // authorities가 비어있으면 andbuilder부분을 띄어넘기때문에
+        // 널값이 아닐 때를 같이 집어넣었음(널과 빈 값은 다른거임)
         List<Authority> authorities = search.getAuthorities();
         if (authorities != null && !authorities.isEmpty()) {
             andBuilder.and(member.authority.in(authorities));

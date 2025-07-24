@@ -36,14 +36,14 @@ public class MemberUpdateService {
         List<Member> members = new ArrayList<>();
         for (int chk : chks) {
 
-            // 강사님 코드랑 다르게 Id값이 userUuid이기에 userUuid로 찾음
-            String userUuid = utils.getParam("uuid_" + chk);
-            Member member = repository.findById(userUuid).orElse(null);
+            // Id값을 userId로 찾음
+            String userId = utils.getParam("userId_" + chk);
+            Member member = repository.findById(userId).orElse(null);
 
             // 멤버가 빈 값이면 스킵처리
             // 혹시 몰라서 출력처리 해놨음
             if (member == null) {
-                System.out.println("존재하지 않는 사용자로 요청됨: uuid=" + userUuid);
+                System.out.println("존재하지 않는 사용자로 요청됨: userId=" + userId);
                 continue;
             }
 

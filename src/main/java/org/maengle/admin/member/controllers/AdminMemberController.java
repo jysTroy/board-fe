@@ -14,6 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,6 +47,13 @@ public class AdminMemberController extends CommonController {
         model.addAttribute("pagination", data.getPagination());
 
         return "admin/member/list";
+    }
+
+    @RequestMapping({"", "/list"})
+    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks) {
+
+        updateService.processBatch(chks);
+        return "redirect:/admin/member";
     }
 
     // 컨트롤러 공통 프로세스임

@@ -100,7 +100,6 @@ public class Utils {
     }
 
     // 이름으로 파라미터 값 쉽게 가져오기 위해서 써놨습니다.
-    // 다른분들도 자주 쓸테니 만관부
     public String getParam(String name) {
         return request.getParameter(name);
     }
