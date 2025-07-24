@@ -27,15 +27,15 @@ public class FileDeleteServiceTest {
         // 임시 데이터
         FileInfo fileInfo = new FileInfo();
         fileInfo.setGid(UUID.randomUUID().toString());
-        fileInfo.setFileName("test.jpg");
-        fileInfo.setContentType("image/jpeg");
-        fileInfo.setExtension("jpg");
+        fileInfo.setFileName("test.txt");
+        fileInfo.setContentType("image/json");
+        fileInfo.setExtension("txt");
         fileInfo.setCreatedBy("tester@test.com");
-        fileInfo.setFilePath("/tmp/test.jpg");
+        fileInfo.setFilePath("/tmp/test.txt");
 
         FileInfo saved = fileInfoRepository.saveAndFlush(fileInfo);
         Long seq = saved.getSeq();
-        System.out.println(seq);
+        System.out.println(seq==1 ? "뷀부레부렙뤠부" : 1);
 
         // 삭제 처리
         fileDeleteService.deleteProcess(seq);
