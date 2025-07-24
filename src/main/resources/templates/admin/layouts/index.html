@@ -7,7 +7,11 @@
     <body>
         <header th:replace="~{admin/outlines/_header::common}"></header>
     <main>
-        <div>관리자 페이지 공통 기능을 넣어주세요!</div>
+        <aside th:replace="~{admin/outlines/_side::menus}"></aside>
+        <section class="main-content">
+            <nav th:replace="~{admin/outlines/_submenu::menus}"></nav>
+            <section layout:fragment="content"></section>
+        </section>
     </main>
     <footer th:replace="~{admin/outlines/_footer::common}"></footer>
     </body>
