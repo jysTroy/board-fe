@@ -12,9 +12,11 @@ public class AlertBackException extends AlertException {
     this.target = target;
   }
 
-  // 현재 페이지로 다시 돌아가기 위해 "self"
   public AlertBackException(String message, HttpStatus status) {
     this(message, status, "self");
   }
 
+  public AlertBackException(String message) {
+    this(message, HttpStatus.BAD_REQUEST);
+  }
 }

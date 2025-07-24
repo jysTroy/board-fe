@@ -61,13 +61,13 @@ public class ThumbnailService {
     public String getThumbPath(Long seq, String url, int width, int height, boolean crop) {
         String basePath = properties.getPath() + "/thumbs"; // 저장 될 기본 경로 지정
 
-        String thumbPath = ""; // thumPath에 담기
+        String thumbPath = ""; // thumbPath에 담기
         if (seq != null && seq > 0L) { // seq가 존재(DB에 있다면) 그 기준으로 경로 생성
             FileInfo item = infoService.get(seq); // infoService로 DB조회
             String folder = infoService.folder(seq); // 해당 파일이 저장 된 서브 폴더 이름을 계산
             File file = new File(basePath + "/" + folder); // 썸네일이 저장 될 폴더의 전체 경로를 File 객체로 생성
             if (!file.exists() || !file.isDirectory()) {
-                file.mkdir(); // 해당 폴더가 존재하지 않거나 폴더가 아니면 새로 생성
+                file.mkdirs(); // 해당 폴더가 존재하지 않거나 폴더가 아니면 새로 생성
             }
 
             // 문자열 포맷으로 경로 만들기

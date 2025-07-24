@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
+import org.maengle.file.services.FileInfoService;
 import org.maengle.member.MemberInfo;
 import org.maengle.member.constants.Authority;
 import org.maengle.member.controllers.MemberSearch;
@@ -36,6 +37,7 @@ public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository repository;
     private final HttpServletRequest request;
+    private final FileInfoService fileInfoService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,6 +47,8 @@ public class MemberInfoService implements UserDetailsService {
         Authority authority = Objects.requireNonNullElse(member.getAuthority(), Authority.MEMBER);
 
         List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(authority.name()));
+
+        addInfo(member); // 회원 정보 정보 처리
 
         return MemberInfo.builder()
                 .userId(member.getUserId())
@@ -106,5 +110,13 @@ public class MemberInfoService implements UserDetailsService {
         Pagination pagination = new Pagination(page, (int)total, 10, limit, request);
 
         return new ListData<>();
+    }
+
+    /**
+     * 회원 정보 추가 처리
+     * @param member
+     */
+    private void addInfo(Member member) {
+        member.setProfileImage(fileInfoService.get(member.getGid()));
     }
 }
