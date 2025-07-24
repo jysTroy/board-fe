@@ -17,6 +17,8 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
 //        String userId = memberUtil.isLogin() ? memberUtil.getMember().getUserId() : null;
 //
+
+
 //        return Optional.ofNullable(userId);
         return null;
     }
