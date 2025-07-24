@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <header th:fragment="common">
-        <h2>헤더</h2>
+        <div>
+            <th:block th:if="${isLogin}">
+                <a th:href="@{/mypage/index}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.userId)}"></a>
+                <a th:href="@{/logout}" th:text="#{로그아웃}"></a>
+            </th:block>
+            <th:block th:unless="${isLogin}">
+                <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn"></a>
+                <a th:href="@{/member/login}" th:text="#{로그인}" class="btn"></a>
+            </th:block>
+        </div>
     </header>
 </html>

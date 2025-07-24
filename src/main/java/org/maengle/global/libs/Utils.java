@@ -9,12 +9,32 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.LocaleResolver;
+
+import java.util.Locale;
+
 @Component
 @RequiredArgsConstructor
 public class Utils {
 
     private final HttpServletRequest request; // 현재 요청 정보
     private final FileInfoService infoService;
+    private final LocaleResolver localeResolver;
+    private final MessageSource messageSource;
+
+
+    public int version() {
+        return 1;
+    }
+    
+    // 공통 메시지 가져오기
+    public String getMessage(String code) {
+        Locale locale = localeResolver.resolveLocale(request);
+
+        return messageSource.getMessage(code, null, locale);
+    }
 
     // 썸네일 이미지 출력 HTML 태그 생성 (seq,width,height,addClass 여부 입력 받음)
     public String printThumb(Long seq, int width, int height, String addClass, boolean crop) {
@@ -80,5 +100,5 @@ public class Utils {
 
         return String.format("%s://%s%s%s%s",
                 protocol, domain, port, request.getContextPath(), url);
-    }
+    
 }
