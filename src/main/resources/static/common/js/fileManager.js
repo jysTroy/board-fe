@@ -23,6 +23,8 @@ window.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
+
     /* 파일 선택시 처리 S */
     fileEl.addEventListener("change", function() {
         const files = this.files;
@@ -31,12 +33,38 @@ window.addEventListener("DOMContentLoaded", function() {
         const { fileManager } = commonLib; // common.js에서 정의한 commonLib을
 
         fileManager.upload(files, gid, location, imageOnly, single);
+        fileManager.callback = () => {
+            fileEl.value = ""; // 파일 업로드 완료 후 초기화
+        }
 
     });
     /* 파일 선택시 처리 E */
+
+    /* 드래그앤 드롭 파일 업로드 처리 S */
+    const dragDropEls = document.getElementsByClassName("drag-drop-upload");
+    for (const el of dragDropEls) {
+        el.addEventListener("dragover", function(e) {
+            e.preventDefault();
+        });
+
+        el.addEventListener("drop", function(e) {
+            e.preventDefault();
+
+            const { gid, location, single, imageOnly } = this.dataset;
+            let files = e.dataTransfer.files;
+            if (single === 'true') { // 한개의 파일만 업로드
+                files = [files[0]];
+            }
+
+            const { fileManager } = commonLib;
+            fileManager.upload(files, gid, location, imageOnly, single);
+        });
+    }
+    /* 드래그앤 드롭 파일 업로드 처리 E */
 });
 
 commonLib.fileManager = {
+    callback: null,
     /**
     * 파일 업로드
     *
@@ -88,6 +116,10 @@ commonLib.fileManager = {
                // 성공시 후속 처리
                if (typeof fileUploadCallback === 'function') {
                     fileUploadCallback(items); // 사용자 콜백함수 사용할때 만들어줘야함.
+               }
+
+               if (typeof commonLib.fileManager.callback === 'function') {
+                    commonLib.fileManager.callback();
                }
             }, (e) => {
                 // 실패시 후속 처리

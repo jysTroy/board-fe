@@ -1,6 +1,7 @@
 package org.maengle.member.services;
 
 import lombok.RequiredArgsConstructor;
+import org.maengle.file.services.FileInfoService;
 import org.maengle.member.MemberInfo;
 import org.maengle.member.constants.Authority;
 import org.maengle.member.entities.Member;
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository repository;
+    private final FileInfoService fileInfoService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,11 +33,21 @@ public class MemberInfoService implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(authority.name()));
 
+        addInfo(member); // 회원 정보 정보 처리
+
         return MemberInfo.builder()
                 .userId(member.getUserId())
                 .password(member.getPassword())
                 .member(member)
                 .authorities(authorities)
                 .build();
+    }
+
+    /**
+     * 회원 정보 추가 처리
+     * @param member
+     */
+    private void addInfo(Member member) {
+        member.setProfileImage(fileInfoService.get(member.getGid()));
     }
 }
