@@ -89,8 +89,9 @@ public class MemberInfoService implements UserDetailsService {
         }
 
         // 권한 조건 넣은거임
+        // 강사님 코드랑 다른 이유는 null값 체크를 안하면 오류가 나서 집어넣었습니다,,
         List<Authority> authorities = search.getAuthorities();
-        if (!authorities.isEmpty()) {
+        if (authorities != null && !authorities.isEmpty()) {
             andBuilder.and(member.authority.in(authorities));
         }
 
