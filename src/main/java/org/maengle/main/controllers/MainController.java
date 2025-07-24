@@ -12,4 +12,6 @@ public class MainController {
     public String mainPage(){
         return "front/main/main";
     }
+
+    // 하이용
 }
