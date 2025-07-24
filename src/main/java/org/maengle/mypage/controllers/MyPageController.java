@@ -1,7 +1,6 @@
 package org.maengle.mypage.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.maengle.global.libs.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
 public class MyPageController {
-    private final Utils utils;
 
     @GetMapping
     public String index() {

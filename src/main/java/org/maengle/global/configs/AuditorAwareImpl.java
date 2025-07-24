@@ -11,14 +11,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuditorAwareImpl implements AuditorAware<String> {
 
-    //private final MemberUtil memberUtil;
+    private final MemberUtil memberUtil;
 
     @Override
     public Optional<String> getCurrentAuditor() {
-//        String email = memberUtil.isLogin() ? memberUtil.getMember().getEmail() : null;
-
-//        return Optional.ofNullable(email);
-
+//        String userId = memberUtil.isLogin() ? memberUtil.getMember().getUserId() : null;
+//
+//        return Optional.ofNullable(userId);
         return null;
     }
         // 언젠간 쓸거임(진짜로)

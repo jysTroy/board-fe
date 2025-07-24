@@ -13,9 +13,12 @@ import java.util.Locale;
 public class Utils {
 
     private final HttpServletRequest request;
-    private final MessageSource messageSource;
     private final LocaleResolver localeResolver;
+    private final MessageSource messageSource;
 
+    public int version() {
+        return 1;
+    }
 
     public String getMessage(String code) {
         Locale locale = localeResolver.resolveLocale(request);

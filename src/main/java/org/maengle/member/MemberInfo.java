@@ -13,7 +13,7 @@ import java.util.Collection;
 @Builder
 public class MemberInfo implements UserDetails {
 
-    private String id;
+    private String userId;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
     private Member member;
@@ -30,7 +30,7 @@ public class MemberInfo implements UserDetails {
 
     @Override
     public String getUsername() {
-        return id;
+        return userId;
     }
 
     //계정 만료 여부
