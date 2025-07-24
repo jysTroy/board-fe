@@ -19,10 +19,11 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userUuid;
 
+
     @Column(length=65, nullable = false)
     private String gid;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String userId;
 
     @Column(length = 65)
