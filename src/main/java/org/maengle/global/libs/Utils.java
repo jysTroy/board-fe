@@ -4,15 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
-
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
+import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -100,5 +97,12 @@ public class Utils {
 
         return String.format("%s://%s%s%s%s",
                 protocol, domain, port, request.getContextPath(), url);
-    
+    }
+
+    // 이름으로 파라미터 값 쉽게 가져오기 위해서 써놨습니다.
+    // 다른분들도 자주 쓸테니 만관부
+    public String getParam(String name) {
+        return request.getParameter(name);
+    }
+
 }
