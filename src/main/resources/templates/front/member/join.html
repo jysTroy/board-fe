@@ -3,69 +3,67 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-<main layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
-        <ul>
-            <li>
-                <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
-                <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
-                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
-                <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}">
-                <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="text" name="idNumber" th:field="*{idNumber}" th:placeholder="#{주민등록번호}">
-                <div class="error" th:each="err : ${#fields.errors('idNumber')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <span th:each="gen : ${genders}">
-                    <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}">
-                    <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
-                </span>
-
-                <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
-                <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}">
-                <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
-                    <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
-                    <div class="inner">
-                        <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
-                            <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
-                            <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+<main layout:fragment="content" class="join-template">
+    <div class="join-container">
+        <h1 th:text="${pageTitle}"></h1>
+        <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}" class="join-form">
+            <ul>
+                <li>
+                    <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="text" name="idNumber" th:field="*{idNumber}" th:placeholder="#{주민등록번호}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('idNumber')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div th:each="gen : ${genders}" class="gender-option">
+                        <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}" class="radio-input">
+                        <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
+                    </div>
+                    <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}" class="common-input">
+                    <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                        <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
+                        <div class="inner">
+                            <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                                <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
+                                <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </li>
+            </ul>
 
-            </li>
-        </ul>
+            <h3 th:text="#{약관동의}"></h3>
+            <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
+            <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
+            <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>
 
-        <h3 th:text="#{약관동의}"></h3>
-        <div class="terms">약관...</div>
-        <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
-        <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
-        <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>
-
-        <button type="submit" th:text="#{가입하기}"></button>
-    </form>
+            <button type="submit" th:text="#{가입하기}" class="btn-join"></button>
+        </form>
+    </div>
     <script th:replace="~{common/_file_tpl::image_tpl}"></script>
-
 </main>
 </html>

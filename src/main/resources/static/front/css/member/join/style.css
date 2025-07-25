@@ -1,0 +1,51 @@
+.join-template{
+    margin: 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.join-container ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.join-form .common-input{
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.join-form .gender-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.join-form gender-option .radio-input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.btn-join{
+    margin: 15px 0px;
+}
