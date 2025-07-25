@@ -7,6 +7,16 @@
         <h2>회원 검색</h2>
         <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
             <table class="table-cols">
+                <th width="120">회원권한</th>
+                <td>
+                    <span th:each="auth : ${authorities}" class="checkbox">
+                        <input type="checkbox" name="authorities"
+                               th:value="${auth.name()}"
+                               th:id="${'authority-' + auth.name()}"
+                               th:field="*{authorities}">
+                        <label th:for="${'authority-' + auth.name()}" th:text="${#messages.msg('authority.' + auth.name())}"></label>
+                    </span>
+                </td>
                 <tr>
                     <th>키워드 검색</th>
                     <td class="flex">
@@ -33,6 +43,7 @@
                         <input type="checkbox" class="check-all" id="check-all" data-target-name="chk">
                         <label for="check-all" class="standalone"></label>
                     </th>
+                    <th>UUID</th>
                     <th>회원명</th>
                     <th>아이디</th>
                     <th>이메일</th>
@@ -49,6 +60,7 @@
                         <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk-' + status.index}">
                         <label th:for="${'chk-' + status.index}" class="standalone"></label>
                     </td>
+                    <td th:text="*{userUuid}" align="center"></td>
                     <td align="center">
                         <th:block th:text="*{name}"></th:block>
                         <div class="badge" th:text="*{#messages.msg('authority.' + authority)}"></div>
