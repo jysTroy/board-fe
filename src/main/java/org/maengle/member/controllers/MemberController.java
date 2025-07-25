@@ -42,7 +42,7 @@ public class MemberController {
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
-        return List.of("member/style");
+        return List.of("member/style", "member/join/style");
     }
 
     @GetMapping("/join")
@@ -109,7 +109,7 @@ public class MemberController {
             pageTitle = utils.getMessage("회원가입");
             addCommonScript.add("fileManager");
 
-            addCommonScript.add("modal");
+            // addCommonScript.add("modal");
 
             addScript.add("member/form");
 
