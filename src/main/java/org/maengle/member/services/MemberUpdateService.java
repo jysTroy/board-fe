@@ -38,7 +38,7 @@ public class MemberUpdateService {
 
             // Id값을 userId로 찾음
             String userId = utils.getParam("userId_" + chk);
-            Member member = repository.findById(userId).orElse(null);
+            Member member = repository.findByUserId(userId).orElse(null);
 
             // 멤버가 빈 값이면 스킵처리
             // 혹시 몰라서 출력처리 해놨음
