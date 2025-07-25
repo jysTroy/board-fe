@@ -1,4 +1,4 @@
-package org.maengle.admin.board;
+package org.maengle.admin.board.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -20,6 +20,7 @@ public class RequestBoard {
     private String category;
 
     private boolean active;
+    private boolean editor;
     private boolean attachFile;
     private boolean comment;
 

@@ -2,6 +2,9 @@ package org.maengle.member.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.maengle.file.constants.FileStatus;
+import org.maengle.file.entities.FileInfo;
+import org.maengle.file.services.FileInfoService;
 import org.maengle.global.libs.Utils;
 import org.maengle.member.constants.Gender;
 import org.maengle.member.services.JoinService;
@@ -12,7 +15,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +28,7 @@ public class MemberController {
     private final Utils utils;
     private final JoinService joinService;
     private final JoinValidator joinValidator;
+    private final FileInfoService fileInfoService;
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
@@ -34,9 +40,15 @@ public class MemberController {
         return Gender.values();
     }
 
+    @ModelAttribute("addCss")
+    public List<String> addCss() {
+        return List.of("member/style");
+    }
+
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
         commonProcess("join", model);
+        form.setGid(UUID.randomUUID().toString());
 
         return "front/member/join";
     }
@@ -48,6 +60,10 @@ public class MemberController {
         joinValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
+            List<FileInfo> items = fileInfoService.getList(form.getGid(), null, FileStatus.ALL);
+            if (items != null && !items.isEmpty()) {
+                form.setProfileImage(items.getFirst());
+            }
             return "front/member/join";
         }
 
@@ -86,13 +102,23 @@ public class MemberController {
         mode = StringUtils.hasText(mode) ? mode : "join";
         String pageTitle = "";
 
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
         if (mode.equals("join")) {
             pageTitle = utils.getMessage("회원가입");
+            addCommonScript.add("fileManager");
+
+            addCommonScript.add("modal");
+
+            addScript.add("member/form");
 
         } else if (mode.equals("login")) {
             pageTitle = utils.getMessage("로그인");
         }
 
         model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
     }
 }

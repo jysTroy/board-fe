@@ -1,11 +1,10 @@
 package org.maengle.board.exceptions;
 
-import org.maengle.global.exceptions.CommonException;
-import org.springframework.http.HttpStatus;
+import org.maengle.global.exceptions.NotFoundException;
 
-public class BoardNotFoundException extends CommonException {
-    public BoardNotFoundException(String message) {
-        // 아직 AlertException을 안만들어서 CommonException으로 흉내만 내놓겠습니다.
-        super(message, HttpStatus.NOT_FOUND);
+public class BoardNotFoundException extends NotFoundException {
+    public BoardNotFoundException() {
+        // 흉내만 내놓겠습니다.
+        super("NotFound.board");
     }
 }

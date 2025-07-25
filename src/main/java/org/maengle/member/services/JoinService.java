@@ -1,6 +1,7 @@
 package org.maengle.member.services;
 
 import lombok.RequiredArgsConstructor;
+import org.maengle.file.services.FileUploadService;
 import org.maengle.member.controllers.RequestJoin;
 import org.maengle.member.entities.Member;
 import org.maengle.member.repositories.MemberRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Lazy
 @Service
@@ -20,6 +22,7 @@ public class JoinService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository repository;
+    private final FileUploadService fileUploadService;
 
     // pw BCrypt 해시화
     // mobile 형식 통일화
@@ -40,6 +43,13 @@ public class JoinService {
 
         member.setCredentialChangedAt(LocalDateTime.now());
 
+        String gid = form.getGid();
+        gid = StringUtils.hasText(gid) ? gid : UUID.randomUUID().toString();
+
+        member.setGid(gid);
+
         repository.saveAndFlush(member);
+        // 파일 업로드 완료 처리
+        fileUploadService.processDone(gid);
     }
 }

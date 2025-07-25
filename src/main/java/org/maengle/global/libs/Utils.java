@@ -4,15 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
-
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
+import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -28,7 +25,14 @@ public class Utils {
     public int version() {
         return 1;
     }
-    
+    public String keywords() {
+        return "";
+    }
+
+    public String description() {
+        return "";
+    }
+
     // 공통 메시지 가져오기
     public String getMessage(String code) {
         Locale locale = localeResolver.resolveLocale(request);
@@ -49,15 +53,15 @@ public class Utils {
         }
 
         /*
-        * url이 비어 있다면 기본 이미지 경로로 설정
-        * 기본 이미지 추후 추가
-        */
+         * url이 비어 있다면 기본 이미지 경로로 설정
+         * 기본 이미지 추후 추가
+         */
         url = StringUtils.hasText(url) ? url : request.getContextPath() + "/common/images/no_image.jpg";
 
         /*
-        * <img> 태그 생성
-        *  class 속성: image-파일 번호 + (추가 css 클래스가 있다면 공백 붙여서 추가)
-        */
+         * <img> 태그 생성
+         *  class 속성: image-파일 번호 + (추가 css 클래스가 있다면 공백 붙여서 추가)
+         */
         return String.format("<img src='%s' class='%s%s'>",
                 url,
                 "image-" + seq,
@@ -80,10 +84,10 @@ public class Utils {
     }
 
     /*
-    * 이미지가 없는 경우 기본 이미지 출력용 <ima> 태그 반환
-    * 웹 애플리케이션의 컨텍스트 경로 + 기본 이미지 경로
-    * 기본 이미지 추후 추가
-    */
+     * 이미지가 없는 경우 기본 이미지 출력용 <ima> 태그 반환
+     * 웹 애플리케이션의 컨텍스트 경로 + 기본 이미지 경로
+     * 기본 이미지 추후 추가
+     */
     public String printNoImage() {
         String url = request.getContextPath() + "/common/images/no_image.jpg";
 
@@ -100,5 +104,11 @@ public class Utils {
 
         return String.format("%s://%s%s%s%s",
                 protocol, domain, port, request.getContextPath(), url);
-    
+    }
+
+    // 이름으로 파라미터 값 쉽게 가져오기 위해서 써놨습니다.
+    public String getParam(String name) {
+        return request.getParameter(name);
+    }
+
 }

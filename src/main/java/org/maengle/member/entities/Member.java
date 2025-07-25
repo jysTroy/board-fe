@@ -2,6 +2,7 @@ package org.maengle.member.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.maengle.file.entities.FileInfo;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.constants.Authority;
 import org.maengle.member.constants.Gender;
@@ -18,7 +19,10 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userUuid;
 
-    @Column(nullable = false, length = 50)
+    @Column(length=65, nullable = false)
+    private String gid;
+
+    @Column(nullable = false, length = 50, unique = true)
     private String userId;
 
     @Column(length = 65)
@@ -49,4 +53,7 @@ public class Member extends BaseEntity {
     private boolean accountLocked; // 계정 정지 상태
     private LocalDateTime expired; // 계정 만료 일자
     private LocalDateTime credentialChangedAt; // PW 변경일
+
+    @Transient
+    private FileInfo profileImage;
 }
