@@ -31,7 +31,10 @@ public class ModelUpdateService {
         item.setName(form.getName());
         item.setDescription(form.getDescription());
 
-        modelRepository.saveAndFlush(item); // DB 저장, 업로드 완료 처리 미완성
+        modelRepository.saveAndFlush(item); // DB 저장
+
+
+        /* 모델 업로드 완료 처리 미완성*/
 
         return item;
 
