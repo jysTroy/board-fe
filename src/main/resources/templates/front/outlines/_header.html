@@ -9,6 +9,7 @@
         <div class="right">
             <div class="user-actions">
                 <th:block th:if="${isLogin}">
+                    <th:block th:if="${loggedMember.profileImage != null}" th:utext="${@utils.printThumb(loggedMember.profileImage.seq, 60, 60, 'profile-image')}"></th:block>
                     <a th:href="@{/mypage}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.name, loggedMember.email)}"></a>
                     <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
                     <a th:href="@{/logout}" th:text="#{로그아웃}"></a>
