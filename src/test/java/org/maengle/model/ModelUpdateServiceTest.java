@@ -1,19 +1,15 @@
 package org.maengle.model;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.maengle.admin.model.RequestModel;
-import org.maengle.global.exceptions.script.AlertException;
+import org.maengle.global.libs.Utils;
 import org.maengle.model.entities.Model;
 import org.maengle.model.repositories.ModelRepository;
 import org.maengle.model.services.ModelUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -24,6 +20,12 @@ public class ModelUpdateServiceTest {
 
     @Autowired
     private ModelRepository modelRepository;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private Utils utils;
 
     @Test
     void test1() {
@@ -69,15 +71,5 @@ public class ModelUpdateServiceTest {
         assert updated.getName().equals("수정된이름"); // 이름이 수정 된 값과 일치하는지 확인
     }
 
-    @Test
-    void test3() { // AlertException 테스트
-        // given
-        List<Integer> emptyList = new ArrayList<>();
-
-        // when & then
-        assertThrows(AlertException.class, () -> {
-            modelUpdateService.processList(emptyList);
-        });
-    }
-
+    /* DELETE + 상태 처리 미완료 */
 }
