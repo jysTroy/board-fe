@@ -3,28 +3,40 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-<main layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
-    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}">
-        <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
-        <ul>
-            <li>
-                <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
-                <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
-            </li>
-            <li>
-                <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
-                <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
-            </li>
-        </ul>
-        <div>
-            <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link"></a>
-            <a th:href="@{/member/findid}" th:text="#{아이디_비밀번호_찾기}" class="btn-link"></a>
-        </div>
-        <div>
-            <button type="submit" th:text="#{로그인}"></button>
-            <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
-        </div>
-    </form>
+<main layout:fragment="content" class="login-template">
+    <div class="login-container">
+        <h1 th:text="${pageTitle}"></h1>
+        <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}" class="login-form">
+            <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
+            <ul>
+                <li>
+                    <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
+                    <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
+                    <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+                </li>
+            </ul>
+            <div class="join_btn">
+                <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link"></a>
+                <a th:href="@{/member/findid}" th:text="#{아이디_비밀번호_찾기}" class="btn-link"></a>
+            </div>
+            <div class="login_btn">
+                <button type="submit" th:text="#{로그인}"></button>
+                <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            </div>
+            <div class="social_btn">
+                <a th:href="${kakaoLoginUrl}">
+                    <img th:src="@{/common/images/kakao_login.png}" alt="카카오 로그인 버튼">
+                </a>
+            </div>
+            <div class="social_btn">
+                <a th:href="${naverLoginUrl}">
+                    <img th:src="@{/common/images/naver_login.png}" alt="네이버 로그인 버튼">
+                </a>
+            </div>
+        </form>
+    </div>
 </main>
 </html>

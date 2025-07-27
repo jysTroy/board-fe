@@ -5,9 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.maengle.file.constants.FileStatus;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
+import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.libs.Utils;
 import org.maengle.member.constants.Gender;
 import org.maengle.member.services.JoinService;
+import org.maengle.member.social.constants.SocialType;
+import org.maengle.member.social.services.KakaoLoginService;
+import org.maengle.member.social.services.NaverLoginService;
 import org.maengle.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@ApplyCommonController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @SessionAttributes("requestLogin")
@@ -29,6 +34,8 @@ public class MemberController {
     private final JoinService joinService;
     private final JoinValidator joinValidator;
     private final FileInfoService fileInfoService;
+    private final KakaoLoginService kakaoLoginService;
+    private final NaverLoginService naverLoginService;
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
@@ -42,13 +49,19 @@ public class MemberController {
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
-        return List.of("member/style", "member/join/style", "outlines/_header/style", "outlines/_footer/style");
+        return List.of("member/style", "member/join/style", "member/login" ,"outlines/_header/style", "outlines/_footer/style");
     }
 
     @GetMapping("/join")
-    public String join(@ModelAttribute RequestJoin form, Model model) {
+    public String join(@ModelAttribute RequestJoin form, Model model,
+                       @SessionAttribute(name = "socialType", required = false) SocialType type,
+                       @SessionAttribute(name = "socialToken", required = false) String socialToken) {
+
         commonProcess("join", model);
+
         form.setGid(UUID.randomUUID().toString());
+        form.setSocialType(type);
+        form.setSocialToken(socialToken);
 
         return "front/member/join";
     }
@@ -92,6 +105,9 @@ public class MemberController {
             globalErrors.forEach(errors::reject);
         }
         /* 검증 실패 처리 E */
+
+        model.addAttribute("kakaoLoginUrl", kakaoLoginService.getLoginUrl(form.getRedirectUrl()));
+        model.addAttribute("naverLoginUrl", naverLoginService.getLoginUrl(form.getRedirectUrl()));
 
         return "front/member/login";
     }
