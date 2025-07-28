@@ -14,4 +14,6 @@ public class AdminBoardController extends CommonController {
     public String mainCode() {
         return "board";
     }
+
+    // 게시판 목록
 }

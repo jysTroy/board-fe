@@ -50,10 +50,13 @@ public class AdminMemberController extends CommonController {
     }
 
     @RequestMapping({"", "/list"})
-    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks) {
+    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
 
         updateService.processBatch(chks);
-        return "redirect:/admin/member";
+
+        // 처리 완료 후에는 부모창의 목록을 새로고침
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
     }
 
     // 컨트롤러 공통 프로세스임

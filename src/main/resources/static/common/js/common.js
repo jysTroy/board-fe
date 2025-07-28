@@ -54,3 +54,27 @@ var commonLib = {
         return url ? baseUrl + url : baseUrl;
     }
 }
+
+// SweetAlert2로 alert 처리
+// 사용법 : <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+window.alert = function(message, callback) {
+    parent.Swal.fire({
+      title: message,
+      icon: "warning"
+    }).then(() => {
+        if (typeof callback === 'function') {
+            callback();
+        }
+    })
+};
+
+// source : 이미지 경로 1개, 에디터 때문에 추가
+commonLib.insertEditorImage = function(source, editor) {
+    editor = editor ?? window.editor;
+    if (!editor || !source || (Array.isArray(source) && source.length === 0)) return;
+
+    source = Array.isArray(source) ? source : [source];
+
+    editor.execute('insertImage', { source })
+
+};

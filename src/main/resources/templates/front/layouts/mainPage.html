@@ -30,10 +30,10 @@
 
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
-    <body>
-        <header th:replace="~{front/outlines/_header::common}"></header>
-        <main layout:fragment="content"></main>
-        <footer th:replace="~{front/outlines/_footer::common}"></footer>
-        <iframe name="ifrmProcess" class="dn"></iframe>
-    </body>
+<body>
+    <header th:replace="~{front/outlines/_header::common}"></header>
+    <main layout:fragment="content"></main>
+    <footer th:replace="~{front/outlines/_footer::common}"></footer>
+    <iframe name="ifrmProcess" class="dn"></iframe>
+</body>
 </html>
