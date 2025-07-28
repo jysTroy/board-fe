@@ -125,8 +125,6 @@ public class MemberController {
             pageTitle = utils.getMessage("회원가입");
             addCommonScript.add("fileManager");
 
-            // addCommonScript.add("modal");
-
             addScript.add("member/form");
 
         } else if (mode.equals("login")) {

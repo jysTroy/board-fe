@@ -8,6 +8,7 @@ import org.maengle.member.constants.Authority;
 import org.maengle.member.constants.Gender;
 import org.maengle.member.social.constants.SocialType;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Table(indexes = {
         @Index(name = "idx_member_created_at", columnList = "createdAt DESC")
 })
-public class Member extends BaseEntity {
+public class Member extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userUuid;

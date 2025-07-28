@@ -1,4 +1,47 @@
-/* ---------- 헤더 영역 ---------- S */
+/* ---------- 프론트 스타일 초기화 S ----------  */
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Segoe UI", sans-serif;;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    margin: 0;
+    color: #000;
+    background: #fff;
+    align-items: center;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+/* ---------- 프론트 스타일 초기화 E ----------  */
+
+
+
+/* ---------- 헤더 영역 S ---------- */
 
 .site-header {
   background-color: #3399ff;
