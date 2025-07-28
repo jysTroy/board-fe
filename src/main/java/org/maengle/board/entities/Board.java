@@ -1,9 +1,6 @@
 package org.maengle.board.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.constants.Authority;
@@ -13,8 +10,10 @@ import org.maengle.member.constants.Authority;
 public class Board extends BaseEntity {
 
     @Id
+    @Column(length=45)
     private String bid;
 
+    @Column(length=100, nullable = false)
     private String name;
 
     private int rowsForPage;
@@ -24,6 +23,8 @@ public class Board extends BaseEntity {
     private String category;
 
     private boolean active;
+    private boolean editor;
+    private boolean imageUpload;
     private boolean attachFile;
     private boolean comment;
 
