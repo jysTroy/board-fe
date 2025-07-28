@@ -5,9 +5,11 @@ import lombok.Data;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.member.constants.Authority;
 
+import java.io.Serializable;
+
 @Data
 @Entity
-public class Board extends BaseEntity {
+public class Board extends BaseEntity implements Serializable {
 
     @Id
     @Column(length=45)
