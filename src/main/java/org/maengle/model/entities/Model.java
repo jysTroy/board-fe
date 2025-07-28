@@ -30,7 +30,7 @@ public class Model extends BaseEntity {
     private ModelStatus modelStatus;
 
     @Column
-    private String category; // 없어도 될 듯
+    private String category; // 미정
 
     @Column
     private Long count; // 조회수
