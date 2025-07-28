@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layouts/main}">
-
+      layout:decorate="~{front/layouts/mainPage}">
+<head>
+    <title>모델 목록</title>
+</head>
+<body>
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
-</section>
-<form name="ListSearch" method="get" th:action="search">
+<form name="ListSearch" method="get" th:action="@{/model}" th:object="${search}">
     <table>
         <tr>
             <th>검색어</th>
             <td>
                 <div>
-                    <section name="slit" th:field="*{slit}">
+                    <select th:field="*{searchType}">
                         <option value="ALL">전체</option>
-                        <option value="NAME">이름</option>
-                        <option value="book">첵</option>
-                    </section>
+                        <option value="NAME">장르별</option>
+                        <option value="book">조회수별</option>
+                    </select>
                 </div>
             </td>
         </tr>
     </table>
+    <button type="submit">검색</button>
 </form>
-<form name="list" method="post" action="list">
     <table>
+        <thead>
         <tr>
-            <th>목록</th>
-            <td>
-                <div>
-                    <input type="text" name="name" placeholder="이름">
-
-                </div>
-            </td>
+            <th>이름</th>
+            <th>카테고리</th>
         </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.name}">모델 이름</td>
+            <td th:text="${item.category}">카테고리</td>
+        </tr>
+        </tbody>
     </table>
-</form>"
-<form name="createForm" method="post" th:action="create">
+<form name="createForm" method="post" th:action="@{/model/create}">
     <table>
         <tr>
             <th>장르별</th>
@@ -51,4 +55,6 @@
         </tr>
     </table>
 </form>
+</section>
+</body>
 </html>
