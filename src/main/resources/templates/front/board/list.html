@@ -3,7 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-    <main layout:fragment="content">
-        <h1>게시글 목록 페이지</h1>
-    </main>
+<main layout:fragment="content">
+    <th:block th:replace="~{front/board/_board_title::common}"></th:block>
+
+    <th:block th:replace="~{front/board/_items::common}"></th:block>
+</main>
 </html>
