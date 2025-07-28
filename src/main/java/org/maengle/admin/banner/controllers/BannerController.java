@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Controller("adminBannerController")
+@Controller()
 @RequestMapping("/admin/banner")
 @RequiredArgsConstructor
 public class BannerController {
@@ -24,13 +24,6 @@ public class BannerController {
         return "banner";
     }
 
-
-    // 배너 그룹 목록 화면
-    @GetMapping
-    public String group(Model model) {
-        model.addAttribute("pageTitle", "배너그룹");
-        return "admin/banner/group";
-    }
 
     // 배너 목록 화면
     @GetMapping("/list/{groupCode}")

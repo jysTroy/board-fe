@@ -59,7 +59,6 @@ public class BannerInfoService {
         return form;
     }
 
-
     private void addBannerInfo(Banner banner) {
         String groupCode = banner.getBannerGroup().getGroupCode();
         List<FileInfo> banners = fileInfoService.getListDone(groupCode, "banner_" + banner.getSeq());
