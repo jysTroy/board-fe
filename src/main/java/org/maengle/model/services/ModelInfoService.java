@@ -28,10 +28,13 @@ public class ModelInfoService {
 		return item;
 	}
 
+	// 상품 조회
 	public RequestModel getForm(Long seq) {
 		Model item = get(seq);
 		return modelMapper.map(item, RequestModel.class);
 	}
+
+
 
 	// 상품 추가 정보 처리
 	private void addInfo(Model item) {
