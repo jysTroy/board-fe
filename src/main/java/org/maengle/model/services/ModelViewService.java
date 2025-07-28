@@ -26,7 +26,7 @@ import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
 @RequiredArgsConstructor
-public class ModelInfoService {
+public class ModelViewService {
 
 	private final ModelMapper modelMapper;
 	private final ModelRepository modelRepository;

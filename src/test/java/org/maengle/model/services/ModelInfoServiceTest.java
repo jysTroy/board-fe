@@ -30,7 +30,7 @@ class ModelInfoServiceTest {
     private ModelMapper modelMapper;
 
     @InjectMocks
-    private ModelInfoService modelInfoService;
+    private ModelViewService modelInfoService;
 
     @BeforeEach
     void setUp() {

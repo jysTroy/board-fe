@@ -2,7 +2,7 @@ package org.maengle.model.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.global.search.ListData;
-import org.maengle.model.services.ModelInfoService;
+import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class ModelViewController {
 
-	private final ModelInfoService modelInfoService;
+	private final ModelViewService modelInfoService;
 
 	// 상품 목록
 	@GetMapping
