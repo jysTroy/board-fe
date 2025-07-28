@@ -8,7 +8,7 @@ public class PaginationTest {
 
 	@Test
 	void test() {
-		Pagination pagination = new Pagination(13, 9865, 10, 10);
+		Pagination pagination = new Pagination(31, 500, 10, 10);
 		System.out.println(pagination);
 
 		pagination.getPages().forEach(i -> System.out.println(Arrays.toString(i)));
