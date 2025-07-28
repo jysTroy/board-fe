@@ -49,7 +49,7 @@ public class MemberController {
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
-        return List.of("member/style", "member/join/style", "member/login" ,"outlines/_header/style", "outlines/_footer/style");
+        return List.of("member/style");
     }
 
     @GetMapping("/join")

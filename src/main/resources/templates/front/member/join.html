@@ -5,7 +5,7 @@
 
 <main layout:fragment="content" class="join-template">
     <div class="join-container">
-        <h1 th:text="${pageTitle}"></h1>
+        <h1 th:text="${pageTitle}" class="join-title"></h1>
         <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}" class="join-form">
             <input type="hidden" name="gid" th:field="*{gid}">
             <input type="hidden" name="socialType" th:field="*{socialType}">
@@ -62,7 +62,7 @@
             </ul>
 
             <div class="terms">
-                <h3 th:text="#{약관동의}"></h3>
+                <h3 th:text="#{약관동의}" class="terms-agree-title"></h3>
                 <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
                 <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
                 <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>

@@ -5,7 +5,7 @@
 
 <main layout:fragment="content" class="login-template">
     <div class="login-container">
-        <h1 th:text="${pageTitle}"></h1>
+        <h1 th:text="${pageTitle}" class="login-title"></h1>
         <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}" class="login-form">
             <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
             <ul>
@@ -28,12 +28,12 @@
             </div>
             <div class="social_btn">
                 <a th:href="${kakaoLoginUrl}">
-                    <img th:src="@{/common/images/kakao_login.png}" alt="카카오 로그인 버튼">
+                    <img th:src="@{/common/images/kakao_login.png}" alt="카카오 로그인 버튼" class="social-link-img">
                 </a>
             </div>
             <div class="social_btn">
                 <a th:href="${naverLoginUrl}">
-                    <img th:src="@{/common/images/naver_login.png}" alt="네이버 로그인 버튼">
+                    <img th:src="@{/common/images/naver_login.png}" alt="네이버 로그인 버튼" class="social-link-img">
                 </a>
             </div>
         </form>
