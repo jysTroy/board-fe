@@ -14,4 +14,3 @@ public interface MemberRepository extends JpaRepository<Member, String>, Queryds
     boolean existsBySocialTypeAndSocialToken(SocialType type, String token);
     Member findBySocialTypeAndSocialToken(SocialType type, String token);
 }
-

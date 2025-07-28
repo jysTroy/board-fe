@@ -40,7 +40,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
         if(exception instanceof BadCredentialsException){
             if(!StringUtils.hasText(userId)){
                 // id 란이 비어있는 경우
-                fieldErrors.add("id_NotBlank");
+                fieldErrors.add("userId_NotBlank");
             }
 
             if(!StringUtils.hasText(password)){

@@ -77,12 +77,14 @@ public class NaverLoginService implements SocialLoginService{
         Map resBody = res.getBody();
         Map<String, Object> responseMap = (Map<String, Object>) resBody.get("response");
 
-        long id = (Long)resBody.get("id");
-//        if (responseMap == null || responseMap.get("id") == null) {
-//            throw new IllegalStateException("네이버 사용자 정보에서 id를 가져올 수 없습니다.");
-//        }
+//        long id = (Long)resBody.get("id");
+        if (responseMap == null || responseMap.get("id") == null) {
+            throw new IllegalStateException("네이버 사용자 정보에서 id를 가져올 수 없습니다.");
+        }
 
-        return "" + id;
+        String id = (String) responseMap.get("id");
+
+        return id;
     }
 
     @Override

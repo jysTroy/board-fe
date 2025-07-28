@@ -19,10 +19,8 @@ public class RequestJoin {
     private String userId;
 
     @Size(min=8)
-    @NotBlank
     private String password;
 
-    @NotBlank
     private String confirmPassword;
 
     @NotBlank
