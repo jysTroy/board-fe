@@ -14,6 +14,13 @@ public class Menus {
                 new Menu("list", "회원목록", "/admin/member")
         ));
 
+        // 게시판 관리
+        menus.put("board", List.of(
+                new Menu("list", "게시판 목록", "/admin/board"),
+                new Menu("register", "게시판 등록", "/admin/board/register"),
+                new Menu("posts", "게시글 관리", "/admin/board/posts")
+        ));
+
     }
 
     // 주 메뉴 코드(member)로 (서브)메뉴목록 조회

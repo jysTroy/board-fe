@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.global.entities.BaseEntity;
+import org.maengle.model.constants.ModelStatus;
 
 import java.util.List;
 
@@ -25,8 +26,11 @@ public class Model extends BaseEntity {
     @Column(length = 150, nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private ModelStatus modelStatus;
+
     @Column
-    private String category; // 질문 (카테고리가 여러개인데 하나만 정의해도 되는지)
+    private String category; // 미정
 
     @Column
     private Long count; // 조회수
