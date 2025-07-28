@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.global.entities.BaseEntity;
+import org.maengle.model.constants.ModelStatus;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class Model extends BaseEntity {
 
     @Column(length = 150, nullable = false)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private ModelStatus modelStatus;
 
     @Column
     private String category; // 없어도 될 듯
