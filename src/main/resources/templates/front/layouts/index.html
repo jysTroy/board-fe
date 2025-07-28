@@ -14,6 +14,7 @@
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
     <th:block layout:fragment="addCommonCss"></th:block>
 
+    <!-- popup 처리용 -->
     <link th:if="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@utils.version()})}">
 
     <link th:unless="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/common/css/popup.css?v={v}(v=${@utils.version()})}">
@@ -35,6 +36,7 @@
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
 </head>
 <body>
+<!-- popup 처리용 -->
 <th:block th:if="${param.popup == null || !param.popup}">
     <header th:replace="~{front/outlines/_header::common}"></header>
 </th:block>
