@@ -6,8 +6,7 @@
     </div>
 
     <a th:href="@{/mypage/profile}" th:text="#{회원정보_수정}" class="menu" th:classappend="${mainCode == 'profile'} ? 'on'"></a>
-    <a th:href="@{/mypage/board}" th:text="#{내가_작성한_글}" class="menu" th:classappend="${maincode == 'board'} ? 'on'"></a>
+    <a th:href="@{/mypage/board}" th:text="#{내가_작성한_글}" class="menu" th:classappend="${mainCode == 'board'} ? 'on'"></a>
     <a th:href="@{/mypage/resign}" th:text="#{회원탈퇴}" class="menu" th:classappend="${mainCode == 'resign'} ? 'on'"></a>
-
 </aside>
 </html>

@@ -70,7 +70,7 @@ public class MemberController {
         joinService.process(form);
 
         // 회원가입 성공시
-        return "redirect:/member/login";
+        return "redirect:/";
     }
 
     @GetMapping("/login")

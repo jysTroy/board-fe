@@ -15,4 +15,22 @@ public class MyPageController {
 
         return "front/mypage/index";
     }
+
+    @GetMapping("/profile")
+    public String profile() {
+
+        return null;
+    }
+
+    @GetMapping("/board")
+    public String myBoard() {
+
+        return null;
+    }
+
+    @GetMapping("/resign")
+    public String resign() {
+        return null;
+    }
 }
+
