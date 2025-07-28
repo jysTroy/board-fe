@@ -49,6 +49,7 @@ public class BoardConfigInfoService {
         return mapper.map(board, RequestBoard.class);
     }
 
+    // 목록 조회임
     public ListData<Board> getList(CommonSearch search) {
         int page = Math.max(search.getPage(), 1);
         int limit = search.getLimit();
