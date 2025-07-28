@@ -77,7 +77,6 @@ public class ModelInfoService {
 
 		/* 키워드 검색 처리 E */
 
-
 		Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 		Page<Model> data = modelRepository.findAll(andBuilder, pageable);
 		List<Model> items = data.getContent();
