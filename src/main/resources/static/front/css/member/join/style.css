@@ -147,3 +147,16 @@ input#terms-agree {
 .profile-image.uploaded .file-upload-btn {
     display: none;
 }
+
+.dn {
+    display: none !important;
+}
+
+#modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.7);
+}

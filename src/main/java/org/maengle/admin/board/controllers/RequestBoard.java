@@ -7,6 +7,8 @@ import org.maengle.member.constants.Authority;
 @Data
 public class RequestBoard {
 
+    private String mode;
+
     @NotBlank
     private String bid;
 
@@ -21,6 +23,7 @@ public class RequestBoard {
 
     private boolean active;
     private boolean editor;
+    private boolean imageUpload;
     private boolean attachFile;
     private boolean comment;
 
