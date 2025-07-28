@@ -15,7 +15,10 @@ public class RequestBanner {
     @NotBlank
     private String groupCode;
 
+    @NotBlank
     private String bName;
+
+    private String bLink;
     private String target = "_self";
 
     private long listOrder;
