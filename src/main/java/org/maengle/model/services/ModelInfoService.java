@@ -74,10 +74,18 @@ public class ModelInfoService {
 		}
 		/* 모델 등록일자 검색 처리 E */
 
-		/* 키워드 검색 처리 S */
+		/* 조회수 검색 처리 S */
+		Integer minCount = search.getMinCount();
+		Integer maxCount = search.getMaxCount();
 
-		/* 키워드 검색 처리 E */
+		if (minCount != null) {
+			andBuilder.and(model.count.goe(minCount));
+		}
 
+		if (maxCount != null) {
+			andBuilder.and(model.count.loe(maxCount));
+		}
+		/* 조회수 검색 처리 E */
 
 		Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 		Page<Model> data = modelRepository.findAll(andBuilder, pageable);
