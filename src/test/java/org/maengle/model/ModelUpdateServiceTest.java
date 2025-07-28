@@ -29,7 +29,7 @@ public class ModelUpdateServiceTest {
 
     @Test
     void test1() {
-        RequestModel form = new RequestModel(); // 가상 폼 데이터
+        RequestModel form = new RequestModel(); // 가상 폼 데이터, seq 제외하고 설정
         form.setMid("model_001");
         form.setName("테스트모델");
         form.setDescription("설명");
@@ -44,7 +44,7 @@ public class ModelUpdateServiceTest {
         // DB에서 저장 된 모델 다시 조회
         Model found = modelRepository.findById(saved.getSeq()).orElse(null);
 
-        // 저장 된 모델이 null이 아니고, 이름이 올바른지 확인
+        // 저장 된 모델이 null이 아니고, seq가 자동 생성 되고, 이름이 올바른지 확인
         assert found != null;
         assert found.getName().equals("테스트모델");
     }
@@ -62,6 +62,12 @@ public class ModelUpdateServiceTest {
         form.setMid("model_002");
         form.setName("수정된이름");
         form.setDescription("수정된설명");
+
+        /*
+        * seq를 통해 기존 모델이 조회 되었는지
+        * 기존 모델의 name, description이 덮어 씌워졌는지
+        * modelRepository.saveAndFlush가 정상 작동 하는지 확인
+        */
 
         Model updated = modelUpdateService.process(form);
 
