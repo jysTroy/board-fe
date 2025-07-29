@@ -50,7 +50,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
                 fieldErrors.add("password_NotBlank");
             }
 
-
             if(fieldErrors.isEmpty()){
                 // 모든 필수항목을 입력하였으나 대조되는 데이터가 없는 경우
                 globalErrors.add("Authentication.bad.credential");
