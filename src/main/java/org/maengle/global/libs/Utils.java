@@ -2,6 +2,8 @@ package org.maengle.global.libs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.maengle.banner.entities.Banner;
+import org.maengle.banner.service.BannerInfoService;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
 import org.springframework.context.MessageSource;
@@ -20,6 +22,7 @@ public class Utils {
     private final FileInfoService infoService;
     private final LocaleResolver localeResolver;
     private final MessageSource messageSource;
+    private final BannerInfoService bannerInfoService;
 
 
     public int version() {
@@ -109,6 +112,11 @@ public class Utils {
     // 이름으로 파라미터 값 쉽게 가져오기 위해서 써놨습니다.
     public String getParam(String name) {
         return request.getParameter(name);
+    }
+
+    // 배너 목록
+    public List<Banner> getBanners(String groupCode) {
+        return bannerInfoService.getList(groupCode);
     }
 
 }

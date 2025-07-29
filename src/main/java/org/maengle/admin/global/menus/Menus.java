@@ -1,5 +1,6 @@
 package org.maengle.admin.global.menus;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,12 @@ public class Menus {
                 new Menu("list", "게시판 목록", "/admin/board"),
                 new Menu("register", "게시판 등록", "/admin/board/register"),
                 new Menu("posts", "게시글 관리", "/admin/board/posts")
+        ));
+
+        // 배너 관리
+        menus.put("banner", Arrays.asList(
+                new Menu("group", "배너관리", "/admin/banner"),
+                new Menu("add", "배너등록", "/admin/banner/group")
         ));
     }
 
