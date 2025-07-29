@@ -8,8 +8,8 @@ import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.controllers.ModelSearch;
-import org.maengle.model.services.ModelViewService;
 import org.maengle.model.services.ModelUpdateService;
+import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -73,7 +73,7 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록
 	@GetMapping("/register")
-	public String register(@ModelAttribute RequestModel form, Model model) {
+	public String register(@ModelAttribute("requestModel") RequestModel form, Model model) {
 		commonProcess("register", model);
 		form.setMid(UUID.randomUUID().toString());
 		form.setModelStatus(ModelStatus.READY);
@@ -91,6 +91,7 @@ public class ModelUpdateController extends CommonController {
 	}
 
 	// 상품 등록, 수정 처리
+	@PostMapping("/register")
 	public String saveModel(RequestModel form, Errors errors, Model model) {
 		String mode = Objects.requireNonNullElse(form.getMode(), "add");
 		commonProcess(mode.equals("edit") ? "register" : "update", model);
