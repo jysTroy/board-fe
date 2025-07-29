@@ -81,7 +81,7 @@ commonLib.insertEditorImage = function(source, editor) {
 
 // 에디터 공통
 commonLib.loadEditor = function(el, height = 350) {
-    if (!ClassicEditor || !el) {
+    if (typeof ClassicEditor === 'undefined' || !ClassicEditor || !el) {
         return Promise.resolve();
     }
 
