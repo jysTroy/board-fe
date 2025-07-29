@@ -47,12 +47,11 @@
             </thead>
             <tbody>
             <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
-                <!-- ✅ 이미지: 맨 앞 열 -->
                 <td align="center">
-                    <img th:if="*{mainImages != null and !mainImages.isEmpty()}"
-                         th:src="@{${mainImages[0].fileUrl}}"
+                    <img th:if="${item.mainImages != null && !item.mainImages.isEmpty()}"
+                         th:src="@{${item.mainImages[0].fileUrl}}"
                          alt="이미지" width="80">
-                    <span th:if="*{mainImages == null or mainImages.isEmpty()}">이미지 없음</span>
+                    <span th:if="${item.mainImages == null || item.mainImages.isEmpty()}">이미지 없음</span>
                 </td>
 
                 <!-- 체크박스 -->

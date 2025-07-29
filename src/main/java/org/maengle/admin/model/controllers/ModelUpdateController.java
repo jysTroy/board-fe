@@ -2,7 +2,6 @@ package org.maengle.admin.model.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
-import org.maengle.file.constants.FileStatus;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
@@ -71,10 +70,12 @@ public class ModelUpdateController extends CommonController {
 
 	// 상품 등록
 	@GetMapping("/register")
-	public String register(@ModelAttribute RequestModel form, Model model) {
+	public String register(@ModelAttribute org.maengle.model.entities.Model item , Model model) {
 		commonProcess("register", model);
-		form.setGid(UUID.randomUUID().toString());
-		form.setModelStatus(ModelStatus.READY);
+		item.setGid(UUID.randomUUID().toString());
+		item.setModelStatus(ModelStatus.READY);
+
+		model.addAttribute("requestModel", item);
 
 		return "admin/model/register";
 	}
@@ -101,10 +102,6 @@ public class ModelUpdateController extends CommonController {
 
 		if (errors.hasErrors()) {
 			// 검증 실패시에 업로드된 파일 정보를 유지
-			String gid = form.getGid();
-			form.setListImages(fileInfoService.getList(gid, "list", FileStatus.ALL));
-			form.setMainImages(fileInfoService.getList(gid, "main", FileStatus.ALL));
-
 			return "admin/model/" + (mode.equals("edit") ? "update" : "register");
 		}
 
@@ -131,9 +128,9 @@ public class ModelUpdateController extends CommonController {
 		List<String> addCommonScript = new ArrayList<>();
 		List<String> addScript = new ArrayList<>();
 
-		if (List.of("register", "update").contains(code)) { // 상품 등록 또는 수정
+		if (List.of("register", "update").contains(code)) { // 모델 등록 또는 수정
 			addCommonScript.add("fileManager");
-			addScript.add("model/form"); // 파일 업로드 후속 처리 또는 양ㅅ긱 처리 관련
+			addScript.add("model/form"); // 파일 업로드 후속 처리 또는 양식 처리 관련
 			pageTitle = code.equals("update") ? "모델정보 수정" : "모델등록";
 
 			List<ModelStatus> statusList = code.equals("update")
