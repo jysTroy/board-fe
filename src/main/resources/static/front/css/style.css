@@ -1,21 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+/* ---------- 프론트 스타일 초기화 S ----------  */
+
 * {
     box-sizing: border-box;
     outline: none;
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: "Segoe UI", sans-serif;;
 }
 
 html {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 body {
     margin: 0;
-    color: #141414;
+    color: #000;
+    background: #fff;
+    align-items: center;
 }
 
 a {
-    color: #141414;
+    color: #000;
     text-decoration: none;
 }
 
@@ -40,18 +43,16 @@ img {
     padding: 0;
 }
 
-/* 헤더 영역 S */
-header {
-    border-bottom: 1px solid #f0f0f0;
-}
-header .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 18px 8px 30px
-}
-header .site-logo {
-    height: 80px;
+
+/* ---------- 헤더 영역 S ---------- */
+
+.site-header {
+  background-color: #3399ff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
 }
 
 header .right {
@@ -88,25 +89,24 @@ header #site-main-search input[type='text']{
     background: #f5f5f5;
 }
 
-header .right a, button {
-    color: #787878;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: -0.01em;
-}
-header .right button {
-    background: transparent;
-    border: 0;
+.user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-header .user-actions {
-    display: flex;
-    align-items: center;
+.user-actions > * {
+  display: flex;
+  align-items: center;
 }
 
-header .user-actions .dot {
-    color: #e6e6e6;
-    margin: 0 12px;
+
+.user-actions a {
+  margin: 10px 0px;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
 }
 
 header nav > div {
@@ -158,15 +158,21 @@ main {
         display: block !important;
    }
 
-   .site-header .right {
-        display: block !important;
-   }
-   .site-header #site-main-search {
-        margin-right: 0;
-   }
-   .site-header .site-logo {
-        height: 60px;
-   }
+  .user-actions {
+    align-self: flex-end;
+    justify-content: center;
+  }
+}
+
+.btn {
+  padding: 8px 16px;
+  background-color: white;
+  border: 3px solid #0077cc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
 
    .site-header .user-actions {
         position: absolute;
@@ -174,17 +180,63 @@ main {
         right: 20px;
    }
 
-   .site-header .user-actions a, .site-header .user-actions button {
-        padding: 6px 11px;
-        border: 1px solid #f0f0f0;
-        border-radius: 99px;
-        font-size: 13px;
-        line-height: 17px;
-   }
+/* ---------- 헤더 영역 E ---------- */
 
-   .site-header .user-actions .dot {
-        margin: 0 7px;
-   }
+
+
+/* ---------- 푸터 영역 S ---------- */
+
+.footer-logo{
+    width: 25px;
+}
+
+footer {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 20px 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0px;
+  color: #222;
+}
+
+.contact-info p {
+  margin: 4px 0;
+}
+
+.contact-info a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  margin: 20px 0;
+  color: #666;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    font-size: 13px;
+    padding: 30px 15px;
+  }
+
+  .footer .h2 {
+    font-size: 16px;
+  }
 }
    /* 슬라이드 기본 설정 */
    .banners {
