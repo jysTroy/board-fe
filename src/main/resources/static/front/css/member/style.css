@@ -1,4 +1,269 @@
+/* ---------- 회원 가입 페이지 ---------- S */
+
+.join-title {
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: #333;
+}
+
+.terms-agree-title {
+    margin-bottom: 10px;
+}
+
+.join-template{
+    margin: 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.join-container ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.join-form input{
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.gender-option {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px 15px 10px;
+  gap: 8px;
+  font-size: 16px;
+}
+
+input.radio-input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.btn-join{
+    width: 100%;
+    padding: 12px;
+    margin: 0;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-image{
+    margin-bottom: 15px;
+}
+
+.terms {
+    margin-bottom: 15px;
+}
+
+input#terms-agree {
+    width: auto;
+}
+
+/* ---------- 회원 가입 페이지 E ---------- */
 
 
 
+/* ---------- 회원 로그인 페이지 S ---------- */
 
+.social-link-img{
+    width: 100%;
+}
+
+.login-title {
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: #333;
+}
+
+.login-template{
+    margin: 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.login-container ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.login-form button {
+  width: 300px;
+  padding: 12px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form ul li .autologin{
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.login-form ul li .autologin input{
+    width: auto;
+    margin-right: 3px;
+}
+
+.login-form ul li .autologin label{
+    line-height: 1;
+}
+
+.login-form .login_btn{
+    margin: 10px 0px;
+}
+
+.login-form .join_btn{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 3px;
+}
+
+.btn-link {
+  font-size: 14px;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+  color: #666;
+    text-decoration: underline;
+}
+
+.social_btn{
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* ---------- 회원 로그인 페이지 E ---------- */
+
+
+
+/* ---------- 파일 업로드 버튼 영역 S ---------- */
+
+.file-upload-btn {
+    display: flex;
+    width: 200px;
+    height: 90px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border: 2px dashed #bbb;
+    border-radius: 10px;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #fafafa;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.file-upload-btn:hover {
+    background-color: #f0f8ff;
+    border-color: #0077cc;
+    color: #0077cc;
+}
+
+/* 이미지 미리보기 wrapper */
+.file-images {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 업로드된 이미지 */
+.file-images img.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    border-radius: 10px;
+}
+
+/* 삭제 버튼 - 이미지 오른쪽 위에 위치 */
+.file-images .remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.75);
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.file-images .remove:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.profile-image.uploaded .file-upload-btn {
+    display: none;
+}
+
+/* ---------- 파일 업로드 버튼 영역 E ---------- */

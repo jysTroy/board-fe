@@ -8,6 +8,7 @@ import org.maengle.member.repositories.MemberRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Lazy
@@ -31,31 +32,40 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
         RequestJoin form = (RequestJoin) target;
 
+        // 소셜 로그인이 아닐경우 비밀번호와 비밀번호 확인은 필수 파라미터
+        if(!form.isSocial()){
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotBlank");
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotBlank");
+        }
+
         /**
          * 1. 이메일 중복 여부
          * 2. 비밀번호 복잡성
          * 3. 비밀번호 확인
          * 4. 휴대폰번호 형식 검증
+         * 1~3번 : 소셜 로그인 시 불필요
          */
-        String password = form.getPassword();
-        String confirmPassword = form.getConfirmPassword();
+        if(!form.isSocial()) {
+            String password = form.getPassword();
+            String confirmPassword = form.getConfirmPassword();
+
+            // 1. 아이디 중복 여부
+            if (repository.existsByUserId(form.getUserId())) {
+                errors.rejectValue("userId", "Duplicated");
+            }
+
+            // 2. 비밀번호 복잡성
+            if (!checkAlpha(password, false) || !checkNumber(password) || !checkSpecialChars(password)) {
+                errors.rejectValue("password", "Complexity");
+            }
+
+            // 3. 비밀번호 확인
+            if (!password.equals(confirmPassword)) {
+                errors.rejectValue("confirmPassword", "Mismatch");
+            }
+        }
+
         String mobile = form.getMobile();
-
-        // 1. 아이디 중복 여부
-        if (repository.existsByUserId(form.getUserId())){
-            errors.rejectValue("userId", "Duplicated");
-        }
-
-        // 2. 비밀번호 복잡성
-        if (!checkAlpha(password, false) || !checkNumber(password) || !checkSpecialChars(password)) {
-            errors.rejectValue("password", "Complexity");
-        }
-
-        // 3. 비밀번호 확인
-        if (!password.equals(confirmPassword)) {
-            errors.rejectValue("confirmPassword", "Mismatch");
-        }
-
         // 4. 휴대폰번호 형식 검증
         if (!checkMobile(mobile)) {
             errors.rejectValue("mobile", "Format");
