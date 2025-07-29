@@ -39,7 +39,7 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
         }
 
         /**
-         * 1. 이메일 중복 여부
+         * 1. 아이디 중복 여부
          * 2. 비밀번호 복잡성
          * 3. 비밀번호 확인
          * 4. 휴대폰번호 형식 검증
