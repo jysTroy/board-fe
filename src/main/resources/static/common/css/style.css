@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+body {
+  background: #fff;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
 .dn {
     display: none !important;
 }
@@ -42,6 +48,7 @@
     border-bottom: 2px solid #000;
 }
 
+
 .header-profile {
     display: flex;
     flex-direction: column;
@@ -60,14 +67,4 @@
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-/* 이미지 잘림 방지 때문에 넣어 놓음 */
-.header-profile, .profile-image-link {
-    overflow: visible !important; /* 잘림 방지 */
-}
 
-.profile-image-link img.profile-image {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin-top: 0; /* 혹시 음수 마진 제거 */
-}
