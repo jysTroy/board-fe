@@ -30,7 +30,6 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 
         String popup = request.getParameter("popup");
 
-
         List<String> fieldErrors = new ArrayList<>();
         List<String> globalErrors = new ArrayList<>();
 
@@ -76,8 +75,11 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
             return;
         }
 
+
+        String addQs = "?popup=true";
+        //popup != null && popup.equals("true") ? "?popup=true":"";
+
         // 로그인 실패 후 돌아오면 로그인 form에 입력한 값이 적혀 있음
-        String addQs = popup != null && popup.equals("true") ? "?popup=true":"";
         session.setAttribute("requestLogin", form);
         response.sendRedirect(request.getContextPath() + "/member/login" + addQs);
     }
