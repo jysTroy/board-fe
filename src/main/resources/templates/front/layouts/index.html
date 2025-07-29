@@ -9,6 +9,9 @@
     <meta name="keywords" th:content="${@utils.keywords()}">
     <meta name="description" th:content="${@utils.description()}">
 
+    <!-- 슬라이드용 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <!-- 슬라이드용 -->
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
@@ -41,7 +44,27 @@
     <header th:replace="~{front/outlines/_header::common}"></header>
 </th:block>
 
-<main layout:fragment="content"></main>
+<main layout:fragment="content">
+    <!-- 슬라이드용 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <main layout:fragment="content">
+        <div class="swiper banners">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
+                    <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
+                        <img th:src="*{bannerImage.fileUrl}" alt="" />
+                    </a>
+                </div>
+            </div>
+
+            <!-- 네비게이션 및 페이지네이션 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </main>
+    <!-- 슬라이드용 -->
+</main>
 
 <th:block th:if="${param.popup == null || !param.popup}">
     <footer th:replace="~{front/outlines/_footer::common}"></footer>

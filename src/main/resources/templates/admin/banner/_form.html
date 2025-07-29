@@ -8,6 +8,7 @@
             <th width="180">배너그룹</th>
             <td>
                 <select name="groupCode" th:field="*{groupCode}">
+                    <option value="">-- 배너 그룹 선택 --</option>
                     <option th:each="item : ${bannerGroups}" th:value="${item.groupCode}" th:text="${item.groupName}"></option>
                 </select>
                 <div class="error" th:each="err : ${#fields.errors('groupCode')}" th:text="${err}"></div>

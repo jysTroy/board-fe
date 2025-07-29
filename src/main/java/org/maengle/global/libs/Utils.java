@@ -119,4 +119,11 @@ public class Utils {
         return bannerInfoService.getList(groupCode);
     }
 
+    /*
+    * 배너 페이지 설정
+    * 0 이하 정수인 경우 1이상 정수로 대체
+    */
+    public static int onlyPositiveNumber(int num, int replace) {
+        return num < 1 ? replace : num;
+    }
 }

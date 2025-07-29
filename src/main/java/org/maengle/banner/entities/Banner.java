@@ -20,14 +20,14 @@ public class Banner extends BaseEntity {
     private Long seq;
 
     @Column(length = 60, nullable = false)
-    private String bName;
+    private String bName; // 배너명
 
-    private String bLink;
-    private String target = "_self";
+    private String bLink; // 배너 링크
+    private String target = "_self"; // 배너 타겟
 
-    private long listOrder;
+    private long listOrder; // 진열 순서
 
-    private boolean active;
+    private boolean active; // 노출 여부
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groupCode")

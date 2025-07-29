@@ -1,52 +1,244 @@
 package org.maengle.admin.banner.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.maengle.admin.global.menus.Menu;
+import org.maengle.admin.global.menus.Menus;
 import org.maengle.banner.entities.Banner;
-import org.maengle.banner.service.BannerInfoService;
+import org.maengle.banner.entities.BannerGroup;
+import org.maengle.banner.service.*;
+import org.maengle.global.search.ListData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Controller()
+@Controller("adminBannerController")
 @RequestMapping("/admin/banner")
 @RequiredArgsConstructor
 public class BannerController {
 
+    private final BannerGroupSaveService bannerGroupSaveService;
+    private final BannerGroupDeleteService bannerGroupDeleteService;
     private final BannerInfoService bannerInfoService;
+    private final BannerSaveService bannerSaveService;
+    private final BannerDeleteService bannerDeleteService;
 
     @ModelAttribute("menuCode")
     public String menuCode() {
         return "banner";
     }
 
-
-    // 배너 목록 화면
-    @GetMapping("/list/{groupCode}")
-    public String bannerList(@PathVariable("groupCode") String groupCode, Model model) {
-        List<Banner> items = bannerInfoService.getList(groupCode);
-        model.addAttribute("items", items);
-        model.addAttribute("pageTitle", "배너목록");
-        return "admin/banner/list";
+    @ModelAttribute("subMenus")
+    public List<Menu> subMenus() {
+        return Menus.getMenus("banner");
     }
 
-    // 배너 등록 화면
+
+    @ModelAttribute("bannerGroups")
+    public List<BannerGroup> bannerGroups() {
+        BannerGroupSearch search = new BannerGroupSearch();
+        search.setLimit(10000);
+        ListData<BannerGroup> data = bannerInfoService.getGroupList(search);
+
+        return data.getItems();
+    }
+
+    /**
+     * 배너 그룹 관리
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping
+    public String group(@ModelAttribute  BannerGroupSearch search,  Model model) {
+        commonProcess("group", model);
+
+        ListData<BannerGroup> data = bannerInfoService.getGroupList(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        return "admin/banner/group";
+    }
+
+    /**
+     * 그룹 등록
+     */
+    @PostMapping
+    public String addGroup(@Valid RequestBannerGroup form, Errors errors,  Model model) {
+        commonProcess("group", model);
+
+        /*
+        bannerGroupValidator.validate(form, errors);
+        bannerValidator 아직 미구현
+        */
+
+        if (errors.hasErrors()) {
+            String code = errors.getFieldErrors().stream().map(f -> f.getCodes()[0]).findFirst().orElse(null);
+            //if (code != null) throw new AlertException(Utils.getMessage(code), HttpStatus.BAD_REQUEST);
+        }
+
+        bannerGroupSaveService.save(form);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    /**
+     * 그룹 목록 수정
+     *
+     * @param chks
+     * @param model
+     * @return
+     */
+    @PatchMapping
+    public String editGroup(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+        commonProcess("group", model);
+
+
+        bannerGroupSaveService.saveList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    /**
+     * 그룹 목록 삭제
+     *
+     * @param chks
+     * @param model
+     * @return
+     */
+    @DeleteMapping
+    public String deleteGroup(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+        commonProcess("group", model);
+
+        bannerGroupDeleteService.deleteList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    /**
+     * 배너 등록
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("pageTitle", "배너등록");
+    public String add(@ModelAttribute RequestBanner form,  Model model) {
+        commonProcess("add", model);
+
         return "admin/banner/add";
     }
 
-    // 배너 수정 화면
+    /**
+     * 배너 수정
+     * @param seq
+     * @param model
+     * @return
+     */
     @GetMapping("/edit/{seq}")
-    public String edit(@PathVariable Long seq, Model model) {
-        // 배너 정보 조회 (서비스에 getForm 같은 메서드 있어야 함)
-        model.addAttribute("requestBanner", bannerInfoService.getForm(seq));
-        model.addAttribute("pageTitle", "배너수정");
+    public String edit(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("edit", model);
+
+        RequestBanner form = bannerInfoService.getForm(seq);
+        model.addAttribute("requestBanner", form);
+
         return "admin/banner/edit";
+    }
+
+    /**
+     * 배너 추가, 수정
+     *
+     * @param form
+     * @param errors
+     * @param model
+     * @return
+     */
+    @PostMapping("/save")
+    public String save(@Valid RequestBanner form, Errors errors, Model model) {
+        commonProcess(form.getMode(), model);
+
+        /*
+        bannerValidator.validate(form, errors);
+        bannerValidator 아직 미구현
+        */
+
+        if (errors.hasErrors()) {
+            return "admin/banner/" + form.getMode();
+        }
+
+        bannerSaveService.save(form);
+
+        return "redirect:/admin/banner/list/" + form.getGroupCode();
+    }
+
+    /**
+     * 배너 목록
+     *
+     * @param groupCode
+     * @param model
+     * @return
+     */
+    @GetMapping("/list/{groupCode}")
+    public String bannerList(@PathVariable("groupCode") String groupCode, Model model) {
+        commonProcess("list", model);
+
+        List<Banner> items = bannerInfoService.getList(groupCode, true);
+
+        model.addAttribute("items", items);
+
+        return "admin/banner/list";
+    }
+
+    @PatchMapping("/list")
+    public String editBannerList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+        bannerSaveService.saveList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    @DeleteMapping("/list")
+    public String deleteBannerList(@RequestParam("chk") List<Integer> chks, Model model) {
+        commonProcess("list", model);
+
+        bannerDeleteService.deleteList(chks);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    /**
+     * 배너 공통 처리
+     *
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(String mode, Model model) {
+        String pageTitle = "배너목록";
+        mode = StringUtils.hasText(mode) ? mode : "list";
+
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        if (mode.equals("group")) {
+            pageTitle = "배너그룹";
+        } else if (mode.equals("add") || mode.equals("edit")) {
+            pageTitle = "배너" + ((mode.equals("edit")) ? "수정" : "등록");
+            addCommonScript.add("fileManager");
+            addScript.add("banner/form");
+        }
+
+        model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("subMenuCode", mode);
     }
 }

@@ -185,4 +185,25 @@ main {
    .site-header .user-actions .dot {
         margin: 0 7px;
    }
+
+    /*슬라이드*/
+   .banner-slider {
+     width: 100%;
+     height: 300px;
+     position: relative;
+   }
+
+   .banner-slider .swiper-slide img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+   }
+
+   .banner-slider .swiper-button-next,
+   .banner-slider .swiper-button-prev {
+     color: #fff;
+     top: 50%;
+     transform: translateY(-50%);
+   }
 }

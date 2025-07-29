@@ -13,12 +13,12 @@ public class RequestBanner {
     private Long seq;
 
     @NotBlank
-    private String groupCode;
+    private String groupCode; // 배너 그룹 코드
 
     @NotBlank
     private String bName;
 
-    private String bLink;
+    private String bLink; // 배너 링크
     private String target = "_self";
 
     private long listOrder;
