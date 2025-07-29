@@ -1,34 +1,21 @@
-<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 * {
     box-sizing: border-box;
     outline: none;
-    font-family: "Nanum Gothic", sans-serif;
-=======
-/* ---------- 프론트 스타일 초기화 S ----------  */
-
-* {
-    box-sizing: border-box;
-    outline: none;
-    font-family: "Segoe UI", sans-serif;;
->>>>>>> 5f22199d32fbc4dd800e7eaef471ba98afb445a9
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 html {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 body {
     margin: 0;
-    color: #000;
-<<<<<<< HEAD
-=======
-    background: #fff;
-    align-items: center;
->>>>>>> 5f22199d32fbc4dd800e7eaef471ba98afb445a9
+    color: #141414;
 }
 
 a {
-    color: #000;
+    color: #141414;
     text-decoration: none;
 }
 
@@ -47,150 +34,155 @@ img {
     border: 0;
 }
 
-<<<<<<< HEAD
-/* 헤더 영역 S */
-.site-logo {
-    height: 50px;
+.layout-width {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0;
 }
 
+/* 헤더 영역 S */
+header {
+    border-bottom: 1px solid #f0f0f0;
+}
+header .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18px 8px 30px
+}
+header .site-logo {
+    height: 80px;
+}
+
+header .right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+header #site-main-search {
+    background: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.5%);
+    border-radius: 8px;
+    height: 40px;
+    padding: 10px;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+header #site-main-search svg {
+    color: #a5a5a5;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+header #site-main-search input[type='text']{
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    color: #141414;
+    caret-color: #1E9EFF;
+    flex-grow: 1;
+    border: 0;
+    background: #f5f5f5;
+}
+
+header .right a, button {
+    color: #787878;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+}
+header .right button {
+    background: transparent;
+    border: 0;
+}
+
+header .user-actions {
+    display: flex;
+    align-items: center;
+}
+
+header .user-actions .dot {
+    color: #e6e6e6;
+    margin: 0 12px;
+}
+
+header nav > div {
+    display: flex;
+    height: 52px;
+    padding: 0 18px 0 30px !important;
+}
+header nav a {
+    line-height: 52px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 12px;
+}
+
+header nav a:hover {
+    color: #787878;
+}
+
+header nav a.on {
+    color: #1E9EFF;
+}
 /* 헤더 영역 E */
 
 /* 푸터 영역 S */
-footer .logo {
-    height: 50px;
+footer {
+    padding: 41px 26px 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+footer .inner {
+    color: #787878;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+}
+
+footer .inner div + div {
+    margin-top: 10px;
 }
 /* 푸터 영역 E */
-=======
-/* ---------- 프론트 스타일 초기화 E ----------  */
 
-
-
-/* ---------- 헤더 영역 S ---------- */
-
-.site-header {
-  background-color: #3399ff;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 0 15px;
+main {
+    min-height: 600px;
 }
 
-.logo-box{
-    display: flex;
-    justify-content: center;
+
+@media screen and (max-width: 770px) {
+   .site-header {
+        display: block !important;
+   }
+
+   .site-header .right {
+        display: block !important;
+   }
+   .site-header #site-main-search {
+        margin-right: 0;
+   }
+   .site-header .site-logo {
+        height: 60px;
+   }
+
+   .site-header .user-actions {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+   }
+
+   .site-header .user-actions a, .site-header .user-actions button {
+        padding: 6px 11px;
+        border: 1px solid #f0f0f0;
+        border-radius: 99px;
+        font-size: 13px;
+        line-height: 17px;
+   }
+
+   .site-header .user-actions .dot {
+        margin: 0 7px;
+   }
 }
-
-.site-logo-a {
-    display: inline-block;
-}
-
-.site-logo {
-    display: block;
-    width: 60px;
-    margin: 0px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #2c3e50;
-    text-decoration: none;
-}
-
-.user-actions a {
-  margin: 10px 0px;
-  font-size: 14px;
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.user-actions a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-  .site-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .user-actions {
-    align-self: flex-end;
-  }
-}
-
-.btn {
-  padding: 8px 16px;
-  background-color: white;
-  border: 3px solid #0077cc;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.btn:hover {
-  background-color: #f7c855;
-  color: black;
-}
-
-/* ---------- 헤더 영역 E ---------- */
-
-
-
-/* ---------- 푸터 영역 S ---------- */
-
-.footer-logo{
-    width: 25px;
-}
-
-footer {
-  background-color: #f5f5f5;
-  color: #333;
-  padding: 20px 20px;
-  text-align: center;
-  font-size: 14px;
-}
-
-footer-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 0px;
-  color: #222;
-}
-
-.contact-info p {
-  margin: 4px 0;
-}
-
-.contact-info a {
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-.terms {
-  margin: 20px 0;
-  color: #666;
-}
-
-.copyright {
-  font-size: 12px;
-  color: #aaa;
-}
-
-@media (max-width: 600px) {
-  .footer {
-    font-size: 13px;
-    padding: 30px 15px;
-  }
-
-  .footer .h2 {
-    font-size: 16px;
-  }
-}
-
-/* ---------- 푸터 영역 ---------- E */
->>>>>>> 5f22199d32fbc4dd800e7eaef471ba98afb445a9
