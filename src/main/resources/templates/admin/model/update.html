@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/index}">
+
+<head>
+    <th:block layout:fragment="addCommonScript">
+        <th:block th:replace="~{common/_editor_script::script}"></th:block>
+    </th:block>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <th:block th:replace="~{admin/model/_form::common}"></th:block>
+</section>
+</body>
+</html>
