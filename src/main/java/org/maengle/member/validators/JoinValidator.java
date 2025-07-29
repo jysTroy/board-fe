@@ -3,6 +3,7 @@ package org.maengle.member.validators;
 import lombok.RequiredArgsConstructor;
 import org.maengle.global.validators.MobileValidator;
 import org.maengle.global.validators.PasswordValidator;
+import org.maengle.member.constants.Gender;
 import org.maengle.member.controllers.RequestJoin;
 import org.maengle.member.repositories.MemberRepository;
 import org.springframework.context.annotation.Lazy;
@@ -69,6 +70,11 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
         // 4. 휴대폰번호 형식 검증
         if (!checkMobile(mobile)) {
             errors.rejectValue("mobile", "Format");
+        }
+
+        Gender gender = form.getGender();
+        if(gender == null){
+            errors.rejectValue("gender", "NotNull");
         }
     }
 }
