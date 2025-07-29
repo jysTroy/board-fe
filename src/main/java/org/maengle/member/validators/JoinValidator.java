@@ -72,9 +72,17 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             errors.rejectValue("mobile", "Format");
         }
 
+        if(mobile == null){
+            errors.rejectValue("mobile", "NotBlank");
+        }
+
         Gender gender = form.getGender();
         if(gender == null){
             errors.rejectValue("gender", "NotNull");
+        }
+
+        if(!form.isTermsAgree()){
+            errors.rejectValue("termsAgree", "False");
         }
     }
 }
