@@ -2,6 +2,7 @@ package org.maengle.model;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
+import org.maengle.admin.model.controllers.RequestModel;
 import org.maengle.global.libs.Utils;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.entities.Model;
