@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-
-<th:block layout:fragment="addCommonScript">
-    <th:block th:replace="~{common/_editor_script::script}"></th:block>
-</th:block>
 
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
@@ -37,7 +32,7 @@
                             <img th:src="">
                         </div>
                     </div>
-                    <button type="submit" th:data-mid="*{mid}" data-location="main" data-image-only="true">이미지 추가</button>
+                    <button type="submit" th:data-gid="*{gid}" data-location="main" data-image-only="true">이미지 추가</button>
                 </td>
             </tr>
         </table>

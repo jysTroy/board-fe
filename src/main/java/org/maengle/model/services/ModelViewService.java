@@ -102,9 +102,9 @@ public class ModelViewService {
 	// 상품 추가 정보 처리
 	private void addInfo(Model item) {
 		// 업로드한 파일 처리
-		String mid = item.getMid();
-		item.setMainImages(fileInfoService.getList(mid, "main"));
-		item.setListImages(fileInfoService.getList(mid, "list"));
+		String gid = item.getGid();
+		item.setMainImages(fileInfoService.getList(gid, "main"));
+		item.setListImages(fileInfoService.getList(gid, "list"));
 	}
 
 

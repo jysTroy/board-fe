@@ -14,7 +14,7 @@ public class RequestModel {
 	private Long seq;
 
 	@NotBlank
-	private String mid;
+	private String gid;
 
 	@NotBlank
 	private String name;
