@@ -11,7 +11,7 @@
 
     <!-- 슬라이드용 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <!-- 슬라이드용 -->
+
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
@@ -45,7 +45,7 @@
 </th:block>
 
 <main layout:fragment="content">
-    <!-- 슬라이드용 -->
+    <!-- 슬라이드 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <main layout:fragment="content">
         <div class="swiper banners">
@@ -56,14 +56,15 @@
                     </a>
                 </div>
             </div>
-
             <!-- 네비게이션 및 페이지네이션 -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
+            <!-- 네비게이션 및 페이지네이션 -->
         </div>
+        <div th:replace="~{front/outlines/_nav::menu}"></div>
     </main>
-    <!-- 슬라이드용 -->
+    <!-- 슬라이드 -->
 </main>
 
 <th:block th:if="${param.popup == null || !param.popup}">
