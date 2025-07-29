@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{front/layouts/index}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
 
 <th:block layout:fragment="addCommonCss">
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/error.css?v=(v=${@utils.version()})}">
