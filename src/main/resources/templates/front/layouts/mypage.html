@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- mypage용 layout -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
@@ -40,7 +39,7 @@
     <header th:replace="~{front/outlines/_header::common}"></header>
 </th:block>
 
-<main>
+<main class="layout-width">
     <aside th:replace="~{front/outlines/_side::mypage}"></aside>
     <section layout:fragment="content"></section>
 </main>
