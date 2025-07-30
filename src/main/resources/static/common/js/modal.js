@@ -77,8 +77,9 @@ commonLib.modal = {
 
         // 팝업 제목 처리
         if (_title) {
-            const titleDiv = document.createElement("div");
+            const titleDiv = document.createElement("img");
             titleDiv.className = "modal-title";
+            titleDiv.src = "common/images/logo.png"
             titleDiv.innerHTML = _title;
             modalContent.prepend(titleDiv);
         }
