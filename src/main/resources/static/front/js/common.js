@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiper = new Swiper(".banners", {
     loop: true,
     autoplay: {
-      delay: 3000,
+      delay: 5000,
       disableOnInteraction: false,
     },
     pagination: {
