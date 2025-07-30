@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+/* ---------- 프론트 스타일 초기화 S ----------  */
+
 * {
     box-sizing: border-box;
     outline: none;
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: "Segoe UI", sans-serif;;
 }
 
 html {
@@ -11,11 +12,13 @@ html {
 
 body {
     margin: 0;
-    color: #141414;
+    color: #000;
+    background: #fff;
+    align-items: center;
 }
 
 a {
-    color: #141414;
+    color: #000;
     text-decoration: none;
 }
 
@@ -34,12 +37,6 @@ img {
     border: 0;
 }
 
-.layout-width {
-    max-width: 1170px;
-    margin: 0 auto;
-    padding: 0;
-}
-
 h1, h2, h3, h4 {
     padding: 0;
     margin: 0;
@@ -54,18 +51,48 @@ h1.main-title {
     font-weight: 600;
 }
 
-/* 헤더 영역 S */
+.layout-width {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ---------- 프론트 스타일 초기화 E ----------  */
+
+
+
+/* ---------- 헤더 영역 S ---------- */
+
 header {
     border-bottom: 1px solid #f0f0f0;
 }
-header .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 18px 8px 30px
+
+.site-header {
+  background-color: #3399ff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px 8px 30px
 }
+
+.logo-box{
+    display: flex;
+    justify-content: center;
+}
+
+.site-logo-a {
+    display: inline-block;
+}
+
 header .site-logo {
-    height: 80px;
+    display: block;
+    width: 60px;
+    margin: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
 }
 
 header .right {
@@ -113,16 +140,6 @@ header .right button {
     border: 0;
 }
 
-header .user-actions {
-    display: flex;
-    align-items: center;
-}
-
-header .user-actions .dot {
-    color: #e6e6e6;
-    margin: 0 12px;
-}
-
 header nav > div {
     display: flex;
     height: 52px;
@@ -142,61 +159,149 @@ header nav a:hover {
 header nav a.on {
     color: #1E9EFF;
 }
-/* 헤더 영역 E */
 
-/* 푸터 영역 S */
+header .user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+header .user-actions > * {
+  display: flex;
+  align-items: center;
+}
+
+
+header .user-actions a {
+  margin: 10px 0px;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+}
+
+header .user-actions .dot {
+    color: #e6e6e6;
+    margin: 0 12px;
+}
+
+header .user-actions a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  header .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  header .user-actions {
+    align-self: flex-end;
+    justify-content: center;
+  }
+}
+
+.btn {
+  padding: 8px 16px;
+  background-color: white;
+  border: 3px solid #0077cc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #f7c855;
+  color: black;
+}
+
+/* ---------- 헤더 영역 E ---------- */
+
+
+
+/* ---------- 푸터 영역 S ---------- */
+
+.footer-logo{
+    width: 25px;
+}
+
 footer {
-    padding: 41px 26px 20px;
-    border-top: 1px solid #f0f0f0;
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 20px 20px;
+  text-align: center;
+  font-size: 14px;
 }
 
-footer .inner {
-    color: #787878;
+footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0px;
+  color: #222;
+}
+
+.contact-info p {
+  margin: 4px 0;
+}
+
+.contact-info a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  margin: 20px 0;
+  color: #666;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .footer {
     font-size: 13px;
-    line-height: 16px;
-    letter-spacing: -0.01em;
+    padding: 30px 15px;
+  }
+
+  .footer .h2 {
+    font-size: 16px;
+  }
 }
 
-footer .inner div + div {
-    margin-top: 10px;
+/* ---------- 푸터 영역 ---------- E */
+
+/* ---------- 메인 영역 ---------- S */
+
+
+/* ---------- 메인 영역 ---------- E */
+
+/* ------- 마이페이지 영역 ------- S */
+
+
+
+/* ------- 마이페이지 영역 ------- E */
+
+
+/* ---------- 프로필 영역 ---------- S */
+
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-/* 푸터 영역 E */
 
-main {
-    min-height: 600px;
+header .profile-image {
+    overflow: hidden;
+    border-radius: 50%; /* 프로필을 원형으로 */
+    background-color: #f0f0f0; /* 배경으로 구분 */
 }
 
-
-@media screen and (max-width: 770px) {
-   .site-header {
-        display: block !important;
-   }
-
-   .site-header .right {
-        display: block !important;
-   }
-   .site-header #site-main-search {
-        margin-right: 0;
-   }
-   .site-header .site-logo {
-        height: 60px;
-   }
-
-   .site-header .user-actions {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-   }
-
-   .site-header .user-actions a, .site-header .user-actions button {
-        padding: 6px 11px;
-        border: 1px solid #f0f0f0;
-        border-radius: 99px;
-        font-size: 13px;
-        line-height: 17px;
-   }
-
-   .site-header .user-actions .dot {
-        margin: 0 7px;
-   }
-}
+/* ---------- 프로필 영역 ---------- E */

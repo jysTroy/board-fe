@@ -46,7 +46,7 @@ public class Utils {
         return messageSource.getMessage(code, null, locale);
     }
 
-    // 다국어 메시지 처리용 코드 배열 (codes)을 받아, 각 코드에 대한 메시지를 반환
+    // 여러 메시지 코드를 한 번에 받아서, 해당 코드에 매핑된 다국어 메시지를 List 형태로 변환 처리
     public List<String> getMessages(String[] codes) {
         ResourceBundleMessageSource ms = (ResourceBundleMessageSource) messageSource;
         ms.setUseCodeAsDefaultMessage(false);
@@ -63,12 +63,7 @@ public class Utils {
         }
     }
 
-    /**
-     * 커맨드 객체 검증 실패 메세지 처리(REST)
-     *
-     * @param errors
-     * @return
-     */
+    /* 검증 실패 메세지 처리 */
     public Map<String, List<String>> getErrorMessages(Errors errors) {
         // 필드별 검증 실패 메세지  - rejectValue, 커맨드 객체 검증(필드)
         Map<String, List<String>> messages = errors.getFieldErrors()
