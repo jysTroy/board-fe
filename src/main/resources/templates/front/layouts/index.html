@@ -27,6 +27,7 @@
     <th:block layout:fragment="addCss"></th:block>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
     <script th:src="@{/common/js/modal.js?v={v}(v=${@utils.version()})}"></script>
     <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
@@ -45,26 +46,41 @@
     </th:block>
 
 <main layout:fragment="content">
+    <div class="layout-width">
     <!-- 슬라이드 -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-        <div class="swiper banners">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
-                    <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
-                        <img th:src="*{bannerImage.fileUrl}" alt="" />
-                    </a>
-                </div>
+    <div class="swiper banners">
+        <div class="swiper-wrapper">
+
+            <!-- 디버깅용 강제 띄우는 화면 S -->
+            <div class="swiper-slide">
+                <img src="/images/download1.jpeg" alt="슬라이드1" />
             </div>
+            <div class="swiper-slide">
+                <img src="/images/download2.jpeg" alt="슬라이드2" />
+            </div>
+            <div class="swiper-slide">
+                <img src="/images/download3.jpeg" alt="슬라이드3" />
+            </div>
+            <!-- 디버깅용 강제 띄우는 화면 E -->
+
+            <!-- original code S -->
+            <!--<div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
+                <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
+                    <img th:src="*{bannerImage.fileUrl}" alt="" />
+                </a>
+            </div>-->
+            <!-- original code E -->
+
+        </div>
             <!-- 네비게이션 및 페이지네이션 -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
             <!-- 네비게이션 및 페이지네이션 -->
         </div>
-        <div th:replace="~{front/outlines/_nav::menu}"></div>
+    </div>
     </main>
     <!-- 슬라이드 -->
-</main>
 
     <th:block th:if="${param.popup == null || !param.popup}">
         <footer th:replace="~{front/outlines/_footer::common}"></footer>
