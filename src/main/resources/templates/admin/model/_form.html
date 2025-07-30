@@ -35,8 +35,9 @@
         <tr>
             <th width="120">메인 이미지</th>
             <td>
+                <input type="file" name="mainFiles" multiple>
+
                 <div class="uploaded_images" id="main-images" th:classappend="*{mainImages != null} ? 'uploaded'">
-                    <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
                     <div class="inner">
                         <div th:if="*{mainImages != null}" th:each="item : *{mainImages}" th:object="${item}" class="file-images" th:id="*{'file-' + mainImages.seq}">
                             <i class="xi-close remove" th:data-seq="*{seq}"></i>
@@ -63,7 +64,7 @@
     <h2>모델 상세설명</h2>
     <table class="table-cols mb30">
         <tr>
-            <th width="120">상품설명</th>
+            <th width="120">모델설명</th>
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>
             </td>
