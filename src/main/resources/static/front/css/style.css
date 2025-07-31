@@ -174,7 +174,6 @@ header .user-actions > * {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
   text-decoration: none;
 }
 
@@ -187,7 +186,7 @@ header .user-actions a {
 
 header .user-actions .dot {
     color: #e6e6e6;
-    margin: 0 12px;
+    margin: 0 6px;
 }
 
 header .user-actions a:hover {
@@ -208,14 +207,12 @@ header .user-actions a:hover {
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 4px 16px;
   background-color: white;
-  border: 3px solid #1F9EFF;
-  border-radius: 25px;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
-  color: #1F9EFF;
   font-weight: 600;
 }
 
