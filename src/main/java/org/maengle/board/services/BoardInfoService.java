@@ -19,6 +19,7 @@ import org.maengle.global.search.Pagination;
 import org.maengle.member.entities.Member;
 import org.maengle.member.libs.MemberUtil;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,6 +28,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Lazy
 @Service
 @Transactional
 @RequiredArgsConstructor

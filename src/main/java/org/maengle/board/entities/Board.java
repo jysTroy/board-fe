@@ -22,7 +22,6 @@ public class Board extends BaseEntity implements Serializable {
     private String name; // 게시판 이름
 
     private int rowsForPage; // 한 페이지당 레코드 갯수
-
     private int pageCount; // 노출될 페이지 갯수
 
     @Column(length=45, nullable = false)
@@ -37,6 +36,7 @@ public class Board extends BaseEntity implements Serializable {
     private boolean attachFile; // 파일 첨부 기능 사용 여부
     private boolean comment; // 댓글 사용 여부
     private boolean afterWritingRedirect; // 글 작성 후 이동 방향 false : 게시글 목록, true : 게시글 상세
+    private boolean showViewList; // 글보기 하단에 목록 노출 여부
 
     @Enumerated(EnumType.STRING)
     private Authority listAuthority; // MEMBER - 회원, ADMIN - 관리자
@@ -49,8 +49,6 @@ public class Board extends BaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Authority commentAuthority; // 댓글 작성 권한
-
-
 
     public List<String> getCategories() {
         if (!StringUtils.hasText(category)) {

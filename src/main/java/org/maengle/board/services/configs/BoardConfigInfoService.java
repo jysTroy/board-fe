@@ -13,6 +13,7 @@ import org.maengle.global.search.CommonSearch;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
+@Lazy
 @Service
 @RequiredArgsConstructor
 public class BoardConfigInfoService {

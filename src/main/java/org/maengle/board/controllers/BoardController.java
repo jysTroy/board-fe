@@ -1,11 +1,11 @@
 package org.maengle.board.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
 import org.maengle.board.entities.BoardData;
-import org.maengle.board.services.BoardInfoService;
-import org.maengle.board.services.BoardUpdateService;
+import org.maengle.board.services.*;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.board.validators.BoardValidator;
 import org.maengle.file.constants.FileStatus;
@@ -13,6 +13,7 @@ import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.member.libs.MemberUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -35,8 +36,13 @@ public class BoardController {
     private final BoardConfigInfoService configInfoService;
     private final BoardUpdateService updateService;
     private final BoardInfoService infoService;
+    private final BoardDeleteService deleteService;
+    private final BoardViewCountService viewCountService;
+    private final BoardAuthService authService;
     private final FileInfoService fileInfoService;
     private final BoardValidator boardValidator;
+    private final PasswordEncoder encoder;
+    private final HttpSession session;
 
     @ModelAttribute("board")
     public Board getBoard() {
@@ -81,7 +87,7 @@ public class BoardController {
 
     // 게시글 저장
     @PostMapping("/save")
-    public String save(@Valid RequestBoard form, Errors errors, Model model) {
+    public String save(@Valid RequestBoard form, Errors errors, Model model, @SessionAttribute("board") Board board) {
         String mode = form.getMode();
         commonProcess(form.getBid(), mode, model);
 
@@ -97,14 +103,27 @@ public class BoardController {
 
         // 게시글 저장 처리
         BoardData item = updateService.process(form);
+        String redirectUrl = board.isAfterWritingRedirect() ? "view/" + item.getSeq() : "list/" + form.getBid();
 
-        return "redirect:/board/list/" + form.getBid();
+        return "redirect:/board/" + redirectUrl;
     }
 
     // 게시글 보기
     @GetMapping("/view/{seq}")
-    public String view(@PathVariable("seq") Long seq, Model model) {
+    public String view(@PathVariable("seq") Long seq, Model model, @SessionAttribute("board") Board board) {
         commonProcess(seq, "view", model);
+
+        if (board.isShowViewList()) { // 게시글 보기 하단에 목록 노출
+            BoardSearch search = new BoardSearch();
+            ListData<BoardData> data = infoService.getList(board.getBid(), search);
+
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+            model.addAttribute("boardSearch", search);
+        }
+
+        // 게시글 조회수 업데이트
+        viewCountService.update(seq);
 
         return "front/board/view";
     }
@@ -113,11 +132,20 @@ public class BoardController {
     @GetMapping("/delete/{seq}")
     public String delete(@PathVariable("seq") Long seq, Model model, @SessionAttribute("board") Board board) {
         commonProcess(seq, "delete", model);
+        deleteService.process(seq);
 
         return "redirect:/board/list/" + board.getBid();
     }
 
 
+    /**
+     * bid 기준의 공통 처리
+     *  - 게시글 설정조회가 공통 처리
+     *
+     * @param bid
+     * @param mode
+     * @param model
+     */
     private void commonProcess(String bid, String mode, Model model) {
         Board board = configInfoService.get(bid);
         mode = StringUtils.hasText(mode) ? mode : "list";
@@ -165,8 +193,9 @@ public class BoardController {
      */
     private void commonProcess(Long seq, String mode, Model model) {
         BoardData item = infoService.get(seq);
-
         model.addAttribute("item", item);
+
+        authService.check(mode, seq); // 글보기, 글수정 권한 체크
 
         Board board = item.getBoard();
         commonProcess(board.getBid(), mode, model);
