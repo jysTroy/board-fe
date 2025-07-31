@@ -6,8 +6,6 @@ import org.maengle.file.entities.FileInfo;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.model.constants.ModelStatus;
 
-import java.util.List;
-
 @Data
 @Entity
 @Table(indexes = {
@@ -39,9 +37,6 @@ public class Model extends BaseEntity {
     private String description;
 
     @Transient
-    private List<FileInfo> listImages;
-
-    @Transient
-    private List<FileInfo> mainImages;
+    private FileInfo mainImage;
 
 }

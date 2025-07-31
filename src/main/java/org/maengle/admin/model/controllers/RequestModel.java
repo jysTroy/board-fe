@@ -6,8 +6,6 @@ import lombok.Data;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.model.constants.ModelStatus;
 
-import java.util.List;
-
 @Data
 public class RequestModel {
     private String mode; // add - 추가, edit - 수정
@@ -27,6 +25,5 @@ public class RequestModel {
 
     private String description;
 
-    private List<FileInfo> listImages;
-    private List<FileInfo> mainImages;
+    private FileInfo mainImage;
 }
