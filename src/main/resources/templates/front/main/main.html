@@ -2,4 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
+
+    <main layout:fragment="content">
+        <h1>메인 페이지...</h1>
+
+        <!-- 실제로 대화하는 창 띄우는 부분 중요!!! -->
+        <button type="button" class="modal-open" data-width="600" data-height="800" data-url="/chat?model=MODEL1" data-title="챗봇 연습" th:text="#{챗봇_대화}"></button>
+    </main>
 </html>

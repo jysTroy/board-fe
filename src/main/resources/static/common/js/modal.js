@@ -35,7 +35,9 @@ commonLib.modal = {
             modalContent.className = "modal-content iframe";
             document.body.append(modalContent);
 
-            url = commonLib.getUrl(url + '?popup=true');
+            // 모달 오류 수정 부분
+            url = url + (url.includes("?") ? "&" : "?");
+            url = commonLib.getUrl(url + "popup=true");
             iframe = document.createElement("iframe");
             iframe.src = url;
             iframe.frameBorder = 0;
