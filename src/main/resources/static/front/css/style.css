@@ -174,7 +174,6 @@ header .user-actions > * {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
   text-decoration: none;
 }
 
@@ -187,7 +186,7 @@ header .user-actions a {
 
 header .user-actions .dot {
     color: #e6e6e6;
-    margin: 0 12px;
+    margin: 0 6px;
 }
 
 header .user-actions a:hover {
@@ -208,14 +207,12 @@ header .user-actions a:hover {
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 4px 16px;
   background-color: white;
-  border: 3px solid #1F9EFF;
-  border-radius: 25px;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
-  color: #1F9EFF;
   font-weight: 600;
 }
 
@@ -240,7 +237,6 @@ footer {
   padding: 20px 20px;
   text-align: center;
   font-size: 14px;
-  margin-top: 20px;
 }
 
 footer-title {
@@ -251,7 +247,7 @@ footer-title {
 }
 
 .contact-info p {
-  margin: 8px 0;
+  margin: 4px 0;
 }
 
 .contact-info a {
@@ -261,10 +257,6 @@ footer-title {
 
 .contact-info a:hover {
   text-decoration: underline;
-}
-
-.contact-info p:first-of-type {
-padding-top: 8px;
 }
 
 .terms {
@@ -277,8 +269,8 @@ padding-top: 8px;
   color: #aaa;
 }
 
-.copyright p {
-    margin-bottom: 10px !important;
+.inner{
+    padding: 15px 0;
 }
 
 @media (max-width: 600px) {
@@ -290,19 +282,10 @@ padding-top: 8px;
    .site-header .user-actions .dot {
         margin: 0 7px;
    }
+}
 
 /* ---------- 푸터 영역 ---------- E */
 
-/* ---------- 메인 영역 ---------- S */
-
-
-/* ---------- 메인 영역 ---------- E */
-
-/* ------- 마이페이지 영역 ------- S */
-
-
-
-/* ------- 마이페이지 영역 ------- E */
 
 
 /* ---------- 프로필 영역 ---------- S */
