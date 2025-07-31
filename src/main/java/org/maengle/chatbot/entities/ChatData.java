@@ -1,5 +1,6 @@
 package org.maengle.chatbot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.maengle.chatbot.constants.ChatbotModel;
@@ -17,17 +18,20 @@ public class ChatData extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ChatbotModel model;
 
+
+
     @Column(length = 45, nullable = false)
     private String roomId;
 
     @ManyToOne
+    @JsonIgnore
     private Member member;
 
     @Column(length = 500, nullable = false)
-    private String userMessage; // 사용자가 작성한 메세지
+    private String userMessage; // 사용자가 작성한 메시지
 
     @Column(length = 500)
-    private String sysMessage; // 챗봇이 답변한 메세지
+    private String sysMessage; // chatbot이 답변한 메시지
 
     private String emotion;
 }

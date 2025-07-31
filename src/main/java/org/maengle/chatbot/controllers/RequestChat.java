@@ -7,7 +7,6 @@ import org.maengle.chatbot.constants.ChatbotModel;
 
 @Data
 public class RequestChat {
-
     private String roomId;
 
     @NotNull

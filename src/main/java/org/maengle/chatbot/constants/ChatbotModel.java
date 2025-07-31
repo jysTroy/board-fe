@@ -3,15 +3,14 @@ package org.maengle.chatbot.constants;
 public enum ChatbotModel {
     MODEL1(1),
     MODEL2(2),
-    MODEL(3);
+    MODEL3(3);
 
     private final int num;
-
-    ChatbotModel(int num) {
+    ChatbotModel(int num){
         this.num = num;
     }
 
-    public int getNum() {
+    public int getNum(){
         return num;
     }
 }

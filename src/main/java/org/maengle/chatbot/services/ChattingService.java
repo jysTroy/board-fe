@@ -19,19 +19,21 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ChattingService {
-    private final ChatDataRepository repository;
     private final RestTemplate restTemplate;
+    private final ChatDataRepository repository;
     private final MemberUtil memberUtil;
 
     @Value("${chatbot.api.url}")
     private String apiUrl;
 
-    public ChatData process(ChatbotModel model, String roomId, String message) {
-        if (!memberUtil.isLogin()) {
+    public ChatData process(ChatbotModel model, String roomId, String message){
+
+        if(!memberUtil.isLogin()){
             return null;
         }
 
         ChatData item = new ChatData();
+
         item.setModel(model);
         item.setRoomId(roomId);
         item.setMember(memberUtil.getMember());
@@ -43,11 +45,13 @@ public class ChattingService {
         String url = String.format("%s/chatbot?message=%s&model_num=%s", apiUrl, URLEncoder.encode(message, StandardCharsets.UTF_8), model.getNum());
 
         Map response = restTemplate.getForObject(URI.create(url), Map.class);
-        String sysMessage = (String)response.get("sys");
-        String emotion = (String)response.get("emotion");
+
+        String sysMessage = (String) response.get("sys");
+        String emotion = (String) response.get("emotion");
 
         item.setSysMessage(sysMessage);
         item.setEmotion(emotion);
+
         repository.saveAndFlush(item);
 
         return item;

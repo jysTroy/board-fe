@@ -26,19 +26,24 @@ public class ChatController {
     private final ChattingService chattingService;
     private final Utils utils;
 
-    @GetMapping
-    public String index(@RequestParam("model")ChatbotModel m, @RequestParam(name="roomId", required = false) String roomId, Model model) {
 
+    @GetMapping
+    public String index(@RequestParam("model") ChatbotModel m, @RequestParam(name="roomId", required = false) String roomId, Model model) {
+
+        roomId = StringUtils.hasText(roomId) ? roomId : UUID.randomUUID().toString();
+
+        // css랑 js 처리 추가
         model.addAttribute("addCss", List.of("aichat/style"));
-        model.addAttribute("addScript",List.of("aichat/chat"));
-        model.addAttribute("model",m);
+        model.addAttribute("addScript", List.of("aichat/chat"));
+
+        model.addAttribute("model", m);
         model.addAttribute("roomId", roomId);
 
         return "front/aichat/index";
     }
 
     @ResponseBody
-    @GetMapping
+    @GetMapping("/api")
     public ChatData chatting(@Valid RequestChat form, Errors errors) {
         if (errors.hasErrors()) {
             throw new BadRequestException(utils.getErrorMessages(errors));
@@ -49,7 +54,5 @@ public class ChatController {
         form.setRoomId(roomId);
 
         return chattingService.process(form.getModel(), form.getRoomId(), form.getMessage());
-
     }
-
 }

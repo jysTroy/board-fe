@@ -79,6 +79,5 @@ social:
   naver.apikey: ${naver.apikey}
   naver.secret: ${naver.secret}
 
-
 chatbot:
   api.url: ${chatbot.url}
