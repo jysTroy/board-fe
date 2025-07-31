@@ -1,12 +1,14 @@
 package org.maengle.global.exceptions;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Map;
 
 @Getter
+@Setter
 public class CommonException extends RuntimeException {
     private final HttpStatus status;
     private boolean errorCode;

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+
+<main layout:fragment="content" class="chat-popup-page">
+    <form name="frmChat" autocomplete="off">
+        <input type="hidden" name="model" th:value="${model}">
+        <input type="hidden" name="roomId" th:value="${roomId}">
+        <div class="chat-history"></div>
+        <div class="input-section">
+            <input type="text" name="message">
+            <button type="submit" th:text="#{전송하기}"></button>
+        </div>
+    </form>
+</main>
+</html>
