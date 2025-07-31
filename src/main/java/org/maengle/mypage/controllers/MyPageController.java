@@ -100,7 +100,7 @@ public class MyPageController {
         List<String> addCss = new ArrayList<>();
 
         if (mode.equals("profile")) {
-            pageTitle = utils.getMessage("회원정보_수정");
+            pageTitle = utils.getMessage("개인정보_수정");
 
             addCommonScript.add("fileManager");
             addScript.add("member/form");
