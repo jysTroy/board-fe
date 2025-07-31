@@ -1,5 +1,6 @@
 package org.maengle.member.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.file.constants.FileStatus;
@@ -39,6 +40,7 @@ public class MemberController {
     private final FileInfoService fileInfoService;
     private final KakaoLoginService kakaoLoginService;
     private final NaverLoginService naverLoginService;
+    private final HttpSession session;
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
@@ -62,6 +64,9 @@ public class MemberController {
 
         commonProcess("join", model);
 
+        session.removeAttribute("EmailAuthVerified");
+        session.setAttribute("EmailAuthVerified", false);
+
         form.setGid(UUID.randomUUID().toString());
         form.setSocialType(type);
         form.setSocialToken(socialToken);
@@ -70,7 +75,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
+    public String joinPs(@Valid RequestJoin form, Errors errors, Model model, SessionStatus sessionStatus) {
         commonProcess("join", model);
 
         joinValidator.validate(form, errors);
@@ -84,6 +89,7 @@ public class MemberController {
         }
 
         joinService.process(form);
+        sessionStatus.setComplete();
 
         // 회원가입 성공시
         return "redirect:/";
@@ -117,6 +123,7 @@ public class MemberController {
 
             addCommonScript.add("fileManager");
             addScript.add("member/form");
+            addScript.add("member/join");
 
         } else if (mode.equals("login")) {
             pageTitle = utils.getMessage("로그인");
