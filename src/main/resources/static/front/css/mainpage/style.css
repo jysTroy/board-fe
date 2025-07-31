@@ -1,0 +1,23 @@
+/* ---------- 배너 영역 ---------- S */
+
+.swiper.banners {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.swiper.banners .swiper-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.swiper.banners .swiper-button-next,
+.swiper.banners .swiper-button-prev {
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* ---------- 배너 영역 ---------- E */

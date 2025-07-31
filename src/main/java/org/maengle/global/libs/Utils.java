@@ -104,7 +104,7 @@ public class Utils {
 
         /*
          * <img> 태그 생성
-         *  class 속성: image-파일 번호 + (추가 css 클래스가 있다면 공백 붙여서 추가)
+         *  class 속성: image-파일 번호 + (추가 style.css 클래스가 있다면 공백 붙여서 추가)
          */
         return String.format("<img src='%s' class='%s%s'>",
                 url,

@@ -321,20 +321,3 @@ header .profile-image {
 
 /* ---------- 프로필 영역 ---------- E */
 }
-
-/* ---------- 배너 영역 ---------- S */
-
-.banner-slider .swiper-slide img {
- width: 100%;
- height: 300px;
- object-fit: cover;
-}
-
-.banner-slider .swiper-button-next,
-.banner-slider .swiper-button-prev {
- color: #fff;
- top: 50%;
- transform: translateY(-50%);
-}
-
-/* ---------- 배너 영역 ---------- E */
