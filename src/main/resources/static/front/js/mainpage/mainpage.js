@@ -1,6 +1,6 @@
 // 슬라이드 처리용
 document.addEventListener("DOMContentLoaded", function () {
-  const swiper = new Swiper(".banners", {
+  const swiper = new Swiper(".banners-slider", {
     loop: true,
     autoplay: {
       delay: 5000,

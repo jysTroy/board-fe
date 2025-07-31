@@ -11,6 +11,7 @@
 
     <!-- 슬라이드용 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" th:href="@{/front/css/mainpage/style.css}" />
 
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
@@ -30,6 +31,9 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
     <script th:src="@{/common/js/modal.js?v={v}(v=${@utils.version()})}"></script>
+
+    <script th:src="@{/front/js/mainpage/mainpage.js}"></script>
+
     <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
     <th:block layout:fragment="addCommonScript"></th:block>
 
@@ -45,7 +49,8 @@
         <header th:replace="~{front/outlines/_header::common}"></header>
     </th:block>
 
-<main layout:fragment="content"></main>
+    <!-- 슬라이드 처리용 -->
+    <main layout:fragment="content"></main>
 
     <th:block th:if="${param.popup == null || !param.popup}">
         <footer th:replace="~{front/outlines/_footer::common}"></footer>
