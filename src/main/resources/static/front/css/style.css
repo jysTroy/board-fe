@@ -240,6 +240,7 @@ footer {
   padding: 20px 20px;
   text-align: center;
   font-size: 14px;
+  margin-top: 20px;
 }
 
 footer-title {
@@ -250,7 +251,7 @@ footer-title {
 }
 
 .contact-info p {
-  margin: 4px 0;
+  margin: 8px 0;
 }
 
 .contact-info a {
@@ -262,6 +263,10 @@ footer-title {
   text-decoration: underline;
 }
 
+.contact-info p:first-of-type {
+padding-top: 8px;
+}
+
 .terms {
   margin: 20px 0;
   color: #666;
@@ -270,6 +275,10 @@ footer-title {
 .copyright {
   font-size: 12px;
   color: #aaa;
+}
+
+.copyright p {
+    margin-bottom: 10px !important;
 }
 
 @media (max-width: 600px) {
