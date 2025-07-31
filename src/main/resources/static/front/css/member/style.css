@@ -96,7 +96,7 @@ input#terms-agree {
 }
 
 .email_auth_box{
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .email_verify{
@@ -114,6 +114,10 @@ input#terms-agree {
 .email_verify:hover {
     background-color: rgba(0, 123, 255, 0.1);
     color: #0056b3;
+}
+
+#email_message_box{
+    margin-bottom: 15px;
 }
 
 /* ---------- 회원 가입 페이지 E ---------- */
@@ -236,6 +240,23 @@ input#terms-agree {
 
 
 /* ---------- 파일 업로드 버튼 영역 S ---------- */
+
+#modal-open-btn{
+    all: unset;
+    min-width: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #007BFF;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
+#modal-open-btn:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+}
 
 .file-upload-btn {
     display: flex;

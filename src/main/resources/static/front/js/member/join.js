@@ -4,10 +4,14 @@ window.addEventListener("DOMContentLoaded", function() {
     const emailConfirmEl = document.getElementById("email_confirm"); // 확인 버튼
     const emailReVerifyEl = document.getElementById("email_re_verify"); // 재전송 버튼
     const authNumEl = document.getElementById("auth_num"); // 인증코드
+
+    emailReVerifyEl.style.display = "none";
+
     if (emailVerifyEl) {
         emailVerifyEl.addEventListener("click", function() {
             const { ajaxLoad, sendEmailVerify } = commonLib;
             const email = frmJoin.email.value.trim();
+
             if (!email) {
                 console.log(email);
                 showEmailMessage('이메일을 입력하세요.', true);
@@ -21,9 +25,8 @@ window.addEventListener("DOMContentLoaded", function() {
                         frmJoin.email.focus();
                     } else { // 중복이메일이 아닌 경우
 
-                        // 버튼 숨기고 로딩
-                        //emailVerifyEl.style.display = "none";
-                        //if (loadingIconEl) loadingIconEl.style.display = "inline";
+                        emailVerifyEl.style.display = "none";
+                        emailReVerifyEl.style.display = "";
 
                         sendEmailVerify(email); // 이메일 인증 코드 전송
 
@@ -79,10 +82,6 @@ function showEmailMessage(msg, isError = false) {
 function callbackEmailVerify(data) {
     if (data && data.success) { // 전송 성공
 
-        // 로딩버튼 제거
-        //const loadingIconEl = document.getElementById("loading_icon");
-        //if (loadingIconEl) loadingIconEl.style.display = "none";
-
         showEmailMessage("&nbsp;&nbsp;인증코드가 이메일로 전송되었습니다. <br>&nbsp;&nbsp;확인 후 인증코드를 입력하세요.");
 
         /** 3분 유효시간 카운트 */
@@ -112,12 +111,17 @@ function callbackEmailVerifyCheck(data) {
         // 1. 인증 카운트 멈추기
         if (authCount.intervalId) clearInterval(authCount.intervalId);
 
-        // 2. 인증코드 전송 버튼 제거
+        // 2. 인증코드 전송 | 재전송 버튼, 인증 메일 전송 메시지 제거
         const emailVerifyEl = document.getElementById("email_verify");
+        const emailReVerifyEl = document.getElementById("email_re_verify");
+        const email_message_box = document.getElementById("email_message_box");
         emailVerifyEl.parentElement.removeChild(emailVerifyEl);
+        emailReVerifyEl.parentElement.removeChild(emailReVerifyEl);
+        email_message_box.parentElement.removeChild(email_message_box);
 
-        // 3. 이메일 입력 항목 readonly 속성으로 변경 //readonly, readOnly 확인하기 컴퓨터마다 다른가?
-        frmJoin.email.readOnly = true;
+        // 3. 이메일 입력 항목 readonly 속성으로 변경
+        //frmJoin.email.readonly = true;
+        document.getElementById("email_input").readOnly = true;
 
         // 4. 인증 성공시 인증코드 입력 영역 제거 및 인증 코드 입력 영역에 입력 항목 출력 처리
         const authBoxEl = document.querySelector(".email_auth_box");

@@ -87,6 +87,7 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             errors.rejectValue("termsAgree", "False");
         }
 
+
         boolean isVerified = (Boolean) session.getAttribute("EmailAuthVerified");
 
         if (!isVerified) {

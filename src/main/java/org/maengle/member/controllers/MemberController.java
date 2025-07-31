@@ -65,7 +65,7 @@ public class MemberController {
         commonProcess("join", model);
 
         session.removeAttribute("EmailAuthVerified");
-        model.addAttribute("EmailAuthVerified", false);
+        session.setAttribute("EmailAuthVerified", false);
 
         form.setGid(UUID.randomUUID().toString());
         form.setSocialType(type);
