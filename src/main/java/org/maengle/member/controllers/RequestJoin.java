@@ -38,7 +38,6 @@ public class RequestJoin {
 
     private boolean termsAgree;
 
-
     private FileInfo profileImage;
 
     private SocialType socialType;

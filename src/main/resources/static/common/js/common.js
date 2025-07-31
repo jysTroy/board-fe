@@ -105,3 +105,35 @@ commonLib.loadEditor = function(el, height = 350) {
         })();
     });
 };
+
+/**
+* 이메일 인증 메일 보내기
+*
+* @param email : 인증할 이메일
+*/
+commonLib.sendEmailVerify = function(email) {
+    const { ajaxLoad } = commonLib;
+
+    const url = `/api/email/verify?email=${email}`;
+
+    ajaxLoad(url, (data) => {
+        if (typeof callbackEmailVerify === 'function') {
+            callbackEmailVerify(data);
+        }
+
+    }, (err) => console.error(err));
+};
+
+/**
+* 인증 메일 코드 검증 처리
+*
+*/
+commonLib.sendEmailVerifyCheck = function(authNum) {
+    const { ajaxLoad } = commonLib;
+    const url = `/api/email/auth_check?authNum=${authNum}`;
+    ajaxLoad(url, (data) => {
+        if (typeof callbackEmailVerifyCheck === 'function') {
+            callbackEmailVerifyCheck(data);
+        }
+    }, (err) => console.error(err))
+};

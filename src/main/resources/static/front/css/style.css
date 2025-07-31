@@ -129,7 +129,6 @@ header #site-main-search input[type='text']{
 }
 
 header .right a, button:not(.btn) {
-    color: #fff;
     font-weight: 600;
     font-size: 14px;
     letter-spacing: -0.01em;

@@ -77,15 +77,13 @@ commonLib.modal = {
         modalContent.style.top = `${ypos}px`;
         modalContent.style.left = `${xpos}px`;
 
-        // 팝업 제목 처리
-        if (_title) {
-            const titleDiv = document.createElement("img");
-            titleDiv.className = "modal-title";
-            titleDiv.src = "common/images/logo.png"
-            titleDiv.innerHTML = _title;
-            modalContent.prepend(titleDiv);
-        }
+        // 팝업 상단 이미지 처리
+        const titleDiv = document.createElement("img");
+        titleDiv.className = "modal-title";
+        titleDiv.src = commonLib.getUrl("/common/images/logo.png");
+        modalContent.prepend(titleDiv);
     },
+
     /**
     * close 정의
     * 모달 배경 레이어 - #modal-bg
