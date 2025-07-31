@@ -1,6 +1,7 @@
 package org.maengle.model.services;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.StringExpression;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.model.controllers.RequestModel;
@@ -68,13 +69,13 @@ public class ModelViewService {
 
 		List<String> categories = search.getCategories(); // 대분류 여러개
 		String category = search.getCategory(); // 대분류
-		List<String> subCategory = search.getSubCategory(); // 하위분류
+		List<String> subCategory = search.getSubCategory();// 하위분류
 
 		QModel model = QModel.model;
 
 		BooleanBuilder andBuilder = new BooleanBuilder();
 
-		// 전체 목록을 보일지 말지를 추가
+		// 전체 모델 목록을 보일지 말지를 추가
 		if (!isAll) {
 			andBuilder.and(model.modelStatus.eq(ModelStatus.ACTIVE));
 		}
@@ -89,7 +90,23 @@ public class ModelViewService {
 		}
 		/* 모델 등록일자 검색 처리 E */
 
-		// 분류 조회S
+		// 키워드 검색 S
+		sopt = StringUtils.hasText(sopt) ? sopt.toUpperCase() : "ALL";
+		if (StringUtils.hasText(skey)) {
+			skey = skey.trim();
+			StringExpression field = null;
+			if (sopt.equals("NAME")) { // 모델명
+				field = model.name;
+			} else if (sopt.equals("DESCRIPTION")) { // 모델 설명
+				field = model.description;
+			} else { // 통합 검색
+				field = model.name.concat(model.description);
+			}
+
+			andBuilder.and(field.contains(skey));
+		}
+		// 키워드 검색 E
+		// 분류 조회 S
 		if (categories != null && !categories.isEmpty()) {
 			andBuilder.and(model.category.in(categories));
 		}
@@ -97,11 +114,12 @@ public class ModelViewService {
 		if (StringUtils.hasText(category)) { // 대분류
 			andBuilder.and(model.category.eq(category));
 
-			if (subCategory != null && !subCategory.isEmpty()) {
-				andBuilder.and(model.category.in(subCategory));
+			if (subCategory != null && !subCategory.isEmpty()) { // 하위분류
+				andBuilder.and(model.subCategory.in(subCategory));
 			}
 		}
-		// 분류 조회E
+		// 분류 조회 E
+
 
 		Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
 		Page<Model> data = modelRepository.findAll(andBuilder, pageable);

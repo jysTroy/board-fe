@@ -78,7 +78,7 @@ public class ModelUpdateController extends CommonController {
 		return "common/_execute_script";
 	}
 
-	// 상품 등록
+	// 모델 등록
 	@GetMapping("/register")
 	public String register(@ModelAttribute RequestModel form , Model model) {
 		commonProcess("register", model);
