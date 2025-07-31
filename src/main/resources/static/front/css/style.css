@@ -272,6 +272,10 @@ footer-title {
   color: #aaa;
 }
 
+.inner{
+    padding: 15px 0;
+}
+
 @media (max-width: 600px) {
   .footer {
     font-size: 13px;
@@ -281,19 +285,10 @@ footer-title {
    .site-header .user-actions .dot {
         margin: 0 7px;
    }
+}
 
 /* ---------- 푸터 영역 ---------- E */
 
-/* ---------- 메인 영역 ---------- S */
-
-
-/* ---------- 메인 영역 ---------- E */
-
-/* ------- 마이페이지 영역 ------- S */
-
-
-
-/* ------- 마이페이지 영역 ------- E */
 
 
 /* ---------- 프로필 영역 ---------- S */
