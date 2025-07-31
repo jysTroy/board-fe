@@ -5,8 +5,10 @@ import org.maengle.admin.board.controllers.RequestBoard;
 import org.maengle.board.entities.Board;
 import org.maengle.board.repositories.BoardRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+@Lazy
 @Service
 @RequiredArgsConstructor
 public class BoardConfigUpdateService {
