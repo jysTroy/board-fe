@@ -1,5 +1,6 @@
 package org.maengle.member.validators;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.maengle.global.validators.MobileValidator;
 import org.maengle.global.validators.PasswordValidator;
@@ -17,6 +18,7 @@ import org.springframework.validation.Validator;
 @RequiredArgsConstructor
 public class JoinValidator implements Validator, PasswordValidator, MobileValidator {
     private final MemberRepository repository;
+    private final HttpSession session;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -64,10 +66,6 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             if (!password.equals(confirmPassword)) {
                 errors.rejectValue("confirmPassword", "Mismatch");
             }
-
-            if(repository.existsByEmail(form.getEmail())){
-                errors.rejectValue("email", "Duplicated");
-            }
         }
 
         String mobile = form.getMobile();
@@ -87,6 +85,12 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
         if(!form.isTermsAgree()){
             errors.rejectValue("termsAgree", "False");
+        }
+
+        boolean isVerified = (Boolean) session.getAttribute("EmailAuthVerified");
+
+        if (!isVerified) {
+            errors.rejectValue("email", "NotVerified");
         }
     }
 }

@@ -96,15 +96,15 @@ input#terms-agree {
 }
 
 .email_auth_box{
-
+    margin-bottom: 5px;
 }
 
 .email_verify{
     all: unset; /* 기본 버튼 스타일 제거 */
+    min-width: 30px;
     cursor: pointer;
     font-size: 14px;
     color: #007BFF;
-    margin-bottom: 15px;
     padding: 6px 12px;
     border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease;
