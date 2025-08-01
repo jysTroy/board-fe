@@ -13,6 +13,8 @@
     </th:block>
     </th:block>
 
+    <th:block th:replace="~{front/board/_comment::common}"></th:block>
+
     <th:block th:if="*{showViewList}">
         <th:block th:replace="~{front/board/_items::common}"></th:block>
     </th:block>

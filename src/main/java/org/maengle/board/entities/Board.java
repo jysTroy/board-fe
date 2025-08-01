@@ -50,6 +50,15 @@ public class Board extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Authority commentAuthority; // 댓글 작성 권한
 
+    @Transient
+    private boolean writeable; // 글쓰기 가능 여부
+
+    @Transient
+    private boolean listable; // 글목록 가능 여부
+
+    @Transient
+    private boolean commentable; // 댓글 작성 가능 여부
+
     public List<String> getCategories() {
         if (!StringUtils.hasText(category)) {
             return List.of();
