@@ -9,6 +9,7 @@ import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.libs.Utils;
 import org.maengle.member.constants.Gender;
+import org.maengle.member.services.FindPwService;
 import org.maengle.member.services.JoinService;
 import org.maengle.member.social.constants.SocialType;
 import org.maengle.member.social.services.KakaoLoginService;
@@ -41,6 +42,7 @@ public class MemberController {
     private final KakaoLoginService kakaoLoginService;
     private final NaverLoginService naverLoginService;
     private final HttpSession session;
+    private final FindPwService findPwService;
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
@@ -109,6 +111,34 @@ public class MemberController {
         return "front/member/login";
     }
 
+    @GetMapping("/find_pw")
+    public String findPw(@ModelAttribute RequestFindPw form, Model model) {
+        commonProcess("find_pw", model);
+
+        return "front/member/find_pw";
+    }
+
+    @PostMapping("/find_pw")
+    public String findPwPs(@Valid RequestFindPw form, Errors errors, Model model) {
+        commonProcess("find_pw", model);
+
+        findPwService.process(form, errors); // 비밀번호 찾기 처리
+
+        if (errors.hasErrors()) {
+            return "front/member/find_pw";
+        }
+
+        // 비밀번호 찾기에 이상 없다면 완료 페이지로 이동
+        return "redirect:/member/find_pw_done";
+    }
+
+    @GetMapping("/find_pw_done")
+    public String findPwDone(Model model) {
+        commonProcess("find_pw", model);
+
+        return "front/member/find_pw_done";
+    }
+
     // 공통 처리 (현재로선 페이지 타이틀을 설정 (message를 일괄 관리))
 
     private void commonProcess(String mode, Model model) {
@@ -127,6 +157,8 @@ public class MemberController {
 
         } else if (mode.equals("login")) {
             pageTitle = utils.getMessage("로그인");
+        } else if (mode.equals("find_pw")) {
+            pageTitle = utils.getMessage("비밀번호_찾기");
         }
 
         model.addAttribute("pageTitle", pageTitle);
