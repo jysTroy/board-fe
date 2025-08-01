@@ -19,8 +19,6 @@ public class ModelViewController {
 	// 상품 목록
 	@GetMapping
 	public String list(@ModelAttribute ModelSearch search, Model model) {
-		String searchType = search.getSearchType();
-		System.out.println("선택된 검색 조건:" + searchType);
 
 		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
 		model.addAttribute("items", data.getItems());

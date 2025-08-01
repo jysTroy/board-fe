@@ -2,11 +2,10 @@ package org.maengle.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.maengle.chatbot.constants.ChatbotModel;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.global.entities.BaseEntity;
 import org.maengle.model.constants.ModelStatus;
-
-import java.util.List;
 
 @Data
 @Entity
@@ -27,21 +26,25 @@ public class Model extends BaseEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ModelStatus modelStatus;
 
-    @Column
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ChatbotModel chatbotModel;
+
+    @Column(length=60)
     private String category;
 
-    @Column
-    private Long count; // 조회수
+    @Column(length=60)
+    private String subCategory;
+
+    private long count; // 조회수
 
     @Lob
     private String description;
 
     @Transient
-    private List<FileInfo> listImages;
-
-    @Transient
-    private List<FileInfo> mainImages;
+    private FileInfo mainImage;
 
 }

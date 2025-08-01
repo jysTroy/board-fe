@@ -16,11 +16,11 @@
                 <th width="150">키워드 검색</th>
                 <td>
                     <div class="flex">
-                        <select  th:field="*{searchType}" class="w180 mr5">
+                        <select  class="w180 mr5">
                             <option value="ALL">통합검색</option>
-                            <option value="NAME">이름</option>
-                            <option value="COUNT">조회수</option>
-                        </select><x></x>
+                            <option value="NAME">모델명</option>
+                            <option value="CATEGORY">카테고리</option>
+                        </select>
                         <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드를 입력">
                     </div>
                 </td>
@@ -48,10 +48,10 @@
             <tbody>
             <tr th:if="${items != null && !items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
                 <td align="center">
-                    <img th:if="${item.mainImages != null && !item.mainImages.isEmpty()}"
-                         th:src="@{${item.mainImages[0].fileUrl}}"
+                    <img th:if="${item.mainImage != null}"
+                         th:src="@{${item.mainImage.fileUrl}}"
                          alt="이미지" width="80">
-                    <span th:if="${item.mainImages == null || item.mainImages.isEmpty()}">이미지 없음</span>
+                    <span th:if="${item.mainImage == null}">이미지 없음</span>
                 </td>
 
                 <!-- 체크박스 -->

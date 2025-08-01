@@ -1,7 +1,11 @@
 package org.maengle.admin.model.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.global.controllers.CommonController;
+import org.maengle.chatbot.constants.ChatbotModel;
+import org.maengle.file.constants.FileStatus;
+import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
@@ -15,8 +19,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @ApplyCommonController
@@ -45,6 +50,11 @@ public class ModelUpdateController extends CommonController {
 		return ModelStatus.values();
 	}
 
+	@ModelAttribute("chatbotModels")
+	public ChatbotModel[] chatbotModels() {
+		return ChatbotModel.values();
+	}
+
 	// 상품 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
 	@GetMapping({"", "/list"})
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
@@ -68,18 +78,17 @@ public class ModelUpdateController extends CommonController {
 		return "common/_execute_script";
 	}
 
-	// 상품 등록
+	// 모델 등록
 	@GetMapping("/register")
-	public String register(@ModelAttribute org.maengle.model.entities.Model item , Model model) {
+	public String register(@ModelAttribute RequestModel form , Model model) {
 		commonProcess("register", model);
-		item.setGid(UUID.randomUUID().toString());
-		item.setModelStatus(ModelStatus.READY);
-
-		model.addAttribute("requestModel", item);
+		form.setGid(UUID.randomUUID().toString());
+		form.setModelStatus(ModelStatus.READY);
 
 		return "admin/model/register";
 	}
 
+	@GetMapping("/update/{seq}")
 	public String update(@PathVariable("seq") Long seq, Model model) {
 		commonProcess("update", model);
 
@@ -90,35 +99,25 @@ public class ModelUpdateController extends CommonController {
 	}
 
 	// 모델 등록, 수정 처리
-	@PostMapping("/register")
-	public String saveModel(RequestModel form, Errors errors, Model model) {
-		String mode = Objects.requireNonNullElse(form.getMode(), "add");
-		commonProcess(mode.equals("edit") ? "update" : "register", model);
-
-		// gid가 null이면 UUID로 생성
-		if (!StringUtils.hasText(form.getGid())) {
-			form.setGid(UUID.randomUUID().toString());
-		}
+	@PostMapping("/save")
+	public String saveModel(@Valid RequestModel form, Errors errors, Model model) {
+		String mode = form.getMode();
+		mode = StringUtils.hasText(mode) ? mode : "register";
+		commonProcess(mode, model);
 
 		if (errors.hasErrors()) {
 			// 검증 실패시에 업로드된 파일 정보를 유지
-			return "admin/model/" + (mode.equals("edit") ? "update" : "register");
+			List<FileInfo> items = fileInfoService.getList(form.getGid(), "main", FileStatus.ALL);
+			form.setMainImage(items == null || items.isEmpty() ? null : items.getFirst());
+			return "admin/model/" + mode;
 		}
 
 		modelUpdateService.process(form);
 
-		// 상품 등록 완료 후 상품 목록으로 이동
 		return "redirect:/admin/model";
 	}
 
-	// 상품 수정, 삭제 관리
-	@GetMapping("/update")
-	public String update(Model model) {
-		commonProcess("update", model);
-		model.addAttribute("requestModel", new RequestModel());
 
-		return "admin/model/update";
-	}
 
 	// 공통 처리 부분
 	private void commonProcess(String code, Model model) {
@@ -132,13 +131,6 @@ public class ModelUpdateController extends CommonController {
 			addCommonScript.add("fileManager");
 			addScript.add("model/form"); // 파일 업로드 후속 처리 또는 양식 처리 관련
 			pageTitle = code.equals("update") ? "모델정보 수정" : "모델등록";
-
-			List<ModelStatus> statusList = code.equals("update")
-					? Arrays.asList(ModelStatus.values()) // 모두 포함 (READY, ACTIVE, DELETED)
-					: Arrays.stream(ModelStatus.values()) // DELETED 제외
-					.filter(status -> status != ModelStatus.DELETED)
-					.collect(Collectors.toList());
-			model.addAttribute("statusList", statusList);
 
 		} else if (code.equals("list")) {
 			pageTitle = "모델목록";
