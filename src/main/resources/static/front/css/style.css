@@ -217,7 +217,6 @@ header .user-actions a:hover {
 
 .btn:hover {
   background-color: #1A8CDD;
-  border-radius: 10px;
   color: #fff;
 }
 
@@ -303,9 +302,6 @@ header .profile-image {
 
 /* ---------- 프로필 영역 ---------- E */
 
-main {
-    min-height: 1850px;
-}
 
 /*  사이드 메뉴 영역 S  */
 aside.main-menu {
