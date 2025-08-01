@@ -55,9 +55,10 @@
             <dt th:text="#{프로필_이미지}"></dt>
             <dd>
                 <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                    <div th:text="#{이미지_첨부하기}" class="file-upload-btn drag-drop-upload"
+                         th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
                     <div class="inner">
                         <div th:if="*{profileImage == null}" class="profile-images">
-                            <div th:text="#{이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
                         </div>
                         <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
                             <div th:text="#{이미지_변경하기}" class="file-upload-btn drag-drop-upload" th:data-gid="${loggedMember.gid}" data-single="true" data-image-only="true"></div>
