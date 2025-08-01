@@ -247,6 +247,8 @@ public class BoardController {
         model.addAttribute("mode", mode);
     }
 
+    // 커밋용 주석
+
     /**
      * seq 기준의 공통 처리
      *  - 게시글 조회가 공통 처리 ...
