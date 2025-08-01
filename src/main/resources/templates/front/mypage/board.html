@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-<section layout:fragment="content" class="mypage-container">
+<section layout:fragment="content" class="myboard-container">
     <h1 class="main-title" th:text="${pageTitle}"></h1>
 
     <form class="frm-search" name="frmSearch" method="GET" th:action="@{/mypage/board}" autocomplete="off" th:object="${boardSearch}">

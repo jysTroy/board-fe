@@ -21,7 +21,7 @@
                     <svg width="3" height="3" viewBox="0 0 3 3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="dot"><circle cx="1.5" cy="1.5" r="1.5"></circle></svg>
                     <a th:href="@{/logout}" th:text="#{로그아웃}"></a>
                     <svg width="3" height="3" viewBox="0 0 3 3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="dot"><circle cx="1.5" cy="1.5" r="1.5"></circle></svg>
-                    <th:block th:if="${loggedMember.profileImage != null}" th:utext="${@utils.printThumb(loggedMember.profileImage.seq, 60, 60, 'profile-image')}"></th:block>
+                    <th:block th:if="${loggedMember.profileImage != null}" th:utext="${@utils.printThumb(loggedMember.profileImage.seq, 50, 50, 'profile-image')}"></th:block>
                     <a th:href="@{/mypage}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.name, loggedMember.email)}"></a>
 
                 </th:block>
