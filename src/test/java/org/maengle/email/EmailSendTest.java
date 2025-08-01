@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.maengle.global.email.entities.EmailMessage;
 import org.maengle.global.email.services.EmailSendService;
 import org.maengle.global.email.services.EmailVerifyService;
+import org.maengle.member.services.FindPwService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -67,5 +69,13 @@ public class EmailSendTest {
         // API 요청 처리 (인증번호 검증)
         mockMvc.perform(get("/api/email/auth_check").param("authNum", String.valueOf(authNum)).session(session))
                 .andDo(print());
+    }
+
+    @Autowired
+    private FindPwService service;
+
+    @Test
+    void test4(){
+        assertDoesNotThrow(() -> service.reset("tailred215@gmail.com"));
     }
 }
