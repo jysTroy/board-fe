@@ -4,14 +4,24 @@ import org.maengle.member.controllers.RequestLogin;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import java.util.List;
 
 @Lazy
 @Component
-public class LoginValidator {
+public class LoginValidator implements Validator {
 
-    public void validate(RequestLogin form, Errors errors){
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return clazz.isAssignableFrom(RequestLogin.class);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+        RequestLogin form = (RequestLogin) target;
+
         /* 검증 실패 처리 S */
         List<String> fieldErrors = form.getFieldErrors();
         if (fieldErrors != null) {
