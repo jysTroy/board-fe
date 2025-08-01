@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.maengle.board.controllers.RequestComment;
 import org.maengle.board.entities.BoardData;
 import org.maengle.board.entities.Comment;
+import org.maengle.board.entities.QComment;
+import org.maengle.board.repositories.BoardDataRepository;
 import org.maengle.board.repositories.CommentRepository;
 import org.maengle.member.libs.MemberUtil;
 import org.springframework.context.annotation.Lazy;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class CommentUpdateService {
     private final CommentRepository commentRepository;
     private final BoardInfoService boardInfoService;
+    private final BoardDataRepository boardDataRepository;
     private final HttpServletRequest request;
     private final MemberUtil memberUtil;
 
@@ -42,7 +45,25 @@ public class CommentUpdateService {
 
         commentRepository.saveAndFlush(item);
 
+        // 댓글 갯수 업데이트
+        updateCommentCount(form.getBoardDataSeq());
+
         return item;
+    }
+
+    /**
+     * 게시글별 댓글 갯수 업데이트
+     * @param boardDataSeq
+     */
+    public void updateCommentCount(Long boardDataSeq) {
+        QComment comment = QComment.comment;
+        long total = commentRepository.count(comment.item.seq.eq(boardDataSeq));
+
+        BoardData item = boardDataRepository.findById(boardDataSeq).orElse(null);
+        if (item != null) {
+            item.setCommentCount((int)total);
+            boardDataRepository.saveAndFlush(item);
+        }
     }
 }
 

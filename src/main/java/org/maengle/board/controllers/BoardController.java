@@ -1,7 +1,5 @@
 package org.maengle.board.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
@@ -19,7 +17,6 @@ import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
 import org.maengle.member.libs.MemberUtil;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -52,9 +49,7 @@ public class BoardController {
     private final CommentValidator commentValidator;
     private final CommentUpdateService commentUpdateService;
     private final CommentInfoService commentInfoService;
-    private final PasswordEncoder encoder;
-    private final HttpSession session;
-    private final HttpServletRequest request;
+    private final CommentDeleteService commentDeleteService;
 
     // 게시글 목록
     @GetMapping("/list/{bid}")
@@ -186,6 +181,19 @@ public class BoardController {
         model.addAttribute("requestComment", form);
 
         return "front/board/comment_update";
+    }
+
+    @GetMapping("/comment/delete/{seq}")
+    public String commentDelete(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "comment_delete", model);
+
+        // 삭제 처리
+        commentDeleteService.process(seq);
+
+        // 삭제 완료 시 게시글로 이동
+        BoardData item = (BoardData) model.getAttribute("item");
+
+        return "redirect:/board/view/" + item.getSeq();
     }
 
 
