@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
 import org.maengle.board.entities.BoardData;
+import org.maengle.board.entities.Comment;
 import org.maengle.board.services.*;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.board.validators.BoardValidator;
@@ -41,13 +42,9 @@ public class BoardController {
     private final BoardAuthService authService;
     private final FileInfoService fileInfoService;
     private final BoardValidator boardValidator;
+    private final CommentInfoService commentInfoService;
     private final PasswordEncoder encoder;
     private final HttpSession session;
-
-    @ModelAttribute("board")
-    public Board getBoard() {
-        return new Board();
-    }
 
     // 게시글 목록
     @GetMapping("/list/{bid}")
@@ -125,14 +122,33 @@ public class BoardController {
         // 게시글 조회수 업데이트
         viewCountService.update(seq);
 
+        // 댓글 기본값 처리
+        if (board != null && board.isComment()) {
+            if (board.isCommentable()) { // 댓글 작성 가능 여부
+                RequestComment commentForm = new RequestComment();
+                if (memberUtil.isLogin()) { // 로그인 상태라면 로그인한 회원 이름으로 초기값
+                    commentForm.setCommenter(memberUtil.getMember().getName());
+                }
+                commentForm.setBoardDataSeq(seq);
+                commentForm.setMode("comment_write");
+                model.addAttribute("requestComment", commentForm);
+            }
+
+            // 댓글 목록
+            model.addAttribute("comments", commentInfoService.getList(seq));
+        }
+
+
         return "front/board/view";
     }
 
     // 게시글 삭제
     @GetMapping("/delete/{seq}")
-    public String delete(@PathVariable("seq") Long seq, Model model, @SessionAttribute("board") Board board) {
+    public String delete(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "delete", model);
         deleteService.process(seq);
+
+        Board board = (Board)model.getAttribute("board");
 
         return "redirect:/board/list/" + board.getBid();
     }
@@ -148,11 +164,15 @@ public class BoardController {
      */
     private void commonProcess(String bid, String mode, Model model) {
         Board board = configInfoService.get(bid);
+
+        authService.check(mode, bid); // 글쓰기, 글목록에서의 권한 체크
+
         mode = StringUtils.hasText(mode) ? mode : "list";
 
         List<String> addCommonScript = new ArrayList<>();
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
+
         String pageTitle = board.getName(); // 게시판 명
 
         String skin = board.getSkin();
@@ -192,10 +212,18 @@ public class BoardController {
      * @param model
      */
     private void commonProcess(Long seq, String mode, Model model) {
-        BoardData item = infoService.get(seq);
+        BoardData item = null;
+
+        if (mode.equals("comment_update") || mode.equals("comment_delete")) { // 댓글 수정, 삭제일 경우
+            Comment comment =commentInfoService.get(seq);
+            item = comment.getItem();
+            model.addAttribute("comment", comment);
+        } else {
+            item = infoService.get(seq);
+        }
         model.addAttribute("item", item);
 
-        authService.check(mode, seq); // 글보기, 글수정 권한 체크
+        authService.check(mode, seq); // 글보기, 글수정, 댓글 수정, 댓글 삭제 시 권한 체크
 
         Board board = item.getBoard();
         commonProcess(board.getBid(), mode, model);

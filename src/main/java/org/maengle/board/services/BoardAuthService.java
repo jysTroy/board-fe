@@ -5,10 +5,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
 import org.maengle.board.entities.BoardData;
+import org.maengle.board.entities.Comment;
 import org.maengle.board.exceptions.BoardNotFoundException;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.global.exceptions.UnAuthorizedException;
-import org.maengle.global.libs.Utils;
 import org.maengle.member.constants.Authority;
 import org.maengle.member.entities.Member;
 import org.maengle.member.libs.MemberUtil;
@@ -22,10 +22,10 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class BoardAuthService {
-    private final Utils utils;
     private final MemberUtil memberUtil;
     private final BoardConfigInfoService configInfoService;
     private final BoardInfoService infoService;
+    private final CommentInfoService commentInfoService;
     private final HttpServletRequest request;
     private final HttpServletResponse response;
 
@@ -37,15 +37,22 @@ public class BoardAuthService {
 
         Board board = null; // 게시판 설정
         BoardData item = null; // 게시글
+        Comment comment = null; // 댓글
 
         // 글작성, 글목록
         if (StringUtils.hasText(bid)) {
             board = configInfoService.get(bid);
         }
 
-        // 게시글 보기, 게시글 수정
+        // 게시글 보기, 게시글 삭제, 게시글 수정, 댓글 수정, 댓글 삭제
         if (seq != null && seq > 0L) {
-            item = infoService.get(seq);
+            if (mode.startsWith("comment_")) { // 댓글 수정, 삭제
+                comment = commentInfoService.get(seq);
+                item = comment.getItem(); // 게시글
+            } else { // 게시글
+                item = infoService.get(seq);
+            }
+
             board = item.getBoard();
         }
 
@@ -88,11 +95,22 @@ public class BoardAuthService {
              */
             Member boardMember = item.getMember();
             if (!memberUtil.isLogin() || !boardMember.getUserUuid().equals(memberUtil.getMember().getUserUuid())) { // 직접 작성한 게시글이 아닌 경우
-                        throw new UnAuthorizedException("UnAuthorized");
+                 throw new UnAuthorizedException("UnAuthorized");
+            }
+            // 글 수정, 글 삭제 권한 체크 E
+        }
+        // 댓글 수정, 댓글 삭제 권한 체크 S
+        if (comment != null && mode.startsWith("comment_")) {
+            Member commentMember = comment.getMember();
+            if (!memberUtil.isLogin() || !commentMember.getUserUuid().equals(memberUtil.getMember().getUserUuid())) { // 직접 작성한 댓글이 아닌 경우
+                throw new UnAuthorizedException("UnAuthorized");
             }
         }
+        // 댓글 수정, 댓글 삭제 권한 체크 E
     }
-            // 글 수정, 글 삭제 권한 체크 E
+
+
+
 
     /**
      * 게시글 작성, 글 목록
