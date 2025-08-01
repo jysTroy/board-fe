@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +86,12 @@ public class MyPageController {
         return "front/mypage/resign";
     }
 
+    @PostMapping("/resign")
+    public String resignProcess() {
+        memberUpdateService.resign();
+        return "redirect:/";
+    }
+
 
     // 마이페이지 공통 처리
     private void commonProcess(String mode, Model model) {
@@ -111,6 +114,8 @@ public class MyPageController {
             pageTitle = utils.getMessage("내가_작성한_글");
         } else if (mode.equals("resign")) {
             pageTitle = utils.getMessage("회원탈퇴");
+            // js를 통해 경고 메세지 출력 후 탈퇴
+            addScript.add("member/resign");
         } else {
             pageTitle = utils.getMessage("마이페이지");
         }
