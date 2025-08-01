@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-<section layout:fragment="content">
+<section layout:fragment="content" class="mypage-container">
     <h1 class="main-title" th:text="${pageTitle}"></h1>
 
     <form th:action="@{/mypage/resign}" method="POST" class="resign-form" id="resignForm">
