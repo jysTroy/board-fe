@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+<main layout:fragment="content" class="findpw-container">
+    <h1 th:text="#{아이디}" class="findpw-title"></h1>
+    <div th:text="${session.userId}" class="findpw-message"></div>
+    <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}" class="findpw-button"></a>
+    <a th:href="@{/member/login}" th:text="#{로그인}" class="findpw-button"></a>
+</main>
+</html>
