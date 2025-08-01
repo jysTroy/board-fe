@@ -1,7 +1,9 @@
 package org.maengle.model.services;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.model.controllers.RequestModel;
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
@@ -36,6 +38,7 @@ public class ModelViewService {
 	private final ModelRepository modelRepository;
 	private final FileInfoService fileInfoService;
 	private final HttpServletRequest request;
+	private final JPAQueryFactory queryFactory;
 
 	// 모델 id로 검색
 	public Model get(Long seq) {
@@ -131,6 +134,35 @@ public class ModelViewService {
 		Pagination pagination = new Pagination(page, (int)total, 10, limit, request);
 
 		return new ListData<>(items, pagination);
+	}
+
+
+	/**
+	 * 분류 목록
+	 * 키 : 대분류
+	 * 값(List<String>) : 하위 분류
+	 *
+	 * @return
+	 */
+	public Map<String, List<String>> getCategories() {
+		QModel model = QModel.model;
+		List<Tuple> items = queryFactory.select(model.category, model.subCategory)
+				.from(model)
+				.distinct()
+				.orderBy(model.category.asc(), model.subCategory.asc())
+				.fetch();
+
+		Map<String, List<String>> categories = new HashMap<>();
+		for (Tuple item : items) {
+			String category = item.get(model.category);
+			String subCategory = item.get(model.subCategory);
+
+			List<String> subCategories = categories.getOrDefault(category, new ArrayList<>());
+			subCategories.add(subCategory);
+			categories.put(category, subCategories);
+		}
+
+		return categories;
 	}
 
 	// 모델 추가 정보 처리

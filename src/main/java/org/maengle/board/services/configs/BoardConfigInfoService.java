@@ -2,6 +2,7 @@ package org.maengle.board.services.configs;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.maengle.admin.board.controllers.RequestBoard;
@@ -21,7 +22,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.domain.Sort.Order.desc;
 
@@ -33,6 +36,7 @@ public class BoardConfigInfoService {
     private final BoardRepository repository;
     private final ModelMapper mapper;
     private final HttpServletRequest request;
+    private final JPAQueryFactory queryFactory;
 
 
     // 게시판 설정 한 개 조회
@@ -96,6 +100,37 @@ public class BoardConfigInfoService {
     // 게시판 설정 추가 정보 가공 처리
     private void addInfo(Board item) {
 
+    }
+
+    /*
+    * 게시판 목록 : 게시판명, 게시판 아이디
+    * isAll : true -> 모든 게시판 목록(미사용중 포함하여), false : 사용중인 게시판만 보이기
+    *
+    */
+    public List<Map<String, String>> getBoardList(boolean isAll) {
+        QBoard board = QBoard.board;
+
+        BooleanBuilder builder = new BooleanBuilder();
+        if (!isAll) builder.and(board.active.eq(true));
+
+        List<Map<String, String>> items = queryFactory.select(board.name, board.bid)
+                .from(board)
+                .where(builder)
+                .fetch()
+                .stream()
+                .map(tuple -> {
+                    Map<String, String> item = new HashMap<>();
+                    item.put("name", tuple.get(board.name));
+                    item.put("bid", tuple.get(board.bid));
+
+                    return item;
+                }).toList();
+
+        return items;
+    }
+
+    public List<Map<String, String>> getBoardList() {
+        return getBoardList(false);
     }
 
 }
