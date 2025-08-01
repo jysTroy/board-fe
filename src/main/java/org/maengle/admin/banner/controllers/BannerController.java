@@ -7,7 +7,10 @@ import org.maengle.admin.global.menus.Menus;
 import org.maengle.banner.entities.Banner;
 import org.maengle.banner.entities.BannerGroup;
 import org.maengle.banner.service.*;
+import org.maengle.global.exceptions.script.AlertException;
+import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -27,6 +30,9 @@ public class BannerController {
     private final BannerInfoService bannerInfoService;
     private final BannerSaveService bannerSaveService;
     private final BannerDeleteService bannerDeleteService;
+    private final BannerGroupValidator bannerGroupValidator;
+    private final BannerValidator bannerValidator;
+    private final Utils utils;
 
     @ModelAttribute("menuCode")
     public String menuCode() {
@@ -73,14 +79,11 @@ public class BannerController {
     public String addGroup(@Valid RequestBannerGroup form, Errors errors,  Model model) {
         commonProcess("group", model);
 
-        /*
         bannerGroupValidator.validate(form, errors);
-        bannerValidator 아직 미구현
-        */
 
         if (errors.hasErrors()) {
             String code = errors.getFieldErrors().stream().map(f -> f.getCodes()[0]).findFirst().orElse(null);
-            //if (code != null) throw new AlertException(Utils.getMessage(code), HttpStatus.BAD_REQUEST);
+            if (code != null) throw new AlertException(utils.getMessage(code), HttpStatus.BAD_REQUEST);
         }
 
         bannerGroupSaveService.save(form);
@@ -165,10 +168,8 @@ public class BannerController {
     public String save(@Valid RequestBanner form, Errors errors, Model model) {
         commonProcess(form.getMode(), model);
 
-        /*
         bannerValidator.validate(form, errors);
-        bannerValidator 아직 미구현
-        */
+
 
         if (errors.hasErrors()) {
             return "admin/banner/" + form.getMode();

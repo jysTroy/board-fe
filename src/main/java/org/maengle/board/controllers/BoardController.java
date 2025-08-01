@@ -44,6 +44,11 @@ public class BoardController {
     private final PasswordEncoder encoder;
     private final HttpSession session;
 
+    @ModelAttribute("menuCode")
+    public String menuCode() {
+        return "board";
+    }
+
     @ModelAttribute("board")
     public Board getBoard() {
         return new Board();

@@ -4,16 +4,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.member.libs.MemberUtil;
+import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
 public class CommonInterceptor implements HandlerInterceptor {
 
     private final MemberUtil memberUtil;
+    private final ModelViewService modelViewService;
+    private final BoardConfigInfoService boardConfigInfoService;
+    private Map<String, List<String>> categories;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,6 +44,12 @@ public class CommonInterceptor implements HandlerInterceptor {
             if (memberUtil.isLogin()) {
                 modelAndView.addObject("profile", memberUtil.getMember().getProfileImage());
             }
+
+            // AI 모델 분류값 유지 처리
+            processModelCategory(modelAndView);
+
+            // 게시판 메뉴 목록 처리
+            processBoardMenus(modelAndView);
         }
     }
 
@@ -46,5 +61,38 @@ public class CommonInterceptor implements HandlerInterceptor {
             session.removeAttribute("socialType");
             session.removeAttribute("socialToken");
         }
+    }
+
+    /**
+     * AI 모델 분류값 유지 처리
+     *
+     * @param mv
+     */
+    private void processModelCategory(ModelAndView mv) {
+        Map<String, List<String>> data = modelViewService.getCategories();
+        this.categories = data;
+
+        List<String> categories = new ArrayList<>(data.keySet()); // 대분류
+
+        mv.addObject("categories", categories);
+    }
+
+    /**
+     * 하위 분류 조회
+     *
+     * @param category
+     * @return
+     */
+    public List<String> getSubCategories(String category) {
+        return categories.getOrDefault(category, List.of());
+    }
+
+    /**
+     * 게시판 목록 메뉴
+     *
+     * @param mv
+     */
+    private void processBoardMenus(ModelAndView mv) {
+        mv.addObject("boardMenus", boardConfigInfoService.getBoardList());
     }
 }
