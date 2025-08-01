@@ -166,6 +166,11 @@ public class BoardController {
         // 댓글 작성 처리
         Comment item = commentUpdateService.process(form);
 
+        // 수정 완료 시에는 게시글로 이동
+        if (form.getMode().equals("comment_update")) {
+            return "redirect:/board/view/" + form.getBoardDataSeq() + "#comment-" + item.getSeq();
+        }
+
         // 댓글 작성이 완료되면 부모창을 새로고침
 //        model.addAttribute("script", String.format("parent.location.replace('%s/board/view/%s#comment-%s')", form.getBoardDataSeq(), item.getSeq()));
         model.addAttribute("script", "parent.location.reload();");
@@ -246,8 +251,6 @@ public class BoardController {
         model.addAttribute("board", board);
         model.addAttribute("mode", mode);
     }
-
-    // 커밋용 주석
 
     /**
      * seq 기준의 공통 처리

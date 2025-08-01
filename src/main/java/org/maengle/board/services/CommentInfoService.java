@@ -42,7 +42,11 @@ public class CommentInfoService {
     }
 
     public RequestComment getForm(Long seq) {
-        return mapper.map(get(seq), RequestComment.class);
+        Comment item= get(seq);
+        RequestComment form = mapper.map(item, RequestComment.class);
+        form.setMode("comment_update");
+        form.setBoardDataSeq(item.getItem().getSeq());
+        return form;
     }
 
     /**
