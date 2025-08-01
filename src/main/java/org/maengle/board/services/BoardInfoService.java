@@ -124,7 +124,7 @@ public class BoardInfoService {
         int limit = search.getLimit();
         List<String> bids = search.getBid();
         Board board = null;
-        if (bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
+        if (bids != null && bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
             board = configInfoService.get(bids.getFirst());
 
             // 한 페이지당 게시글 갯수
