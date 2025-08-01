@@ -9,6 +9,7 @@ import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.libs.Utils;
 import org.maengle.member.constants.Gender;
+import org.maengle.member.services.FindIdService;
 import org.maengle.member.services.FindPwService;
 import org.maengle.member.services.JoinService;
 import org.maengle.member.social.constants.SocialType;
@@ -43,6 +44,7 @@ public class MemberController {
     private final NaverLoginService naverLoginService;
     private final HttpSession session;
     private final FindPwService findPwService;
+    private final FindIdService findIdService;
 
     @ModelAttribute("requestLogin")
     public RequestLogin requestLogin() {
@@ -109,6 +111,34 @@ public class MemberController {
         sessionStatus.setComplete();
 
         return "front/member/login";
+    }
+
+    @GetMapping("/find_id")
+    public String findId(@ModelAttribute RequestFindId form ,Model model){
+        commonProcess("find_id", model);
+
+        return "front/member/find_id";
+    }
+
+    @PostMapping("/find_id")
+    public String findIdPs(@Valid RequestFindId form, Errors errors ,Model model){
+        commonProcess("find_id", model);
+
+        findIdService.process(form, errors);
+
+        if (errors.hasErrors()) {
+            return "front/member/find_id";
+        }
+
+        //아이디를 확인 후 로그인 or 비밀번호 찾기로 유도
+        return "redirect:/member/find_id_done";
+    }
+
+    @GetMapping("/find_id_done")
+    public String findIdDone(Model model) {
+        commonProcess("find_id", model);
+
+        return "front/member/find_id_done";
     }
 
     @GetMapping("/find_pw")
