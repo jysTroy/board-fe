@@ -65,10 +65,14 @@ class ModelInfoServiceTest {
         assertEquals("샘플 모델", result.getName());
         assertEquals("카테고리", result.getCategory());
         assertEquals("상세 설명", result.getDescription());
+        //assertEquals("main1.jpg", result.getMainImages().get(0).getFileName());
+        //assertEquals("list1.jpg", result.getListImages().get(0).getFileName());
 
         System.out.println("▶ GID: " + result.getGid());
         System.out.println("▶ 이름: " + result.getName());
         System.out.println("▶ 카테고리: " + result.getCategory());
         System.out.println("▶ 설명: " + result.getDescription());
+        //System.out.println("▶ 메인 이미지: " + result.getMainImages().get(0).getFileName());
+        //System.out.println("▶ 리스트 이미지: " + result.getListImages().get(0).getFileName());
     }
 }

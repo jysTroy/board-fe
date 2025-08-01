@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 초기화 안내</title>
+    <style>
+        body {
+            background-color: #f4f6f8;
+            font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #4c74ff, #7e94ff);
+            color: #fff;
+            padding: 24px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .content {
+            padding: 30px 40px;
+        }
+        .label {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .value {
+            background: #f1f3f5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #222;
+            margin-top: 8px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header" th:text="${subject}">비밀번호 초기화 안내</div>
+
+    <div class="content">
+        <div class="label" th:text="#{비밀번호}">임시 비밀번호</div>
+        <div class="value" th:text="${password}">a1b2c3d4</div>
+
+        <p style="margin-top: 30px; line-height: 1.6;">
+            본 메일은 비밀번호 초기화 요청에 따라 발송되었습니다.<br>
+            로그인 후, <strong>마이페이지 > 비밀번호 변경</strong> 메뉴를 통해 새로운 비밀번호로 변경해 주세요.
+        </p>
+    </div>
+
+    <div class="footer">
+        © 2025 이야기와 AI | 모두의 상상력이 현실이 되는 공간
+    </div>
+</div>
+</body>
+</html>
