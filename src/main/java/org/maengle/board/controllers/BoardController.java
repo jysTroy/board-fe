@@ -1,5 +1,6 @@
 package org.maengle.board.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +10,15 @@ import org.maengle.board.entities.Comment;
 import org.maengle.board.services.*;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.board.validators.BoardValidator;
+import org.maengle.board.validators.CommentValidator;
 import org.maengle.file.constants.FileStatus;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
+import org.maengle.global.exceptions.script.AlertException;
+import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
 import org.maengle.member.libs.MemberUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -33,6 +39,7 @@ import java.util.UUID;
 @SessionAttributes({"board"})
 public class BoardController {
 
+    private final Utils utils;
     private final MemberUtil memberUtil;
     private final BoardConfigInfoService configInfoService;
     private final BoardUpdateService updateService;
@@ -42,9 +49,12 @@ public class BoardController {
     private final BoardAuthService authService;
     private final FileInfoService fileInfoService;
     private final BoardValidator boardValidator;
+    private final CommentValidator commentValidator;
+    private final CommentUpdateService commentUpdateService;
     private final CommentInfoService commentInfoService;
     private final PasswordEncoder encoder;
     private final HttpSession session;
+    private final HttpServletRequest request;
 
     // 게시글 목록
     @GetMapping("/list/{bid}")
@@ -141,6 +151,39 @@ public class BoardController {
 
         return "front/board/view";
     }
+
+    @PostMapping("/comment")
+    public String comment(@Valid RequestComment form, Errors errors, Model model) {
+
+        commentValidator.validate(form, errors);
+
+        if (errors.hasErrors()) {
+            for (Map.Entry<String, List<String>> entry : utils.getErrorMessages(errors).entrySet()) {
+                String message = entry.getValue().getFirst();
+                throw new AlertException(message, HttpStatus.BAD_REQUEST);
+            }
+        }
+        // 댓글 작성 처리
+        Comment item = commentUpdateService.process(form);
+
+        // 댓글 작성이 완료되면 부모창을 새로고침
+//        model.addAttribute("script", String.format("parent.location.replace('%s/board/view/%s#comment-%s')", form.getBoardDataSeq(), item.getSeq()));
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    // 댓글 수정
+    @GetMapping("/comment/{seq}")
+    public String commentUpdate(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "comment_update", model);
+
+        RequestComment form = commentInfoService.getForm(seq);
+        model.addAttribute("requestComment", form);
+
+        return "front/board/comment_update";
+    }
+
+
 
     // 게시글 삭제
     @GetMapping("/delete/{seq}")
