@@ -226,6 +226,18 @@ public class BoardInfoService {
         return new ListData<>(items,pagination);
     }
 
+    // 내가 쓴 게시글 중에서 최신꺼 가져오기
+    public List<BoardData> getMyLatest(int limit) {
+        if (!memberUtil.isLogin()) return List.of();
+
+        Member member = memberUtil.getMember();
+        BoardSearch search = new BoardSearch();
+        search.setEmail(List.of(member.getEmail()));
+        search.setLimit(limit);
+
+        return getList(search).getItems();
+    }
+
     /**
      * 추가 정보 처리
      *

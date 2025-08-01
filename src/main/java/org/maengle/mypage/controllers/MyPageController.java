@@ -40,6 +40,15 @@ public class MyPageController {
     public String index(Model model) {
         commonProcess("main",model);
 
+        Member member = memberUtil.getMember();
+        model.addAttribute("loggedMember",member);
+
+        FileInfo profileImage = member.getProfileImage();
+        model.addAttribute("profileImage", profileImage);
+
+        List<BoardData> recentBoards = boardInfoService.getMyLatest(5);
+        model.addAttribute("recentBoards", recentBoards);
+
         return "front/mypage/index";
     }
 
