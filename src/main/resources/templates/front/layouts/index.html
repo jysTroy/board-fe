@@ -44,8 +44,11 @@
     <th:block th:if="${param.popup == null || !param.popup}">
         <header th:replace="~{front/outlines/_header::common}"></header>
     </th:block>
+    <th:block th:if="${param.popup == null || !param.popup}">
+        <aside th:replace="~{front/outlines/_side::common}"></aside>
+    </th:block>
 
-<main layout:fragment="content"></main>
+    <main layout:fragment="content"></main>
 
     <th:block th:if="${param.popup == null || !param.popup}">
         <footer th:replace="~{front/outlines/_footer::common}"></footer>

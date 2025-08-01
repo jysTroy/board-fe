@@ -27,7 +27,7 @@ import java.util.UUID;
 @ApplyCommonController
 @RequiredArgsConstructor
 @RequestMapping("/admin/model")
-public class ModelUpdateController extends CommonController {
+public class ModelController extends CommonController {
 
 	private final ModelUpdateService modelUpdateService;
 	private final ModelViewService modelInfoService;
@@ -60,7 +60,7 @@ public class ModelUpdateController extends CommonController {
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
 
-		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
+		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search, true);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
@@ -116,8 +116,6 @@ public class ModelUpdateController extends CommonController {
 
 		return "redirect:/admin/model";
 	}
-
-
 
 	// 공통 처리 부분
 	private void commonProcess(String code, Model model) {

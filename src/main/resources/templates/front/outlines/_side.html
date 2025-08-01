@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<aside th:fragment="common" class="main-menu">
+
+</aside>
+
 <aside th:fragment="mypage">
     <div class="profile-image">
         <th:block th:if="${profile != null}" th:utext="${@utils.printThumb(profile.seq, 180, 180, 'image')}"></th:block>

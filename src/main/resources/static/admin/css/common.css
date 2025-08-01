@@ -43,12 +43,12 @@ header {
 
 main {
     display: flex;
+    min-height: 980px;
 }
 
 main > aside {
     width: 200px;
     background: #d5d5d5;
-    min-height: 850px;
     margin-right: 15px;
 }
 
