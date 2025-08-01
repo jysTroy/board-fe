@@ -40,9 +40,11 @@ public class BoardData extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String content;
 
-    private boolean notice;
+    private boolean notice; // 공지글 여부
 
-    private int viewCount;
+    private int viewCount; // 조회수
+
+    private int commentCount; // 댓글 수
 
     @Column(length=20)
     private String ip;
@@ -56,5 +58,11 @@ public class BoardData extends BaseEntity implements Serializable {
 
     @Transient
     private List<FileInfo> attachFiles;
+
+    @Transient
+    private boolean editable; // 게시글 수정, 삭제 가능 여부
+
+    @Transient
+    private boolean mine; // 내 게시글
 
 }

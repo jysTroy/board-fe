@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-@Component
+@Component("utils")
 @RequiredArgsConstructor
 public class Utils {
 
@@ -197,5 +197,14 @@ public class Utils {
         Collections.shuffle(chars);
 
         return chars.stream().limit(length).collect(Collectors.joining());
+    }
+
+    /**
+     * 태그를 제거한 문자열로 처리
+     */
+    public String stripTags(String text) {
+        return text.replaceAll("<p[^>]*>(.*?)<\\/p>", "\n")
+                .replaceAll("<[^>]*>", "")
+                .replaceAll("&nbsp", " ");
     }
 }

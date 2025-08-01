@@ -249,5 +249,23 @@ public class BoardInfoService {
         // 첨부된 이미지 & 파일 목록
         item.setEditorImages(fileInfoService.getList(gid, "editor"));
         item.setAttachFiles(fileInfoService.getList(gid, "attach"));
+
+        /**
+         * 내 게시글 여부, 수정 가능 여부
+         * 회원 게시글 : 작성한 회원번호와 로그인한 회원 번호가 일치
+         */
+        boolean editable = true;
+
+        Member boardMember = item.getMember(); // 게시글을 작성한 회원
+        Member member = memberUtil.getMember(); // 로그인한 회원
+
+        item.setMine(memberUtil.isLogin() && boardMember.getUserUuid().equals(member.getUserUuid())); // 로그인한 회원 정보와 게시글 작성 회원 정보가 일치
+
+        if (!memberUtil.isAdmin()) {
+            editable = item.isMine();
+        }
+
+        item.setEditable(editable);
+
     }
 }

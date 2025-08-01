@@ -1,19 +1,22 @@
 package org.maengle.board.controllers;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maengle.board.entities.Board;
 import org.maengle.board.entities.BoardData;
+import org.maengle.board.entities.Comment;
 import org.maengle.board.services.*;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.board.validators.BoardValidator;
+import org.maengle.board.validators.CommentValidator;
 import org.maengle.file.constants.FileStatus;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.annotations.ApplyCommonController;
+import org.maengle.global.exceptions.script.AlertException;
+import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
 import org.maengle.member.libs.MemberUtil;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -32,6 +36,7 @@ import java.util.UUID;
 @SessionAttributes({"board"})
 public class BoardController {
 
+    private final Utils utils;
     private final MemberUtil memberUtil;
     private final BoardConfigInfoService configInfoService;
     private final BoardUpdateService updateService;
@@ -41,18 +46,10 @@ public class BoardController {
     private final BoardAuthService authService;
     private final FileInfoService fileInfoService;
     private final BoardValidator boardValidator;
-    private final PasswordEncoder encoder;
-    private final HttpSession session;
-
-    @ModelAttribute("menuCode")
-    public String menuCode() {
-        return "board";
-    }
-
-    @ModelAttribute("board")
-    public Board getBoard() {
-        return new Board();
-    }
+    private final CommentValidator commentValidator;
+    private final CommentUpdateService commentUpdateService;
+    private final CommentInfoService commentInfoService;
+    private final CommentDeleteService commentDeleteService;
 
     // 게시글 목록
     @GetMapping("/list/{bid}")
@@ -130,14 +127,84 @@ public class BoardController {
         // 게시글 조회수 업데이트
         viewCountService.update(seq);
 
+        // 댓글 기본값 처리
+        if (board != null && board.isComment()) {
+            if (board.isCommentable()) { // 댓글 작성 가능 여부
+                RequestComment commentForm = new RequestComment();
+                if (memberUtil.isLogin()) { // 로그인 상태라면 로그인한 회원 이름으로 초기값
+                    commentForm.setCommenter(memberUtil.getMember().getName());
+                }
+                commentForm.setBoardDataSeq(seq);
+                commentForm.setMode("comment_write");
+                model.addAttribute("requestComment", commentForm);
+            }
+
+            // 댓글 목록
+            model.addAttribute("comments", commentInfoService.getList(seq));
+        }
+
+
         return "front/board/view";
     }
 
+    @PostMapping("/comment")
+    public String comment(@Valid RequestComment form, Errors errors, Model model) {
+
+        commentValidator.validate(form, errors);
+
+        if (errors.hasErrors()) {
+            for (Map.Entry<String, List<String>> entry : utils.getErrorMessages(errors).entrySet()) {
+                String message = entry.getValue().getFirst();
+                throw new AlertException(message, HttpStatus.BAD_REQUEST);
+            }
+        }
+        // 댓글 작성 처리
+        Comment item = commentUpdateService.process(form);
+
+        // 수정 완료 시에는 게시글로 이동
+        if (form.getMode().equals("comment_update")) {
+            return "redirect:/board/view/" + form.getBoardDataSeq() + "#comment-" + item.getSeq();
+        }
+
+        // 댓글 작성이 완료되면 부모창을 새로고침
+//        model.addAttribute("script", String.format("parent.location.replace('%s/board/view/%s#comment-%s')", form.getBoardDataSeq(), item.getSeq()));
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    // 댓글 수정
+    @GetMapping("/comment/{seq}")
+    public String commentUpdate(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "comment_update", model);
+
+        RequestComment form = commentInfoService.getForm(seq);
+        model.addAttribute("requestComment", form);
+
+        return "front/board/comment_update";
+    }
+
+    @GetMapping("/comment/delete/{seq}")
+    public String commentDelete(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "comment_delete", model);
+
+        // 삭제 처리
+        commentDeleteService.process(seq);
+
+        // 삭제 완료 시 게시글로 이동
+        BoardData item = (BoardData) model.getAttribute("item");
+
+        return "redirect:/board/view/" + item.getSeq();
+    }
+
+
+
     // 게시글 삭제
     @GetMapping("/delete/{seq}")
-    public String delete(@PathVariable("seq") Long seq, Model model, @SessionAttribute("board") Board board) {
+    public String delete(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "delete", model);
         deleteService.process(seq);
+
+        Board board = (Board)model.getAttribute("board");
 
         return "redirect:/board/list/" + board.getBid();
     }
@@ -153,11 +220,15 @@ public class BoardController {
      */
     private void commonProcess(String bid, String mode, Model model) {
         Board board = configInfoService.get(bid);
+
+        authService.check(mode, bid); // 글쓰기, 글목록에서의 권한 체크
+
         mode = StringUtils.hasText(mode) ? mode : "list";
 
         List<String> addCommonScript = new ArrayList<>();
         List<String> addCss = new ArrayList<>();
         List<String> addScript = new ArrayList<>();
+
         String pageTitle = board.getName(); // 게시판 명
 
         String skin = board.getSkin();
@@ -197,10 +268,18 @@ public class BoardController {
      * @param model
      */
     private void commonProcess(Long seq, String mode, Model model) {
-        BoardData item = infoService.get(seq);
+        BoardData item = null;
+
+        if (mode.equals("comment_update") || mode.equals("comment_delete")) { // 댓글 수정, 삭제일 경우
+            Comment comment =commentInfoService.get(seq);
+            item = comment.getItem();
+            model.addAttribute("comment", comment);
+        } else {
+            item = infoService.get(seq);
+        }
         model.addAttribute("item", item);
 
-        authService.check(mode, seq); // 글보기, 글수정 권한 체크
+        authService.check(mode, seq); // 글보기, 글수정, 댓글 수정, 댓글 삭제 시 권한 체크
 
         Board board = item.getBoard();
         commonProcess(board.getBid(), mode, model);

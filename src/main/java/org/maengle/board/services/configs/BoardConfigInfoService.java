@@ -13,6 +13,8 @@ import org.maengle.board.repositories.BoardRepository;
 import org.maengle.global.search.CommonSearch;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
+import org.maengle.member.constants.Authority;
+import org.maengle.member.libs.MemberUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ public class BoardConfigInfoService {
     private final BoardRepository repository;
     private final ModelMapper mapper;
     private final HttpServletRequest request;
+    private final MemberUtil memberUtil;
     private final JPAQueryFactory queryFactory;
 
 
@@ -100,8 +103,36 @@ public class BoardConfigInfoService {
     // 게시판 설정 추가 정보 가공 처리
     private void addInfo(Board item) {
 
-    }
+        boolean writeable = true, listable = true, commentable = true;
 
+        // 글쓰기 권한 처리
+        Authority writeAuthority = item.getWriteAuthority();
+        if (writeAuthority == Authority.MEMBER && !memberUtil.isLogin()) {
+            writeable = false;
+        } else if (writeAuthority == Authority.ADMIN && !memberUtil.isAdmin()) {
+            writeable = false;
+        }
+
+        // 글목록 권한 처리
+        Authority listAuthority = item.getListAuthority();
+        if (listAuthority == Authority.MEMBER && !memberUtil.isLogin()) {
+            listable = false;
+        } else if (listAuthority == Authority.ADMIN && !memberUtil.isAdmin()) {
+            listable = false;
+        }
+
+        // 댓글 권한 처리
+        Authority commentAuthority = item.getCommentAuthority();
+        if (commentAuthority == Authority.MEMBER && !memberUtil.isLogin()) {
+            commentable = false;
+        } else if (commentAuthority == Authority.ADMIN && !memberUtil.isAdmin()) {
+            commentable = false;
+        }
+
+        item.setWriteable(writeable);
+        item.setListable(listable);
+        item.setCommentable(commentable);
+    }
     /*
     * 게시판 목록 : 게시판명, 게시판 아이디
     * isAll : true -> 모든 게시판 목록(미사용중 포함하여), false : 사용중인 게시판만 보이기
