@@ -3,7 +3,29 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-    <section layout:fragment="content">
+    <section layout:fragment="content" class="mypage-introduce">
         <h1 class="main-title" th:text="${pageTitle}"></h1>
+
+        <div class="profile-summary">
+            <a href="/mypage/profile" class="profile-summary-link">
+                <div class="profile-summary-content">
+                    <strong th:text="${loggedMember.name}"></strong>
+                    <img th:src="@{/file/thumb?seq={seq}&width=80&height=80&crop=true(seq=*{profileImage.seq})}"
+                         alt="프로필 이미지" class="profile-thumb">
+                </div>
+            </a>
+        </div>
+
+        <div class="mypage-section">
+            <h2>최근 게시글</h2>
+            <ul class="recent-boards">
+                <li th:if="${#lists.isEmpty(recentBoards)}">최근 게시글이 없습니다.</li>
+                <li th:each="board : ${recentBoards}" th:unless="${#lists.isEmpty(recentBoards)}">
+                    <a th:href="@{/board/view/{seq}(seq=${board.seq})}" th:text="${board.subject}"></a>
+                    <span th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd')}"></span>
+                </li>
+            </ul>
+            <a href="/mypage/board" class="btn-view-all">전체보기</a>
+        </div>
     </section>
 </html>

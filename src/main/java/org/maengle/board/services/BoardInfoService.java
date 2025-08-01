@@ -124,7 +124,7 @@ public class BoardInfoService {
         int limit = search.getLimit();
         List<String> bids = search.getBid();
         Board board = null;
-        if (bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
+        if (bids != null && bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
             board = configInfoService.get(bids.getFirst());
 
             // 한 페이지당 게시글 갯수
@@ -224,6 +224,18 @@ public class BoardInfoService {
         Pagination pagination = new Pagination(page, total, range, limit, request);
 
         return new ListData<>(items,pagination);
+    }
+
+    // 내가 쓴 게시글 중에서 최신꺼 가져오기
+    public List<BoardData> getMyLatest(int limit) {
+        if (!memberUtil.isLogin()) return List.of();
+
+        Member member = memberUtil.getMember();
+        BoardSearch search = new BoardSearch();
+        search.setEmail(List.of(member.getEmail()));
+        search.setLimit(limit);
+
+        return getList(search).getItems();
     }
 
     /**
