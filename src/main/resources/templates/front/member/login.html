@@ -5,7 +5,8 @@
 <main layout:fragment="content" class="login-template">
     <div class="login-container">
         <h1 th:text="${pageTitle}" class="login-title"></h1>
-        <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}" class="login-form" target="_top"> <!-- 일반 회원이 로그인 버튼 누르면 button 태그 때문에 target이 안먹어요 그래서 여기서 처리 해야해요 (다른 애들은 button이 아니여서 냅두면 돼요) -->
+        <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}" class="login-form" target="_top">
+            <!-- 일반 회원이 로그인 버튼 누르면 button 태그 때문에 target이 안먹어요 그래서 여기서 처리 해야해요 (다른 애들은 button이 아니여서 냅두면 돼요) -->
             <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
             <ul>
                 <li>
@@ -22,7 +23,7 @@
             </ul>
             <div class="join_btn">
                 <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn-link" target="_top"></a>
-                <a th:href="@{/member/find_pw}" th:text="#{아이디_비밀번호_찾기}" class="btn-link" target="_top"></a>
+                <a th:href="@{/member/find_id}" th:text="#{아이디_비밀번호_찾기}" class="btn-link" target="_top"></a>
             </div>
             <div class="login_btn">
                 <button type="submit" th:text="#{로그인}" class="btn modal-open" data-width="450" data-height="650" data-url="/member/login" th:data-title="#{맹글 놀이터}"></button>

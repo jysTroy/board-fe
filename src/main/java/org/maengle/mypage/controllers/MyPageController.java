@@ -2,10 +2,14 @@ package org.maengle.mypage.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.maengle.board.controllers.BoardSearch;
+import org.maengle.board.entities.BoardData;
+import org.maengle.board.services.BoardInfoService;
 import org.maengle.file.constants.FileStatus;
 import org.maengle.file.entities.FileInfo;
 import org.maengle.file.services.FileInfoService;
 import org.maengle.global.libs.Utils;
+import org.maengle.global.search.ListData;
 import org.maengle.member.constants.Gender;
 import org.maengle.member.entities.Member;
 import org.maengle.member.libs.MemberUtil;
@@ -30,10 +34,20 @@ public class MyPageController {
     private final ProfileValidator profileValidator;
     private final FileInfoService fileInfoService;
     private final MemberUpdateService memberUpdateService;
+    private final BoardInfoService boardInfoService;
 
     @GetMapping
     public String index(Model model) {
         commonProcess("main",model);
+
+        Member member = memberUtil.getMember();
+        model.addAttribute("loggedMember",member);
+
+        FileInfo profileImage = member.getProfileImage();
+        model.addAttribute("profileImage", profileImage);
+
+        List<BoardData> recentBoards = boardInfoService.getMyLatest(5);
+        model.addAttribute("recentBoards", recentBoards);
 
         return "front/mypage/index";
     }
@@ -73,8 +87,13 @@ public class MyPageController {
     }
 
     @GetMapping("/board")
-    public String myBoard(Model model) {
+    public String myBoard(@ModelAttribute BoardSearch search, Model model) {
         commonProcess("board",model);
+
+        ListData<BoardData> data = boardInfoService.getMyList(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return "front/mypage/board";
     }
