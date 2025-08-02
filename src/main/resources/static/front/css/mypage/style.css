@@ -4,7 +4,7 @@ main {
     min-height: 600px;
 }
 
-main > aside {
+main > aside.my-menu {
     width: 210px;
     background: #f8f8f8;
 
@@ -14,14 +14,14 @@ main > section {
     flex-grow: 1;
 }
 
-main > aside .menu {
+main > aside.my-menu .menu {
     display: block;
     padding: 20px 25px;
     border-bottom: 1px solid #ccc;
     font-size: 1.1rem;
 }
 
-main > aside .menu.on {
+main > aside.my-menu .menu.on {
     background: #1E9EFF;
     color: #fff;
     border-color: #1E9EFF;
@@ -309,22 +309,18 @@ main > section {
 
 /* 사이드 프로필 */
 
-aside > .profile-image {
+aside.my-menu > .profile-image {
     margin-top: 50px;
     padding-bottom: 14px;
     border-bottom: 1px solid #ccc;
 }
 
 
-aside > .profile-image > img {
+aside.my-menu > .profile-image > img {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
     transition: box-shadow 0.3s ease;
     cursor: default;
-}
-
-aside > .profile-image:hover > img {
-    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.5);
 }
 
 
