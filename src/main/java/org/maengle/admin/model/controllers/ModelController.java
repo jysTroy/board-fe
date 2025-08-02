@@ -67,17 +67,6 @@ public class ModelController extends CommonController {
 		return "admin/model/list";
 	}
 
-	// 목록에서 상품 정보 수정과 삭제
-	@RequestMapping(method = {RequestMethod.PATCH, RequestMethod.DELETE})
-	public String listPs(@RequestParam(name="idx", required = false) List<Integer> idxes, Model model) {
-
-		modelUpdateService.processList(idxes);
-
-		// 처리가 완료되면 목록을 갱신
-		model.addAttribute("script", "parent.location.reload()");
-		return "common/_execute_script";
-	}
-
 	// 모델 등록
 	@GetMapping("/register")
 	public String register(@ModelAttribute RequestModel form , Model model) {
@@ -114,6 +103,14 @@ public class ModelController extends CommonController {
 
 		modelUpdateService.process(form);
 
+		return "redirect:/admin/model";
+	}
+
+	@PostMapping("/delete/{seq}")
+	public String deleteModel(@PathVariable Long seq, @RequestParam String gid, Model model) {
+		commonProcess("delete", model);
+
+		modelUpdateService.deleteModel(seq, gid);
 		return "redirect:/admin/model";
 	}
 
