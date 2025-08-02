@@ -14,6 +14,7 @@ import org.maengle.board.exceptions.BoardDataNotFoundException;
 import org.maengle.board.repositories.BoardDataRepository;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.file.services.FileInfoService;
+import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
 import org.maengle.member.entities.Member;
@@ -41,6 +42,7 @@ public class BoardInfoService {
     private final JPAQueryFactory queryFactory;
     private final MemberUtil memberUtil;
     private final ModelMapper mapper;
+    private final Utils utils;
 
     /**
      * 게시글 1개 조회
@@ -266,6 +268,5 @@ public class BoardInfoService {
         }
 
         item.setEditable(editable);
-
     }
 }

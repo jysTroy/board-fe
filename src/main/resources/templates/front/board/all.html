@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>전체 게시판 목록</title>
+</head>
+<body>
+<h2>게시판 목록</h2>
+<ul>
+    <li th:each="board : ${boards}">
+        <a th:href="@{|/board/list/${board.bid}|}" th:text="${board.name}"></a>
+    </li>
+</ul>
+</body>
+</html>
