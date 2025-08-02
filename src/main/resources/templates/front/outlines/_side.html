@@ -43,7 +43,11 @@
 
 <aside th:fragment="mypage" class="my-menu">
     <div class="profile-image">
-        <th:block th:if="${profile != null}" th:utext="${@utils.printThumb(profile.seq, 180, 180, 'image')}"></th:block>
+        <th:block th:if="${profile != null}">
+            <a th:href="@{/mypage}">
+                <span th:utext="${@utils.printThumb(profile.seq, 180, 180, 'image')}"></span>
+            </a>
+        </th:block>
         <th:block th:if="${profile == null}">
             <a th:href="@{/mypage/profile}" th:text="#{프로필_이미지가_없습니다}" class="menu-profile"></a>
         </th:block>
