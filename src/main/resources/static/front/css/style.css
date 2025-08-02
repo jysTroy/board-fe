@@ -313,7 +313,6 @@ aside.main-menu {
     left: calc(50% - 830px);
     width: 230px;
     min-height: 500px;
-    border: 1px solid #000;
     z-index: 10;
     transition: all 0.5s;
 }
@@ -332,5 +331,19 @@ aside.main.menu > ul > li.on .sub-menus {
 
 .main-menus sub-menus li.on .sub-menu-items {
     display: block;
+}
+
+.modal-open {
+    display: block;
+    background-color: #1F9EFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.modal-open:hover {
+  background-color: #45a049;
 }
 /*  사이드 메뉴 영역 E  */

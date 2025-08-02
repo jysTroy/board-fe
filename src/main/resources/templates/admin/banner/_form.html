@@ -3,7 +3,7 @@
 <th:block th:fragment="form" th:object="${requestBanner}">
     <input th:if="*{mode == 'edit' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
-    <table class="table_cols">
+    <table class="table-cols mb30">
         <tr>
             <th width="180">배너그룹</th>
             <td>
@@ -24,9 +24,9 @@
         <tr>
             <th>배너링크</th>
             <td>
-                <div class="input_grp">
-                    <input type="text" name="bLink" th:field="*{bLink}">
-                    <select name="target" th:field="*{target}">
+                <div class="flex">
+                    <input type="text" name="bLink" th:field="*{bLink}" class="mr5">
+                    <select name="target" th:field="*{target}" class="w180">
                         <option value="_self">_self</option>
                         <option value="_parent">_parent</option>
                         <option value="_top">_top</option>

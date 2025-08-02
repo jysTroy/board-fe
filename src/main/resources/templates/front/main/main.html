@@ -6,7 +6,7 @@
     <main layout:fragment="content" class="layout-width">
 
         <!-- 슬라이드 -->
-        <div class="swiper banners">
+        <div class="swiper main-banner1 banners">
             <div class="swiper-wrapper">
 
                 <!-- 디버깅용 강제 띄우는 화면 S -->
@@ -37,18 +37,5 @@
             <div class="swiper-pagination"></div>
             <!-- 네비게이션 및 페이지네이션 -->
         </div>
-
-        <nav>
-
-            <a href="#" th:text="#{메뉴1}"></a>
-            <a href="#" th:text="#{메뉴2}" class="on"></a>
-            <a href="#" th:text="#{메뉴3}"></a>
-            <a href="#" th:text="#{메뉴4}"></a>
-            <a href="#" th:text="#{메뉴5}"></a>
-
-        </nav>
-
-        <!-- 실제로 대화하는 창 띄우는 부분 중요!!! -->
-        <button type="button" class="modal-open" data-width="600" data-height="800" data-url="/chat?model=MODEL1" data-title="챗봇 연습" th:text="#{챗봇_대화}"></button>
     </main>
 </html>

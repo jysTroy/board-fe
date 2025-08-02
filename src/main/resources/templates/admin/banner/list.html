@@ -6,11 +6,11 @@
     <h1>배너 목록</h1>
     <form name="frmList" method="post" th:action="@{/admin/banner/list}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
-        <table class="table_rows">
+        <table class="table-rows">
             <thead>
             <tr>
                 <th width="40">
-                    <input type="checkbox" class="checkall" id="checkall" data-target-name="chk">
+                    <input type="checkbox" class="check-all" id="checkall" data-target-name="chk">
                     <label for="checkall"></label>
                 </th>
                 <th width="400" colspan="2">배너</th>
@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             <tr th:if="${items == null || items.isEmpty()}">
-                <td colspan="4" class="no_data">등록된 배너가 없습니다.</td>
+                <td colspan="4" class="no-data">등록된 배너가 없습니다.</td>
             </tr>
             <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
                 <td>
@@ -46,11 +46,11 @@
             </tr>
             </tbody>
         </table>
-        <div class="table_actions" th:unless="${items == null || items.isEmpty()}">
-            <button type="button" class="form_action sbtn" data-mode="delete" data-form-name="frmList">
+        <div class="table-action" th:unless="${items == null || items.isEmpty()}">
+            <button type="button" class="process-form delete sbtn" data-form-name="frmList">
                 선택 배너 삭제하기
             </button>
-            <button type="button" class="form_action sbtn on" data-mode="edit" data-form-name="frmList">
+            <button type="button" class="process-form sbtn black" data-form-name="frmList">
                 선택 배너 수정하기
             </button>
         </div>

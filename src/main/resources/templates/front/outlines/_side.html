@@ -2,14 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <aside th:fragment="common" class="main-menu">
     <a th:if="${profile != null}" class="profile-image" th:href="@{/mypage}"
-    th:utext="${@utils.printThumb(profile.seq, 210, 210)}"></a>
+       th:utext="${@utils.printThumb(profile.seq, 210, 210)}"></a>
 
     <ul class="menus">
+
         <li>
-            <div class="menu">
+            <button type="button" class="modal-open"
+                    data-width="600" data-height="800"
+                    data-url="/chat?model=MODEL1"
+                    data-title="챗봇 연습">
+                <div class="menu">
                 <div class="icon"></div>
                 <div class="text" th:text="#{랜덤_채팅하기}"></div>
             </div>
+            </button>
+            </a>
         </li>
         <li th:classappend="${menuCode != null && menuCode == 'board'} ? 'on'">
             <div class="menu">
@@ -21,10 +28,13 @@
             </div>
         </li>
         <li th:classappend="${menuCode != null && menuCode == 'model'} ? on">
-            <div class="menu">
-                <div class="icon"></div>
-                <div class="text" th:text="#{모델_전체보기}"></div>
-            </div>
+            <a href="/model" class="modal-open">
+                <div class="menu">
+                    <div class="icon"></div>
+                    <div class="text" th:text="#{모델_전체보기}"></div>
+                </div>
+            </a>
+        </li>
             <div class="sub-menus">
                 <ul>
                     <li th:each="category : ${categories}" th:classappend="${#strings.equals(category, subCode)} ? 'on'">
@@ -37,7 +47,6 @@
             </div>
         </li>
     </ul>
-
 </aside>
 
 

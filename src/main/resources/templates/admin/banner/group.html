@@ -6,7 +6,7 @@
     <h1>배너 관리</h1>
     <h2>그룹 등록</h2>
     <form name="frmSave" method="post" th:action="@{/admin/banner}" autocomplete="off" target="ifrmProcess">
-        <table class="table_cols">
+        <table class="table-cols">
             <tr>
                 <th width="100">그룹코드</th>
                 <td width="300">
@@ -18,31 +18,29 @@
                 </td>
             </tr>
         </table>
-        <div class="search_btn">
-            <button type="submit" class="btn">등록하기</button>
-        </div>
+        <button type="submit" class="submit-btn">등록하기</button>
     </form>
     <h2>그룹 목록</h2>
-    <form name="frmSearch" method="get" th:action="@{/admin/banner}" autocomplete="off" th:object="${bannerGroupSearch}">
-        <div class="mb10 input_grp">
-            <select name="sopt" th:field="*{sopt}">
+    <form name="frmSearch" method="get" th:action="@{/admin/banner}" autocomplete="off" th:object="${bannerGroupSearch}" class="mb30">
+        <div class="flex">
+            <select name="sopt" th:field="*{sopt}" class="w180 mr5">
                 <option value="all">통합검색</option>
                 <option value="groupCode">그룹코드</option>
                 <option value="groupName">그룹명</option>
             </select>
-            <input type="text" name="skey" placeholder="키워드 입력" th:field="*{skey}" class="w200">
-            <button type="submit" class="sbtn on">
+            <input type="text" name="skey" placeholder="키워드 입력" th:field="*{skey}" class="w180">
+            <button type="submit" class="sbtn black">
                 <i class="xi-search"></i> 검색하기
             </button>
         </div>
     </form>
     <form name="frmList" method="post" th:action="@{/admin/banner}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
-        <table class="table_rows">
+        <table class="table-rows">
             <thead>
             <tr>
                 <th width="40" align="center">
-                    <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                    <input type="checkbox" class="check-all" data-target-name="chk" id="checkall">
                     <label for="checkall"></label>
                 </th>
                 <th width="150">그룹코드</th>
@@ -53,7 +51,7 @@
             </thead>
             <tbody>
             <tr th:if="${items == null || items.isEmpty()}">
-                <td colspan="5" class="no_data">조회된 배너그룹이 없습니다.</td>
+                <td colspan="5" class="no-data">조회된 배너그룹이 없습니다.</td>
             </tr>
             <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
                 <td>
@@ -78,9 +76,9 @@
             </tr>
             </tbody>
         </table>
-        <div class="table_actions" th:unless="${items == null || items.isEmpty()}">
-            <button type="button" data-mode="delete" data-form-name="frmList" class="form_action sbtn">선택 배너그룹 삭제</button>
-            <button type="button" data-mode="edit" data-form-name="frmList" class="form_action sbtn on">선택 배너그룹 수정</button>
+        <div class="table-action" th:unless="${items == null || items.isEmpty()}">
+            <button type="button" data-form-name="frmList" class="process-form delete sbtn">선택 배너그룹 삭제</button>
+            <button type="button" data-form-name="frmList" class="process-form sbtn black">선택 배너그룹 수정</button>
         </div>
     </form>
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
