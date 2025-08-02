@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
     // 공통 양식 처리
     const processFormButtons = document.getElementsByClassName("process-form");
     for (const el of processFormButtons) {
-        el.addEventListener("click", function() {
+        el.addEventListener("click", function () {
             const method = this.classList.contains("delete") ? "DELETE" : "PATCH";
             const { formName } = this.dataset;
             const formEl = document.forms[formName];
@@ -23,12 +23,19 @@ window.addEventListener("DOMContentLoaded", function() {
 
             formEl._method.value = method;
 
-            if (confirm('정말 처리하겠습니까?')) {
-                formEl.submit();
-            }
+            Swal.fire({
+                title: "정말 처리하겠습니까?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "처리하기",
+                cancelButtonText: "취소"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formEl.submit();
+                }
+            });
         });
     }
-
 });
-
-

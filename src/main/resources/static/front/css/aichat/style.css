@@ -15,17 +15,16 @@
 
 /* 스크롤바 CSS */
 .chat-history::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 .chat-history::-webkit-scrollbar-thumb {
   background-color: #5a9bd4;
   border-radius: 12px;
-  border: 2px solid #f7f1e1;
 }
 
 .chat-history::-webkit-scrollbar-track {
-  background: #f7f1e1;
+  background: transparent;
   border-radius: 12px;
 }
 

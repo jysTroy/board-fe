@@ -4,7 +4,7 @@ main {
     min-height: 600px;
 }
 
-main > aside {
+main > aside.my-menu {
     width: 210px;
     background: #f8f8f8;
 
@@ -14,14 +14,14 @@ main > section {
     flex-grow: 1;
 }
 
-main > aside .menu {
+main > aside.my-menu .menu {
     display: block;
     padding: 20px 25px;
     border-bottom: 1px solid #ccc;
     font-size: 1.1rem;
 }
 
-main > aside .menu.on {
+main > aside.my-menu .menu.on {
     background: #1E9EFF;
     color: #fff;
     border-color: #1E9EFF;
@@ -307,25 +307,57 @@ main > section {
 
 /* 프로필 이미지 첨부 관련 영역 E */
 
-/* 사이드 프로필 */
+/* ------- 사이드 프로필 ------- S */
 
-aside > .profile-image {
+/* 사이드 메뉴 전체 영역 */
+aside.my-menu .profile-image {
     margin-top: 50px;
     padding-bottom: 14px;
     border-bottom: 1px solid #ccc;
+    text-align: center;
 }
 
-
-aside > .profile-image > img {
+/* 프로필 이미지가 있을 때 스타일 */
+aside.my-menu .profile-image a > span > img {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
-    transition: box-shadow 0.3s ease;
-    cursor: default;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
-aside > .profile-image:hover > img {
-    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.5);
+aside.my-menu .profile-image a:hover > span > img {
+    box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
+    transform: scale(1.02);
 }
+
+/* 프로필 이미지가 없을 때 대체 링크 스타일 */
+aside.my-menu .menu-profile {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    color: #888;
+    text-align: center;
+    line-height: 180px;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+aside.my-menu .menu-profile:hover {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: #eef6ff;
+    cursor: pointer;
+}
+
+/* ------- 사이드 프로필 ------- E */
 
 
 /* ------- 마이페이지 내 게시글(board) 스타일 ------- */

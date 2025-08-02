@@ -10,7 +10,7 @@
             <a href="/mypage/profile" class="profile-summary-link">
                 <div class="profile-summary-content">
                     <strong th:text="${loggedMember.name}"></strong>
-                    <img th:src="@{/file/thumb?seq={seq}&width=80&height=80&crop=true(seq=*{profileImage.seq})}"
+                    <img th:if="${profile != null}" th:src="@{/file/thumb?seq={seq}&width=80&height=80&crop=true(seq=*{profile.seq})}"
                          alt="프로필 이미지" class="profile-thumb">
                 </div>
             </a>

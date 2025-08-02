@@ -288,13 +288,16 @@ footer-title {
 
 /* ---------- 프로필 영역 ---------- S */
 
-header.profile-image {
+.profile-image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 header .profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     border-radius: 50%; /* 프로필을 원형으로 */
     background-color: #f0f0f0; /* 배경으로 구분 */
