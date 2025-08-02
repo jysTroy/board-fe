@@ -9,28 +9,14 @@
         <div class="swiper main-banner1 banners">
             <div class="swiper-wrapper">
 
-                <!-- 디버깅용 강제 띄우는 화면 S -->
-                <div class="swiper-slide">
-                    <img src="/front/images/download1.jpg" alt="슬라이드1" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="/front/images/download2.jpg" alt="슬라이드2" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="/front/images/download3.jpg" alt="슬라이드3" />
-                </div>
-                <!-- 디버깅용 강제 띄우는 화면 E -->
-
-                <!-- original code S -->
-                <!--<div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
+                <div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
                     <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
                         <img th:src="*{bannerImage.fileUrl}" alt="" />
                     </a>
-                </div>-->
-                <!-- original code E -->
-
+                </div>
             </div>
             <!-- 슬라이드 -->
+
             <!-- 네비게이션 및 페이지네이션 -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>

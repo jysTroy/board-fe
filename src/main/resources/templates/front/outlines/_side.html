@@ -3,44 +3,50 @@
 <aside th:fragment="common" class="main-menu">
     <a th:if="${profile != null}" class="profile-image" th:href="@{/mypage}"
        th:utext="${@utils.printThumb(profile.seq, 210, 210)}"></a>
+    <th:block th:if="${profile == null}">
+        <a th:href="@{/mypage/profile}" th:text="#{프로필_이미지가_없습니다}" class="menu-profile"></a>
+    </th:block>
 
     <ul class="menus">
-
         <li>
-            <button type="button" class="modal-open"
-                    data-width="600" data-height="800"
+            <a href="#"
+                    class="modal-open"
+                    data-width="600"
+                    data-height="800"
                     data-url="/chat?model=MODEL1"
                     data-title="챗봇 연습">
-                <div class="menu">
+            <div class="menu">
                 <div class="icon"></div>
                 <div class="text" th:text="#{랜덤_채팅하기}"></div>
             </div>
-            </button>
             </a>
         </li>
         <li th:classappend="${menuCode != null && menuCode == 'board'} ? 'on'">
+            <a href="/board/all" class="board-link">
             <div class="menu">
                 <div class="icon"></div>
                 <div class="text" th:text="#{게시판}"></div>
             </div>
+            </a>
             <div class="sub-menus" th:if="${boardMenus != null && !boardMenus.isEmpty()}">
                 <a th:each="item : ${boardMenus}" th:object="${item}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{name}"></a>
             </div>
         </li>
         <li th:classappend="${menuCode != null && menuCode == 'model'} ? on">
-            <a href="/model" class="modal-open">
+            <a href="/model" class="model-link">
                 <div class="menu">
                     <div class="icon"></div>
                     <div class="text" th:text="#{모델_전체보기}"></div>
                 </div>
             </a>
-        </li>
             <div class="sub-menus">
                 <ul>
                     <li th:each="category : ${categories}" th:classappend="${#strings.equals(category, subCode)} ? 'on'">
                         <div class="sub-menu" th:text="${category}"></div>
                         <div class="sub-menu-items">
-                            <a th:each="subCategory : ${@commonInterceptor.getSubCategories(category)}" th:text="${subCategory}" th:href="@{/model(category=${category}, subCategory=${subCategory})}"></a>
+                            <a th:each="subCategory : ${@commonInterceptor.getSubCategories(category)}"
+                               th:text="${subCategory}"
+                               th:href="@{/model(category=${category}, subCategory=${subCategory})}"></a>
                         </div>
                     </li>
                 </ul>

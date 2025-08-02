@@ -333,7 +333,9 @@ aside.main.menu > ul > li.on .sub-menus {
     display: block;
 }
 
-.modal-open {
+.chat-modal,
+.board-link,
+.model-link {
     display: block;
     background-color: #1F9EFF;
     color: white;
@@ -342,8 +344,11 @@ aside.main.menu > ul > li.on .sub-menus {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
-.modal-open:hover {
-  background-color: #45a049;
+.chat-modal:hover,
+.board-link:hover,
+.model-link:hover {
+    background-color: #45a049;
 }
 /*  사이드 메뉴 영역 E  */
