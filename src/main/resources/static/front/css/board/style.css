@@ -42,4 +42,339 @@ input[type="text"], textarea {
 input[type="text"]:focus,
 textarea:focus {
     border-color: #0077cc;
-    background-colo
+    background-color
+    }
+
+select, input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #66b2ff;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f0f8ff;
+    transition: all 0.3s;
+}
+
+select:focus, input:focus {
+    border-color: #0077cc;
+    background-color: #e6f0ff;
+}
+
+/* 버튼 */
+button, .btn {
+    background-color: #f0f8ff;
+    color: #0077cc;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 1px solid #66b2ff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, .btn:hover {
+    background-color: #e0f0ff;
+}
+/* 체크박스 + 라벨 */
+input[type="checkbox"] {
+    margin-right: 6px;
+}
+label {
+    font-size: 13px;
+    color: #444;
+}
+
+
+.board-title-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.board-title-wrap::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.board-title a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.write-button {
+    background-color: #f0f8ff;
+    border: 1px solid #66b2ff;
+    color: #0077cc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.write-button:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.items {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.items li {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+.items .subject {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0077cc;
+    margin-bottom: 6px;
+    text-decoration: none;
+}
+
+.items .post-info {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: #666;
+}
+
+.frm-search {
+    display: flex;
+    gap: 8px;
+    max-width: 800px;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.frm-search select,
+.frm-search input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.frm-search button {
+    flex-shrink: 0;
+}
+
+.frm-search button:hover {
+    background-color: #91c8e5;
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px 0;
+    max-width: 800px;
+}
+
+.category-tabs .tab {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #66b2ff;
+    border-radius: 20px;
+    background-color: #f0f8ff;
+    color: #0077cc;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-tabs .tab:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.category-tabs .tab.on {
+    background-color: #a8d8f0;
+    color: #000;
+    font-weight: bold;
+    border-color: #3399ff;
+}
+
+.board-view-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #fff;
+}
+
+.board-view-page .subject-wrap {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.board-view-page .post-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.board-view-page .content {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.board-view-page .links {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.board-view-page .content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 댓글 전체 영역 */
+.comment-items {
+    list-style: none;
+    padding: 0;
+    margin: 30px auto;
+    max-width: 800px;
+}
+
+/* 댓글 아이템 */
+.comment-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+/* 작성자/작성일시 라인 */
+.comment-item .top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+    color: #555;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 6px;
+}
+
+.comment-item .top-section .left {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-item .top-section .right {
+    font-style: italic;
+    color: #777;
+}
+
+/* 댓글 본문 */
+.comment-item .content-section {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #222;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+/* 수정/삭제 버튼 */
+.comment-item .controls {
+    text-align: right;
+}
+
+.comment-item .controls a {
+    font-size: 0.85rem;
+    color: #0077cc;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.comment-item .controls a:hover {
+    text-decoration: underline;
+}
+
+/* all.html 꾸미기 급조 */
+
+.board-all-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 30px 40px;
+    color: #333;
+}
+
+.board-list-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
+.board-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.board-card {
+    flex: 1 1 200px;
+    max-width: 250px;
+    border: 2px solid #2196f3;
+    border-radius: 16px;
+    background-color: #e3f2fd;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.board-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.2);
+}
+
+.board-link {
+    display: block;
+    padding: 30px 15px;
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0d47a1;
+}

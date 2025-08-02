@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="common" th:object="${board}">
-    <h1>
-        <a th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{name}"></a>
-    </h1>
-    <a th:if="${mode == 'list' && board.writeable}" th:href="@{/board/write/{bid}(bid=*{bid})}" th:text="글쓰기"></a>
+    <div class="board-title-wrap">
+        <h1 class="board-title">
+            <a th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{name}">게시판</a>
+        </h1>
+        <div class="board-title-divider"></div>
+        <a class="write-button"
+           th:if="${mode == 'list' && board.writeable}"
+           th:href="@{/board/write/{bid}(bid=*{bid})}"
+           th:text="글쓰기">
+        </a>
+    </div>
 </th:block>
 </html>
