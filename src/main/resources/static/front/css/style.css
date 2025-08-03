@@ -58,6 +58,20 @@ h1.main-title {
     padding: 0;
 }
 
+.btn {
+  padding: 4px 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background-color: #2FA1FC;
+  color: #fff;
+}
+
 /* ---------- 프론트 스타일 초기화 E ----------  */
 
 
@@ -130,7 +144,6 @@ header #site-main-search input[type='text']{
 }
 
 header .right a, button:not(.btn) {
-    color: #fff;
     font-weight: 600;
     font-size: 14px;
     letter-spacing: -0.01em;
@@ -212,22 +225,6 @@ header .user-actions a:hover {
     align-self: flex-end;
     justify-content: center;
   }
-}
-
-.btn {
-  padding: 4px 16px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-block;
-  font-weight: 600;
-}
-
-.btn:hover {
-  background-color: #2FA1FC;
-  border-radius: 50px;
-  color: #fff;
 }
 
 /* ---------- 헤더 영역 E ---------- */
@@ -362,6 +359,7 @@ main-menu .sub-menus li.on .sub-menu-items {
     cursor: pointer;
     margin-top: 10px;
 }
+
 .menus .modal-open:hover,
 .menus .board-link:hover,
 .model-link:hover {
@@ -388,3 +386,57 @@ main-menu .sub-menus li.on .sub-menu-items {
   color: #666;
 }
 /* ---------- 사이드 메뉴 영역 E ---------- */
+
+/* all.html 영역  S */
+
+.board-all-title {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.board-list-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
+.board-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.board-card {
+    flex: 1 1 200px;
+    max-width: 250px;
+    border: 2px solid #2196f3;
+    border-radius: 16px;
+    background-color: #e3f2fd;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.board-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.2);
+}
+
+.board-link {
+    display: block;
+    padding: 30px 15px;
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0d47a1;
+}
+
+/* all.html 영역  E */
