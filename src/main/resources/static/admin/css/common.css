@@ -43,12 +43,12 @@ header {
 
 main {
     display: flex;
+    min-height: 980px;
 }
 
 main > aside {
     width: 200px;
     background: #d5d5d5;
-    min-height: 850px;
     margin-right: 15px;
 }
 
@@ -184,6 +184,46 @@ textarea {
     text-align: center;
     font-size: 1.15rem;
 }
+
+.table-rows td.image-cell {
+    width: 80px;
+    height: 80px;
+    padding: 0 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-rows td.image-cell img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    display: block !important;
+    margin: 0 auto;
+    border: none !important;
+}
+
+.model-cell {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.model-name {
+    display: inline-block;
+    width: 100%;
+    font-weight: bold;
+}
+
+.edit-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
 /* 테이블 공통 E */
 
 /* 여백 공통 S */
@@ -376,3 +416,4 @@ h2 {
 .dn {
     display: none !important;
 }
+

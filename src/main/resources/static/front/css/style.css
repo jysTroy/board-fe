@@ -58,6 +58,20 @@ h1.main-title {
     padding: 0;
 }
 
+.btn {
+  padding: 4px 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background-color: #2FA1FC;
+  color: #fff;
+}
+
 /* ---------- 프론트 스타일 초기화 E ----------  */
 
 
@@ -213,21 +227,6 @@ header .user-actions a:hover {
   }
 }
 
-.btn {
-  padding: 4px 16px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-}
-
-.btn:hover {
-  background-color: #2FA1FC;
-  border-radius: 50px;
-  color: #fff;
-}
-
 /* ---------- 헤더 영역 E ---------- */
 
 
@@ -293,6 +292,7 @@ footer-title {
 }
 
 /* ---------- 푸터 영역 ---------- E */
+
 
 
 /* ---------- 프로필 영역 ---------- S */
