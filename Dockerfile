@@ -1,5 +1,5 @@
 FROM kimmarinet/ubuntu:1.0.0
-ARG JAR_PATH=build/libs/chatboard.jar
+ARG JAR_PATH=build/libs/chatboard-0.0.1-SNAPSHOT.jar
 ARG PORT=3000
 COPY ${JAR_PATH} app.jar
 RUN mkdir uploads
