@@ -4,24 +4,25 @@
       layout:decorate="~{front/layouts/index}">
 
     <main layout:fragment="content" class="layout-width">
-
         <!-- 슬라이드 -->
-        <div class="swiper main-banner1 banners">
-            <div class="swiper-wrapper">
+        <div class="mainpage-height">
+            <div class="swiper main-banner1 banners">
+                <div class="swiper-wrapper">
 
-                <div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
-                    <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
-                        <img th:src="*{bannerImage.fileUrl}" alt="" />
-                    </a>
+                    <div class="swiper-slide" th:each="banner : ${@utils.getBanners('mainBanner1')}" th:object="${banner}">
+                        <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}">
+                            <img th:src="*{bannerImage.fileUrl}" alt="" />
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <!-- 슬라이드 -->
+                <!-- 슬라이드 -->
 
-            <!-- 네비게이션 및 페이지네이션 -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-            <!-- 네비게이션 및 페이지네이션 -->
+                <!-- 네비게이션 및 페이지네이션 -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <!-- 네비게이션 및 페이지네이션 -->
+            </div>
         </div>
     </main>
 </html>
