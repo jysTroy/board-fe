@@ -11,6 +11,7 @@ import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.controllers.ModelSearch;
+import org.maengle.model.repositories.ModelRepository;
 import org.maengle.model.services.ModelUpdateService;
 import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class ModelController extends CommonController {
 	private final ModelUpdateService modelUpdateService;
 	private final ModelViewService modelInfoService;
 	private final FileInfoService fileInfoService;
+	private final ModelRepository modelRepository;
+
 
 
 	@Override
