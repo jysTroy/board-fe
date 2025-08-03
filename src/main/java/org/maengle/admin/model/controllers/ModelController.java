@@ -11,6 +11,7 @@ import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.controllers.ModelSearch;
+import org.maengle.model.repositories.ModelRepository;
 import org.maengle.model.services.ModelUpdateService;
 import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,13 @@ import java.util.UUID;
 @ApplyCommonController
 @RequiredArgsConstructor
 @RequestMapping("/admin/model")
-public class ModelUpdateController extends CommonController {
+public class ModelController extends CommonController {
 
 	private final ModelUpdateService modelUpdateService;
 	private final ModelViewService modelInfoService;
 	private final FileInfoService fileInfoService;
+	private final ModelRepository modelRepository;
+
 
 
 	@Override
@@ -60,22 +63,11 @@ public class ModelUpdateController extends CommonController {
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
 
-		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
+		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search, true);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
 		return "admin/model/list";
-	}
-
-	// 목록에서 상품 정보 수정과 삭제
-	@RequestMapping(method = {RequestMethod.PATCH, RequestMethod.DELETE})
-	public String listPs(@RequestParam(name="idx", required = false) List<Integer> idxes, Model model) {
-
-		modelUpdateService.processList(idxes);
-
-		// 처리가 완료되면 목록을 갱신
-		model.addAttribute("script", "parent.location.reload()");
-		return "common/_execute_script";
 	}
 
 	// 모델 등록
@@ -117,7 +109,13 @@ public class ModelUpdateController extends CommonController {
 		return "redirect:/admin/model";
 	}
 
+	@PostMapping("/delete/{seq}")
+	public String deleteModel(@PathVariable Long seq, @RequestParam String gid, Model model) {
+		commonProcess("delete", model);
 
+		modelUpdateService.deleteModel(seq, gid);
+		return "redirect:/admin/model";
+	}
 
 	// 공통 처리 부분
 	private void commonProcess(String code, Model model) {

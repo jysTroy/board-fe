@@ -34,7 +34,7 @@ public class ModelViewController {
 	@GetMapping
 	public String list(@ModelAttribute ModelSearch search, Model model) {
 
-		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search);
+		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search, true);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
