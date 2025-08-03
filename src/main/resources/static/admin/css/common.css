@@ -204,6 +204,23 @@ aside a.on {
   background: #f9f9f9;
 }
 
+.table-rows td.image-cell {
+    width: 80px;
+    height: 80px;
+    padding: 0 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-rows td.image-cell img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    display: block !important;
+    margin: 0 auto;
+    border: none !important;
+}
+
 /* ---------- 버튼 ---------- */
 .btn {
   display: inline-block;
