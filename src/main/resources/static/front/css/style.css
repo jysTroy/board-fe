@@ -53,6 +53,7 @@ h1.main-title {
 
 .layout-width {
     max-width: 1170px;
+    min-width: 1024px;
     margin: 0 auto;
     padding: 0;
 }
@@ -64,15 +65,15 @@ h1.main-title {
 /* ---------- 헤더 영역 S ---------- */
 
 header {
-    border-bottom: 1px solid #f0f0f0;
+
 }
 
 .site-header {
-  border-bottom: 1px solid #1A8CDD;
+  border-bottom: 1px solid #D3D3D3;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 18px 8px 30px
+  padding: 10px 0 10px 0
 }
 
 .logo-box{
@@ -86,7 +87,7 @@ header {
 
 header .site-logo {
     display: block;
-    width: 60px;
+    width: 150px;
     margin: 0px;
     font-size: 20px;
     font-weight: bold;
@@ -146,11 +147,11 @@ header nav > div {
 }
 header nav a {
     line-height: 52px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     padding: 0 12px;
     color: #000;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 header nav a:hover {
@@ -297,6 +298,9 @@ footer-title {
 }
 
 header .profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     border-radius: 50%; /* 프로필을 원형으로 */
     background-color: #f0f0f0; /* 배경으로 구분 */
@@ -304,19 +308,32 @@ header .profile-image {
 
 /* ---------- 프로필 영역 ---------- E */
 
-/* ---------- 배너 영역 ---------- S */
 
-.banner-slider .swiper-slide img {
- width: 100%;
- height: 300px;
- object-fit: cover;
+/*  사이드 메뉴 영역 S  */
+aside.main-menu {
+    position: absolute;
+    top: 90px;
+    left: calc(50% - 830px);
+    width: 230px;
+    min-height: 500px;
+    border: 1px solid #000;
+    z-index: 10;
+    transition: all 0.5s;
 }
 
-.banner-slider .swiper-button-next,
-.banner-slider .swiper-button-prev {
- color: #fff;
- top: 50%;
- transform: translateY(-50%);
+aside.main.menu > ul > li .sub-menus {
+    display: none;
 }
 
-/* ---------- 배너 영역 ---------- E */
+aside.main.menu > ul > li.on .sub-menus {
+    display: block;
+}
+
+.main-menus .sub-menu-items {
+    display: none;
+}
+
+.main-menus sub-menus li.on .sub-menu-items {
+    display: block;
+}
+/*  사이드 메뉴 영역 E  */

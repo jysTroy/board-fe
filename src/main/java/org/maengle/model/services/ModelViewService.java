@@ -136,10 +136,11 @@ public class ModelViewService {
 		return new ListData<>(items, pagination);
 	}
 
+
 	/**
 	 * 분류 목록
 	 * 키 : 대분류
-	 * 값 (List<String>) : 하위 분류
+	 * 값(List<String>) : 하위 분류
 	 *
 	 * @return
 	 */

@@ -30,6 +30,10 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
     <script th:src="@{/common/js/modal.js?v={v}(v=${@utils.version()})}"></script>
+    <script th:unless="${param.popup == null || !param.popup}" th:src="@{/common/js/popup.js?v={v}(v=${@utils.version()})}"></script>
+
+    <script th:src="@{/front/js/main/common.js}"></script>
+
     <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
     <th:block layout:fragment="addCommonScript"></th:block>
 
@@ -44,6 +48,7 @@
     <th:block th:if="${param.popup == null || !param.popup}">
         <header th:replace="~{front/outlines/_header::common}"></header>
     </th:block>
+
     <th:block th:if="${param.popup == null || !param.popup}">
         <aside th:replace="~{front/outlines/_side::common}"></aside>
     </th:block>

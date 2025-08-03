@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="skin">
-
+    <nav th:replace="~{front/board/skins/default/_category::skin}"></nav>
     <ul class="items">
-        <li th:if="${items == null || items.isEmpty()}" class="no-data" th:text="#{조회된_게시글이_없습니다}"></li>
-        <li th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
-            <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="subject">
-                <th:block th:text="*{subject}"></th:block>
-            </a>
-            <span class="post-info">
-                <span class="user-info">
-                    <th:block th:text="*{poster}"></th:block>
+        <th:block th:if="*{deletedAt == null}">
+            <li th:if="${items == null || items.isEmpty()}" class="no-data" th:text="#{조회된_게시글이_없습니다}"></li>
+            <li th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+                <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="subject">
+                    <span class="subject" th:text="*{subject}"></span>
+                    <span th:if="*{commentCount > 0}" th:text="*{#strings.concat('(', commentCount + ')')}"></span>
+                </a>
+                <span class="post-info">
+                    <span class="user-info">
+                        <th:block th:text="*{poster}"></th:block>
+                    </span>
+                    <span class="date-info" th:text="*{#temporals.format(createdAt, 'YYYY.MM.dd HH:mm')}"></span>
+                    <span class="view-count" th:if="*{viewCount > 0}" th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></span>
                 </span>
-                <span class="date-info" th:text="*{#temporals.format(createdAt, 'YYYY.MM.dd HH:mm')}"></span>
-            </span>
+        </th:block>
+        <th:block th:if="*{deletedAt != null}">
+            <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="subject" th:text="#{삭제된_게시글}"></a>
+        </th:block>
         </li>
     </ul>
-    <form class="frm-search" name="frmSearch" method="GET" th:action="@{/board/list/{bid}(bid=${board.bid})}" autocomplete="off" th:object="${boardSearch}">
+    <!-- if문 추가됨 -->
+    <form th:if="${board != null}" class="frm-search" name="frmSearch" method="GET" th:action="@{/board/list/{bid}(bid=${board.bid})}" autocomplete="off" th:object="${boardSearch}">
         <select name="sopt" th:field="*{sopt}">
             <option value="ALL" th:text="#{통합검색}"></option>
             <option value="SUBJECT" th:text="#{제목}"></option>

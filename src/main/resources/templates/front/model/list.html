@@ -3,56 +3,35 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-<body>
-<section layout:fragment="content">
+<main layout:fragment="content" class="layout-width ai-model-page">
     <h1 th:text="${pageTitle}"></h1>
-<form name="ListSearch" method="get" th:action="@{/model}" th:object="${search}">
-    <table>
-        <tr>
-            <th>검색어</th>
-            <td>
-                <div>
-                    <select th:field="*{searchType}">
-                        <option value="ALL">전체</option>
-                        <option value="GENRE">장르별</option>
-                        <option value="COUNT">조회수별</option>
-                    </select>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <button type="submit">검색</button>
-</form>
-    <table>
-        <thead>
-        <tr>
-            <th>이름</th>
-            <th>카테고리</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${items}">
-            <td th:text="${item.name}">모델 이름</td>
-            <td th:text="${item.category}">카테고리</td>
-        </tr>
-        </tbody>
-    </table>
-<form name="createForm" method="post" th:action="@{/model/create}">
-    <table>
-        <tr>
-            <th>장르별</th>
-            <td><button type="submit">장르별 모델</button> </td>
-        </tr>
-        <tr>
-            <th>감정별</th>
-            <td><button type="submit">감정별 모델</button> </td>
-        </tr>
-        <tr>
-            <th>베스트 모델</th>
-            <td><button type="submit">베스트 모델</button> </td>
-        </tr>
-    </table>
-</form>
-</section>
-</body>
+
+
+    <form class="frm-search" name="frmSearch" method="GET" th:action="@{/model}" th:object="${modelSearch}" autocomplete="off">
+        <input type="hidden" name="category" th:field="*{category}">
+        <input type="hidden" name="subCategory" th:field="*{subCategory}">
+
+        <span th:text="#{키워드_검색}"></span>
+
+        <select name="sopt" th:field="*{sopt}">
+            <option value="ALL" th:text="#{통합검색}"></option>
+            <option value="NAME" th:text="#{모델명}"></option>
+            <option value="DESCRIPTION" th:text="#{모델_설명}"></option>
+        </select>
+        <input type="text" name="skey" th:field="*{skey}">
+        <button type="submit" th:text="#{검색하기}"></button>
+    </form>
+
+    <ul class="items">
+        <li th:if="${items == null || items.isEmpty()}" class="no-data" th:text="#{조회된_모델이_없습니다}"></li>
+        <li th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item modal-open" th:data-url="@{/chat?popup=true(model=*{chatbotModel})}" data-width="600" data-height="650">
+            <div class="photo" th:if="*{mainImage != null}" th:utext="*{@utils.printThumb(mainImage.seq, 150, 150)}"></div>
+            <div class="content">
+                <div class="model-name" th:text="*{name}"></div>
+                <div class="description" th:if="*{description != null}" th:utext="*{@utils.nl2br(description)}"></div>
+            </div>
+        </li>
+    </ul>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</main>
 </html>

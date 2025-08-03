@@ -42,6 +42,11 @@
   transition: border-color 0.2s;
 }
 
+.join-form input:focus{
+  border-color: #0077cc;
+    outline: none;
+}
+
 .gender-option {
   display: inline-flex;
   flex-direction: row;
@@ -72,9 +77,6 @@ input.radio-input {
     transition: background-color 0.3s;
 }
 
-.profile-image{
-    margin-bottom: 15px;
-}
 
 .terms {
     margin-bottom: 15px;
@@ -96,15 +98,15 @@ input#terms-agree {
 }
 
 .email_auth_box{
-
+    margin-bottom: 15px;
 }
 
 .email_verify{
     all: unset; /* 기본 버튼 스타일 제거 */
+    min-width: 30px;
     cursor: pointer;
     font-size: 14px;
     color: #007BFF;
-    margin-bottom: 15px;
     padding: 6px 12px;
     border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -114,6 +116,17 @@ input#terms-agree {
 .email_verify:hover {
     background-color: rgba(0, 123, 255, 0.1);
     color: #0056b3;
+}
+
+#email_message_box{
+    margin-bottom: 15px;
+}
+
+#email_input:read-only {
+  background-color: #f5f5f5;
+  color: #888;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
 }
 
 /* ---------- 회원 가입 페이지 E ---------- */
@@ -235,7 +248,126 @@ input#terms-agree {
 
 
 
+/* ---------- 비밀번호 찾기 S ---------- */
+
+.find-password-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  color: #333;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.find-password-form input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.find-password-form input:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #005fa3;
+}
+
+.pw_error{
+    color: #cc0000;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.findpw-container {
+    max-width: 480px;
+    margin: 100px auto;
+    padding: 2rem;
+    background-color: #f9f9fb;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+}
+
+.findpw-title {
+    color: #0077cc;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.findpw-message {
+    color: #444;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.findpw-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #0077cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.findpw-button:hover {
+    background-color: #005fa3;
+}
+
+/* ---------- 비밀번호 찾기 E ---------- */
+
+
+
 /* ---------- 파일 업로드 버튼 영역 S ---------- */
+
+#modal-open-btn{
+    all: unset;
+    min-width: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #007BFF;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
+#modal-open-btn:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+}
 
 .file-upload-btn {
     display: flex;

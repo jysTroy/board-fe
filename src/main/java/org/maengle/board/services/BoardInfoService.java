@@ -14,11 +14,13 @@ import org.maengle.board.exceptions.BoardDataNotFoundException;
 import org.maengle.board.repositories.BoardDataRepository;
 import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.file.services.FileInfoService;
+import org.maengle.global.libs.Utils;
 import org.maengle.global.search.ListData;
 import org.maengle.global.search.Pagination;
 import org.maengle.member.entities.Member;
 import org.maengle.member.libs.MemberUtil;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,6 +29,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Lazy
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -39,6 +42,7 @@ public class BoardInfoService {
     private final JPAQueryFactory queryFactory;
     private final MemberUtil memberUtil;
     private final ModelMapper mapper;
+    private final Utils utils;
 
     /**
      * 게시글 1개 조회
@@ -122,7 +126,7 @@ public class BoardInfoService {
         int limit = search.getLimit();
         List<String> bids = search.getBid();
         Board board = null;
-        if (bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
+        if (bids != null && bids.size() == 1) { // 게시판 아이디가 1개인 경우 게시판 설정 조회
             board = configInfoService.get(bids.getFirst());
 
             // 한 페이지당 게시글 갯수
@@ -224,6 +228,18 @@ public class BoardInfoService {
         return new ListData<>(items,pagination);
     }
 
+    // 내가 쓴 게시글 중에서 최신꺼 가져오기
+    public List<BoardData> getMyLatest(int limit) {
+        if (!memberUtil.isLogin()) return List.of();
+
+        Member member = memberUtil.getMember();
+        BoardSearch search = new BoardSearch();
+        search.setEmail(List.of(member.getEmail()));
+        search.setLimit(limit);
+
+        return getList(search).getItems();
+    }
+
     /**
      * 추가 정보 처리
      *
@@ -235,5 +251,22 @@ public class BoardInfoService {
         // 첨부된 이미지 & 파일 목록
         item.setEditorImages(fileInfoService.getList(gid, "editor"));
         item.setAttachFiles(fileInfoService.getList(gid, "attach"));
+
+        /**
+         * 내 게시글 여부, 수정 가능 여부
+         * 회원 게시글 : 작성한 회원번호와 로그인한 회원 번호가 일치
+         */
+        boolean editable = true;
+
+        Member boardMember = item.getMember(); // 게시글을 작성한 회원
+        Member member = memberUtil.getMember(); // 로그인한 회원
+
+        item.setMine(memberUtil.isLogin() && boardMember.getUserUuid().equals(member.getUserUuid())); // 로그인한 회원 정보와 게시글 작성 회원 정보가 일치
+
+        if (!memberUtil.isAdmin()) {
+            editable = item.isMine();
+        }
+
+        item.setEditable(editable);
     }
 }

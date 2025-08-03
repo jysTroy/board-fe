@@ -3,7 +3,20 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-<section layout:fragment="content">
+<section layout:fragment="content" class="myboard-container">
     <h1 class="main-title" th:text="${pageTitle}"></h1>
+
+    <form class="frm-search" name="frmSearch" method="GET" th:action="@{/mypage/board}" autocomplete="off" th:object="${boardSearch}">
+        <select name="sopt" th:field="*{sopt}">
+            <option value="ALL" th:text="#{통합검색}"></option>
+            <option value="SUBJECT" th:text="#{제목}"></option>
+            <option value="CONTENT" th:text="#{내용}"></option>
+            <option value="SUBJECT_CONTENT" th:text="#{제목_내용}"></option>
+        </select>
+        <input type="text" name="skey" th:field="*{skey}">
+        <button type="submit" th:text="#{검색하기}"></button>
+    </form>
+
+    <th:block th:replace="~{front/board/skins/default/_items::skin}"></th:block>
 </section>
 </html>

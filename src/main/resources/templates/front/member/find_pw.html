@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+    <main layout:fragment="content">
+        <div class="find-password-container">
+            <h1 th:text="#{비밀번호_찾기}" class="form-title"></h1>
+
+            <form name="frmFindPw" class="find-password-form" method="post" th:action="@{/member/find_pw}" autocomplete="off" th:object="${requestFindPw}">
+
+                <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+                <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+
+
+                <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
+                <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+
+                <div class="error global pw_error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+                <button type="submit" class="submit-btn" th:text="#{비밀번호_찾기}"></button>
+            </form>
+        </div>
+    </main>
+</html>

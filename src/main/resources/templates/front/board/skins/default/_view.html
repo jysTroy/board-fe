@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="skin" th:object="${item}">
+    <div class="board-view">
+    <div class="subject-wrap">
+        <span th:if="*{notice}" class="notice" th:text="#{공지글}"></span>
+        <span th:if="*{category != ''}" class='category' th:text="*{category}"></span>
+        <span class="subject" th:text="*{subject}"></span>
+    </div>
+
+    <div class="post-info">
+        <div class="left">
+            <span class="user-info">
+                <th:block th:text="#{작성자}"></th:block>
+                <th:block th:text="*{poster}"></th:block>
+            </span>
+            <span class="ip-addr">
+                IP: <th:block th:text="*{ip}"></th:block>
+            </span>
+        </div>
+        <div class="right">
+            <span class="view-count" th:if="*{viewCount > 0}">
+                <th:block th:text="#{조회수}"></th:block>:
+                <th:block th:text="*{viewCount > 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+            </span>
+            <span class="post-date">
+                <th:block th:text="#{작성일시}"></th:block>:
+                <th:block th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></th:block>
+            </span>
+        </div>
+    </div>
+
+    <div class="content" th:if="${item.deletedAt == null || isAdmin}">
+        <th:block th:if="*{plainText}" th:utext="*{@utils.nl2br(content)}"></th:block>
+        <th:block th:unless="*{plainText}" th:utext="*{content}"></th:block>
+    </div>
+    <div class="content" th:unless="${item.deletedAt == null || isAdmin}" th:text="#{삭제된_게시글}"></div>
+    <ul th:if="*{attachFiles != null && !attachFiles.isEmpty()}">
+        <li th:if="${item.deletedAt == null || isAdmin}" th:each="file, status : *{attachFiles}" th:object="${file}">
+            #<th:block th:text="${status.count}"></th:block>.
+            <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+        </li>
+    </ul>
+
+        <div class="links">
+            <a th:if="${board.listable}" th:href="@{/board/list/{bid}(bid=${board.bid})}" th:text="#{글목록}"></a>
+            <a th:if="${board.writeable}" th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글작성}"></a>
+            <a th:if="*{editable}" th:href="@{/board/update/{seq}(seq=*{seq})}" th:text="#{글수정}"></a>
+            <a th:if="*{editable}" th:href="@{/board/delete/{seq}(seq=*{seq})}" th:text="#{글삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+        </div>
+    </div>
+</th:block>
+</html>

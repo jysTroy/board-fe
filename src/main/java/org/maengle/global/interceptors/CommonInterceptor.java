@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.maengle.board.services.configs.BoardConfigInfoService;
 import org.maengle.member.libs.MemberUtil;
 import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 
     private final MemberUtil memberUtil;
     private final ModelViewService modelViewService;
+    private final BoardConfigInfoService boardConfigInfoService;
     private Map<String, List<String>> categories;
 
     @Override
@@ -45,6 +47,9 @@ public class CommonInterceptor implements HandlerInterceptor {
 
             // AI 모델 분류값 유지 처리
             processModelCategory(modelAndView);
+
+            // 게시판 메뉴 목록 처리
+            processBoardMenus(modelAndView);
         }
     }
 
@@ -80,5 +85,14 @@ public class CommonInterceptor implements HandlerInterceptor {
      */
     public List<String> getSubCategories(String category) {
         return categories.getOrDefault(category, List.of());
+    }
+
+    /**
+     * 게시판 목록 메뉴
+     *
+     * @param mv
+     */
+    private void processBoardMenus(ModelAndView mv) {
+        mv.addObject("boardMenus", boardConfigInfoService.getBoardList());
     }
 }

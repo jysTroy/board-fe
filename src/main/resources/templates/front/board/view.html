@@ -3,8 +3,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
-<main layout:fragment="content">
-    <th:block th:replace="~{front/board/_board_title::common}"></th:block>
 
+<th:block layout:fragment="addCss">
+    <link rel="stylesheet" th:href="@{/front/css/board/style.css}" />
+</th:block>
+
+<main layout:fragment="content" th:object="${board}" class="board-view-page">
+    <th:block th:replace="~{front/board/_board_title::common}"></th:block>
+    <th:block th:if="*{skin == 'default'}">
+        <th:block th:replace="~{front/board/skins/default/_view::skin}"></th:block>
+    </th:block>
+    <th:block th:if="*{skin == 'gallery'}">
+        <th:block th:replace="~{front/board/skins/gallery/_view::skin}"></th:block>
+    </th:block>
+
+    <th:block th:replace="~{front/board/_comment::common}"></th:block>
+
+    <th:block th:if="*{showViewList}">
+        <th:block th:replace="~{front/board/_items::common}"></th:block>
+    </th:block>
 </main>
 </html>
