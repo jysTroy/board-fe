@@ -70,6 +70,7 @@ public class CommonInterceptor implements HandlerInterceptor {
      */
     private void processModelCategory(ModelAndView mv) {
         Map<String, List<String>> data = modelViewService.getCategories();
+
         this.categories = data;
 
         List<String> categories = new ArrayList<>(data.keySet()); // 대분류

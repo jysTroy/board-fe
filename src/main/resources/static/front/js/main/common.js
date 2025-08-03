@@ -1,18 +1,18 @@
 // 슬라이드 처리용
 document.addEventListener("DOMContentLoaded", function () {
-  const swiper = new Swiper(".banners-slider", {
+  const swiper = new Swiper(".main-banner1", {
     loop: true,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false,
     },
     pagination: {
-      el: ".swiper-pagination",
+      el: ".main-banner1 .swiper-pagination",
       clickable: true,
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: ".main-banner1 .swiper-button-next",
+      prevEl: ".main-banner1 .swiper-button-prev",
     }
   });
 });
