@@ -1,7 +1,7 @@
 .chat-history {
   display: flex;
   flex-direction: column;
-  height: 300px; /* 스크롤바 확인용 */
+  height: 600px; /* 스크롤바 확인용 */
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 12px;
