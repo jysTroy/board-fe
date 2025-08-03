@@ -18,8 +18,7 @@ public class Menus {
         // 게시판 관리
         menus.put("board", List.of(
                 new Menu("list", "게시판 목록", "/admin/board"),
-                new Menu("register", "게시판 등록", "/admin/board/register"),
-                new Menu("posts", "게시글 관리", "/admin/board/posts")
+                new Menu("register", "게시판 등록", "/admin/board/register")
         ));
 
         // 배너 관리
