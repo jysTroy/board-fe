@@ -1,4 +1,6 @@
 window.addEventListener("DOMContentLoaded", function() {
+
+
     const el = document.querySelector(".file-images .remove");
     if (el) {
         el.addEventListener("click", function() {
