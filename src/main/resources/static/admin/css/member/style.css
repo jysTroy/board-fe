@@ -1,0 +1,81 @@
+/* ---------- 체크박스 ---------- */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 10px;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #1E9EFF;
+}
+
+/* ---------- 배지 (권한, 탈퇴 상태 등) ---------- */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: #e0f3ff;
+  color: #1E9EFF;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* 탈퇴 상태용 배지 */
+.badge.resigned {
+  background-color: #ffdcdc;
+  color: #e03131;
+}
+
+/* ---------- no-data ---------- */
+.no-data {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 15px;
+  color: #777;
+}
+
+/* ---------- 테이블 액션 버튼 영역 ---------- */
+.table-action {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* ---------- sbtn 버튼 ---------- */
+.sbtn {
+  padding: 10px 18px;
+  border: 2px solid #1E9EFF;
+  background: #fff;
+  color: #1E9EFF;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sbtn:hover {
+  background: #1E9EFF;
+  color: #fff;
+}
+
+/* 검정색 강조 버튼 */
+.sbtn.black {
+  background: #141414;
+  border: none;
+  color: #fff;
+}
+
+.sbtn.black:hover {
+  background: #000;
+}
+
+/* 테이블 중앙 정렬 */
+.table-rows th {
+  text-align: center;
+}

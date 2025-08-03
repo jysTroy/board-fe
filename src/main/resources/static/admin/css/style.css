@@ -307,3 +307,11 @@ textarea:focus {
 
 /* ---------- dn ---------- */
 .dn { display: none !important; }
+
+.search-option {
+    width: 100px !important;
+}
+
+.form-margin {
+    margin-bottom: 30px;
+}

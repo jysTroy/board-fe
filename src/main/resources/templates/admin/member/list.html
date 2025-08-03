@@ -5,7 +5,7 @@
 
     <section layout:fragment="content">
         <h2>회원 검색</h2>
-        <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+        <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}" class="form-margin">
             <table class="table-cols">
                 <th width="120">회원권한</th>
                 <td>
@@ -20,7 +20,7 @@
                 <tr>
                     <th>키워드 검색</th>
                     <td class="flex">
-                        <select name="sopt" th:field="*{sopt}" class="w180 mr5">
+                        <select name="sopt" th:field="*{sopt}" class="search-option">
                             <option value="ALL">통합검색</option>
                             <option value="EMAIL">이메일</option>
                             <option value="ID">아이디</option>
@@ -62,7 +62,7 @@
                     </td>
                     <td th:text="*{userUuid}" align="center"></td>
                     <td align="center">
-                        <th:block th:text="*{name}"></th:block>
+                        <th:block th:text="*{name}"></th:block><br/>
                         <div class="badge" th:text="*{#messages.msg('authority.' + authority)}"></div>
                     </td>
                     <td th:text="*{userId}" align="center"></td>
