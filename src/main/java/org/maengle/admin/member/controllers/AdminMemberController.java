@@ -68,6 +68,7 @@ public class AdminMemberController extends CommonController {
         // code가 list면 회원목록 간다는거임
         if (code.equals("list")) {
             pageTitle = "회원목록";
+            model.addAttribute("addCss", List.of("member/style"));
         }
 
         // html에 넘겨줄 값 목록이라는 소리임
