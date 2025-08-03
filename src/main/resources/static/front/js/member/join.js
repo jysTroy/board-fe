@@ -128,7 +128,7 @@ function callbackEmailVerifyCheck(data) {
         authBoxEl.innerHTML = "<span class='confirmed'>이메일 인증이 완료되었습니다.</span>";
 
     } else { // 인증 실패
-        showEmailMessage("인증코드 전송에 실패하였습니다.", true);
+        showEmailMessage("인증코드 인증에 실패하였습니다.", true);
     }
 }
 
