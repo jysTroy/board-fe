@@ -15,6 +15,10 @@ ENV NAVER_SECRET=**
 ENV MAIL_USERNAME=**
 ENV MAIL_PASSWORD=**
 
-ENTRYPOINT ["java", "-Ddb.password=${DB_PASSWORD}","-Ddb.url=${DB_URL}", "-Ddb.username=${DB_USERNAME}", "-Dfile.path=/uploads", "-Dfile.url=/uploads", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dddl.auto=${DDL}", "-Dchatbot.url=http://localhost:8000", "-Dkakao.apikey=${KAKAO_APIKEY}", "-Dnaver.apikey=${NAVER_APIKEY}", "-Dnaver.secret=${NAVER_SECRET}", "-Dmail.username=${MAIL_USERNAME}", "-Dmail.password=${MAIL_PASSWORD}", "-Dredis.host=localhost", "-Dredis.port=6379" ,"-jar", "app.jar"]
+ENV REDIS_HOST=localhost
+ENV REDIS_PORT=6379
+ENV CHATBOT_URL=http://localhost:8000
+
+ENTRYPOINT ["java", "-Ddb.password=${DB_PASSWORD}","-Ddb.url=${DB_URL}", "-Ddb.username=${DB_USERNAME}", "-Dfile.path=/uploads", "-Dfile.url=/uploads", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dddl.auto=${DDL}", "-Dchatbot.url=${CHATBOT_URL}", "-Dkakao.apikey=${KAKAO_APIKEY}", "-Dnaver.apikey=${NAVER_APIKEY}", "-Dnaver.secret=${NAVER_SECRET}", "-Dmail.username=${MAIL_USERNAME}", "-Dmail.password=${MAIL_PASSWORD}", "-Dredis.host=${REDIS_HOST}", "-Dredis.port=${REDIS_PORT}" ,"-jar", "app.jar"]
 
 EXPOSE ${PORT}
