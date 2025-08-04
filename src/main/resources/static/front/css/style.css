@@ -387,59 +387,6 @@ main-menu .sub-menus li.on .sub-menu-items {
 }
 /* ---------- 사이드 메뉴 영역 E ---------- */
 
-/* all.html 영역  S */
-
-.board-all-title {
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-}
-
-.board-list-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px 50px;
-}
-
-.board-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-}
-
-.board-card {
-    flex: 1 1 200px;
-    max-width: 250px;
-    border: 2px solid #2196f3;
-    border-radius: 16px;
-    background-color: #e3f2fd;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.board-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.2);
-}
-
-.board-link {
-    display: block;
-    padding: 30px 15px;
-    color: #0d47a1;
-    text-decoration: none;
-}
-
-.card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #0d47a1;
-}
-
-/* all.html 영역  E */
 
 
 /* 페이지네이션 스타일  S */
