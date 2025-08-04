@@ -371,8 +371,8 @@ input#terms-agree {
 
 .file-upload-btn {
     display: flex;
-    width: 200px;
-    height: 90px;
+    width: 180px;
+    height: 180px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -411,7 +411,7 @@ input#terms-agree {
 }
 
 /* 삭제 버튼 - 이미지 오른쪽 위에 위치 */
-.file-images  {
+.file-images .remove  {
     position: absolute;
     top: 5px;
     right: 5px;
