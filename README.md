@@ -19,10 +19,77 @@
 ### 🟨 김문수
 
 ### ➡️ 기능 설명
+- 보안 공통 설정 : 회원 별 권한에 따른 접근 가능한 페이지 구분, 로그인 시 검증, 로그 아웃 등
+- 멤버 도메인 
+
+    - 회원 가입
+      
+      회원 가입 시 필요한 정보를 폼으로 입력받음  
+      입력한 정보 검증 성공 시 DB에반영 (실패 시 실패 사유 표기)  
+      REST API를 활용한 소셜 연동 회원 가입(KAKAO, NAVER)
+
+    - 이메일 인증
+      
+      회원 가입 및 계정 찾기에서 이메일을 통한 계정 관리 서비스  
+      회원 가입 시 실제로 존재하는 이메일을 입력했는지 인증 메일을 통해 검증  
+      계정 분실 시 이메일을 통해 아이디 검색, 비밀번호는 초기화하여 새로 발급한 비밀번호를 이메일로 전송  
+      
+    
+    - 로그인
+      
+      DB내 회원 여부를 확인하고 로그인 처리  
+      일반적인 회원 가입 시 userId(로그인 시 사용)로 구분  
+      소셜 연동 회원의 경우 소셜 계정 정보를 social_token(연동 가입시 부여)로 구분
+
 
 ### ➡️ 코드 리뷰
 
+- `SecurityConfig` : 로그인, 로그 아웃, 접근 권한 설정, 비밀 번호 BCrypt를 사용하여 해시화  
+- `MessageSourceConfig` : 메시지 처리를 위한 공통 설정, 메시지 유지 보수 관리에 용이하기에 채택  
+- `InterceptorConfig` : CommonInterceptor을 선언하여 소셜 토큰, 로그인 여부, 권한 등의 정보를 반영  
+
+- `MemberController` : 사용자 요청 시 멤버 도메인 내 매핑을 일괄 담당  
+  - 일반 회원 가입 및 로그인 절차 리뷰 참고 자료  
+    https://gitmind.com/app/docs/fv08jdn7
+- `Validator` : 회원 가입, 로그인, 계정 찾기 시 검증 절차
+
 ### ✅ 구현 이미지
+
+☑️ 회원 가입 폼  
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%ED%8F%BC.png" alt="이미지1" width="200">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%ED%8F%BC_%EA%B2%80%EC%A6%9D.png" alt="이미지2" width="200">
+</div>  
+<br/>
+☑️ 이메일 인증  
+<br/>
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EC%9D%B4%EB%A9%94%EC%9D%BC_%EC%9D%B8%EC%A6%9D%EB%B2%88%ED%98%B8_%EB%B0%9C%EC%86%A1.png" alt="이미지1" width="300">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EC%9D%B4%EB%A9%94%EC%9D%BC_%EC%9D%B8%EC%A6%9D%EC%99%84%EB%A3%8C.png" alt="이미지2" width="300">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EC%9D%B8%EC%A6%9D%EB%A9%94%EC%9D%BC.png" alt="이미지3" width="300">
+</div>
+<br/>  
+☑️ 로그인  
+<br/>  
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%8F%BC.png" alt="이미지1" width="200">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EB%A1%9C%EA%B7%B8%EC%9D%B8_%EA%B2%80%EC%A6%9D.png" alt="이미지2" width="200">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/REST_API%EC%97%B0%EB%8F%99_%EC%B9%B4%EC%B9%B4%EC%98%A4.png" alt="이미지3" width="200">
+</div>
+<br/>
+☑️ 아이디 비밀번호 찾기  
+<br/>  
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EC%95%84%EC%9D%B4%EB%94%94_%EC%B0%BE%EA%B8%B0.png" alt="이미지1" width="300">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EC%95%84%EC%9D%B4%EB%94%94_%EC%B0%BE%EA%B8%B0_%EC%99%84%EB%A3%8C.png" alt="이미지2" width="300">
+</div>
+<br/>
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8_%EC%B0%BE%EA%B8%B0.png" alt="이미지1" width="300">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8_%EC%B0%BE%EA%B8%B0_%EC%99%84%EB%A3%8C.png" alt="이미지2" width="300">
+  <img src="https://github.com/Team2-chatBoard/chatboard/blob/master/img/kms/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8_%EC%B4%88%EA%B8%B0%ED%99%94_%EC%9D%B4%EB%A9%94%EC%9D%BC.png" alt="이미지3" width="300">
+</div>
+<br/>
 
 ---
 
@@ -167,6 +234,58 @@
 ![구현화면5](img/jys/5.png)
 ![구현화면6](img/jys/6.png)
 ![구현화면7](img/jys/7.png)
+
+---
+
+### 🟨 이소민
+
+### ➡️ 기능 설명
+## 1. 템플릿 및 레이아웃
+
+- 기본 레이아웃(index.html) : header, side, footer 포함
+- 콘텐츠 영역(main.html) : 메인 배너 포함
+- 공통 영역 분리(outlines)로 재사용성 강화
+- `common.js`에서 사이드 메뉴 스크롤 시 위치 조정 처리
+
+## 2. 메인 배너 구성
+
+- 그룹 코드(`mainBanner1`)와 관리자 그룹 코드 일치 필요
+- 컨트롤러에서 배너 리스트 모델에 담아 뷰에 전달
+- Thymeleaf `th:each`로 반복 출력
+
+## 3. Swiper 슬라이드
+
+- DOMContentLoaded 후 초기화
+- loop + autoplay 설정으로 부드러운 슬라이드 구현
+
+## 4. 백엔드 연동
+
+- `MainController`에서 배너 조회 후 모델 전달
+- `BannerInfoService`에서 그룹 코드로 배너 조회
+
+## 5. 관리자 배너 관리
+
+- 배너 등록/수정 폼과 목록 페이지 제공
+- 가중치, 사용 여부, 링크 등 속성 관리 가능
+
+## 6. 주요 클래스 및 메서드
+
+- `BannerInfoService` : 배너 조회 및 저장
+- `MainController` : 메인 페이지 배너 전달
+- `BannerController` : 관리자 배너 화면 및 저장 처리
+
+## 7. 썸네일 출력 유틸
+
+- 파일 시퀀스와 크기로 이미지 태그 생성
+- URL 기반 이미지 리사이징 처리
+
+
+### ✅ 구현 이미지
+
+![구현화면1](img/lsm/1.png)
+![구현화면2](img/lsm/4.png)
+![구현화면3](img/lsm/5.png)
+![구현화면4](img/lsm/6.png)
 
 ---
 
