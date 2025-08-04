@@ -440,3 +440,60 @@ main-menu .sub-menus li.on .sub-menu-items {
 }
 
 /* all.html 영역  E */
+
+
+/* 페이지네이션 스타일  S */
+.myboard-container .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 6px;
+}
+
+.pagination a {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  color: #007bff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination a.on {
+  background-color: #007bff;
+  color: white;
+}
+/* 페이지네이션 스타일  E */
+
+/* ---------- 프로필 이미지가 없을 때 대체 링크 스타일 ---------- S */
+
+.menu-profile {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    color: #888;
+    text-align: center;
+    line-height: 180px;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.menu-profile:hover {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: #eef6ff;
+    cursor: pointer;
+}
+
+/* ---------- 프로필 이미지가 없을 때 대체 링크 스타일 ---------- E */
