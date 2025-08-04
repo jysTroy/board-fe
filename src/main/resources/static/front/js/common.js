@@ -1,21 +1,28 @@
 window.addEventListener("DOMContentLoaded", function() {
-    const mainMenus = document.querySelectorAll(".main-menu .menu");
     const mainLiEls = document.querySelectorAll(".main-menu .menus > li");
-    mainMenus.forEach(el => {
-        el.addEventListener("click", function() {
-            mainLiEls.forEach(li => li.classList.remove("on"));
 
-            this.parentElement.classList.add("on");
-        });
+    mainLiEls.forEach(li => {
+        const mainMenu = li.querySelector(".menu");
+        if (mainMenu) {
+            mainMenu.addEventListener("click", function(e) {
+                mainLiEls.forEach(otherLi => {
+                    if (otherLi !== li) {
+                        otherLi.classList.remove("on");
+                    }
+                });
+
+                li.classList.toggle("on");
+            });
+        }
     });
 
     const subMenus = document.querySelectorAll(".main-menu .sub-menu");
     subMenus.forEach(el => {
-        el.addEventListener("click", function() {
-            const liEls = this.parentElement.parentElement.children;
-            for(const el of liEls) {
-                el.classList.remove("on");
-            }
+        el.addEventListener("click", function(e) {
+            e.stopPropagation();
+            const liEls = this.closest("ul").children;
+
+            Array.from(liEls).forEach(li => li.classList.remove("on"));
 
             this.parentElement.classList.add("on");
         });
@@ -42,5 +49,19 @@ function floatSideMenu() {
 
         el.style.marginTop = span + "px";
     });
-
 }
+
+window.addEventListener("DOMContentLoaded", function() {
+    const toggles = document.querySelectorAll(".toggle-sub-menu");
+    toggles.forEach(function(toggle) {
+        toggle.addEventListener("click", function(e) {
+            const subMenu = this.nextElementSibling;
+            if (subMenu) {
+                subMenu.style.display =
+                    (subMenu.style.display === "none" || subMenu.style.display === "")
+                        ? "block"
+                        : "none";
+            }
+        });
+    });
+});

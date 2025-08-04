@@ -46,7 +46,7 @@ textarea:focus {
     }
 
 select, input[type="password"] {
-    width: 100%;
+    width: 30%;
     padding: 10px 12px;
     border: 1px solid #66b2ff;
     border-radius: 8px;
@@ -59,22 +59,7 @@ select:focus, input:focus {
     border-color: #0077cc;
     background-color: #e6f0ff;
 }
-
-/* 버튼 */
-button, .btn {
-    background-color: #f0f8ff;
-    color: #0077cc;
-    padding: 10px 20px;
-    font-size: 14px;
-    border: 1px solid #66b2ff;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover, .btn:hover {
-    background-color: #e0f0ff;
-}
+``
 /* 체크박스 + 라벨 */
 input[type="checkbox"] {
     margin-right: 6px;
@@ -164,7 +149,6 @@ label {
     margin: 30px auto;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     padding: 0 10px;
     box-sizing: border-box;
 }
@@ -376,30 +360,64 @@ label {
     background-color: #156fcd;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 6px;
+/* all.html 영역  S */
+
+.board-all-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px;
+    color: #333;
 }
 
-.pagination a {
-  padding: 8px 14px;
-  border: 1px solid #ccc;
-  color: #007bff;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-  margin-bottom: 20px;
+.board-list-container {
+    max-width: 960px;
+    margin: 0px auto;
+    padding: 0 20px 50px;
 }
 
-.pagination a:hover {
-  background-color: #007bff;
-  color: white;
+.board-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
 }
 
-.pagination a.on {
-  background-color: #007bff;
-  color: white;
+.board-card {
+    flex: 1 1 200px;
+    max-width: 250px;
+    border: 2px solid #2196f3;
+    border-radius: 16px;
+    background-color: #e3f2fd;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.board-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.2);
+}
+
+.board-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding: 0 15px;
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0d47a1;
+    text-align: center;
+}
+
+/* all.html 영역  E */

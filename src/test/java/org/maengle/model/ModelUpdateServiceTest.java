@@ -1,7 +1,22 @@
 package org.maengle.model;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.junit.jupiter.api.Test;
+import org.maengle.admin.model.controllers.RequestModel;
+import org.maengle.global.libs.Utils;
+import org.maengle.model.constants.ModelStatus;
+import org.maengle.model.entities.Model;
+import org.maengle.model.repositories.ModelRepository;
+import org.maengle.model.services.ModelUpdateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @Transactional

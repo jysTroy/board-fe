@@ -190,7 +190,11 @@ main > section {
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   width: 100%;
-  max-width: 460px;
+}
+
+.mypage-container .mypage-form {
+  max-width: 50%;
+  margin: 0 0 0 100px;
 }
 
 .mypage-form dl {
@@ -318,7 +322,7 @@ aside.my-menu .profile-image {
 }
 
 /* 프로필 이미지가 있을 때 스타일 */
-aside.my-menu .profile-image a > span > img {
+aside.my-menu .profile-image img {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -328,34 +332,13 @@ aside.my-menu .profile-image a > span > img {
     cursor: pointer;
 }
 
-aside.my-menu .profile-image a:hover > span > img {
+aside.my-menu .profile-image:hover img {
     box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
     transform: scale(1.02);
 }
 
-/* 프로필 이미지가 없을 때 대체 링크 스타일 */
-aside.my-menu .menu-profile {
-    display: block;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-    border: 2px dashed #bbb;
-    border-radius: 12px;
-    color: #888;
-    text-align: center;
-    line-height: 180px;
-    font-size: 14px;
-    text-decoration: none;
-    background-color: #fafafa;
-    transition: all 0.3s ease;
-}
 
-aside.my-menu .menu-profile:hover {
-    border-color: #007bff;
-    color: #007bff;
-    background-color: #eef6ff;
-    cursor: pointer;
-}
+
 
 /* ------- 사이드 프로필 ------- E */
 
@@ -457,34 +440,6 @@ aside.my-menu .menu-profile:hover {
   color: #999;
 }
 
-
-.myboard-container .pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 6px;
-}
-
-.myboard-container .pagination a {
-  padding: 8px 14px;
-  border: 1px solid #ccc;
-  color: #007bff;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-}
-
-.myboard-container .pagination a:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-.myboard-container .pagination a.on {
-  background-color: #007bff;
-  color: white;
-}
-
 /* ---------- 마이페이지 내 게시글 스타일 ---------- */
 
 /* 삭제 버튼 처리 */
@@ -503,13 +458,13 @@ aside.my-menu .menu-profile:hover {
   z-index: 11;
 }
 
-.file-images:hover .remove {
+.file-images .remove:hover  {
     background-color: rgba(255, 0, 0, 1);
 }
 
 /* 탈퇴 폼 전체 스타일 */
 .resign-form {
-  max-width: 460px;
+  max-width: 50%;
   margin: 50px auto;
   padding: 30px;
   background: #fff5f5;
@@ -546,3 +501,4 @@ aside.my-menu .menu-profile:hover {
 }
 
 /* 개인 회원 탈퇴 스타일 */
+

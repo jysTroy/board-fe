@@ -44,7 +44,7 @@ window.addEventListener("DOMContentLoaded", function() {
             let emotionHtml = "";
             if (emotion && emotion.trim() !== "") {
                 const emoticon = convertEmotionToEmoticon(emotion.trim());
-                emotionHtml = `감정: ${emoticon}`;
+                emotionHtml = `${emoticon}`;
             }
 
             let html = tpl

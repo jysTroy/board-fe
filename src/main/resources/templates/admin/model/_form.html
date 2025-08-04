@@ -3,9 +3,8 @@
 <th:block th:fragment="common" th:object="${requestModel}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-    <h2>모델 기본정보</h2>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="120">모델명</th>
             <td>
                 <input type="text" name="name" th:field="*{name}">
@@ -51,23 +50,33 @@
 
     <h2>모델 이미지</h2>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="120">메인 이미지</th>
             <td>
+                <!-- 메인 이미지가 없을 경우 -->
+                <button type="button" th:text="#{이미지_선택}" th:if="*{mainImage == null} or *{mainImage.seq == null}"
+                        class="file-upload-btn submit-btn sbtn"
+                        th:data-gid="*{gid}"
+                        data-location='main'
+                        data-single="true"
+                        data-image-only="true"></button>
+
+                <!-- 메인 이미지가 있을 경우 -->
                 <div class="main-image">
-                    <div th:if="*{mainImage != null}" class="file-images" th:id="*{'file-' + mainImage.seq}">
-                        <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{mainImage.seq})}" class="image show-image" th:data-seq="*{mainImage.seq}">
+                    <div  th:unless="*{mainImage == null} or *{mainImage.seq == null}" class="file-images" th:id="*{'file-' + mainImage.seq}">
+                        <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{mainImage.seq})}"
+                             class="image show-image"
+                             th:data-seq="*{mainImage.seq}">
                         <button type="button" class="remove" th:data-seq="*{mainImage.seq}">삭제</button>
                     </div>
                 </div>
-                <button type="button" th:text="#{이미지_선택}" class="file-upload-btn sbtn" th:data-gid="*{gid}" data-location='main' data-single="true" data-image-only="true"></button>
             </td>
         </tr>
     </table>
 
     <h2>모델 상세설명</h2>
     <table class="table-cols mb30">
-        <tr>
+        <tr class="add-top-line">
             <th width="120">모델 설명</th>
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>

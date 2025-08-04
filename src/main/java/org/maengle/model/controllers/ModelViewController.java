@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModelViewController {
 	private final Utils utils;
-	private final ModelViewService modelInfoService;
+	private final ModelViewService modelViewService;
 
 
 	@ModelAttribute("menuCode")
@@ -30,16 +30,16 @@ public class ModelViewController {
 		return List.of("model/style");
 	}
 
-	// 상품 목록
+	// 모델 목록
 	@GetMapping
 	public String list(@ModelAttribute ModelSearch search, Model model) {
 
-		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search, true);
+		ListData<org.maengle.model.entities.Model> data = modelViewService.getModel(search, true);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
 		model.addAttribute("pageTitle", utils.getMessage("모델_목록"));
-		model.addAttribute("subCode", search.getSubCategory());
+		model.addAttribute("subCode", search.getCategory());
 
 		return "front/model/list";
 	}

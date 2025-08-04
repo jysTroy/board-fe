@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", function() {
     const emailConfirmEl = document.getElementById("email_confirm"); // 확인 버튼
     const emailReVerifyEl = document.getElementById("email_re_verify"); // 재전송 버튼
     const authNumEl = document.getElementById("auth_num"); // 인증코드
+    const emailInputField = document.getElementById("email_input")
 
     emailReVerifyEl.style.display = "none";
 
@@ -35,25 +36,34 @@ window.addEventListener("DOMContentLoaded", function() {
                         /* 인증코드 재전송 처리 S */
                         if (emailReVerifyEl) {
                             emailReVerifyEl.addEventListener("click", function() {
+                                const email = frmJoin.email.value.trim();
                                 sendEmailVerify(email);
                             });
                         }
 
                         /* 인증코드 재전송 처리 E */
 
-                        /* 인증번호 확인 처리 S */
+                        /* 인증번호 및 이메일 확인 처리 S */
                         if (emailConfirmEl && authNumEl) {
                             emailConfirmEl.addEventListener("click", function() {
                             const authNum = authNumEl.value.trim();
+                            const verifyEmail = frmJoin.email.value.trim();
+
                              if (!authNum) {
                                 alert("인증번호를 입력하세요.")
                                 authNumEl.focus();
                                 return;
                              }
 
+                             if (email != verifyEmail){
+                                alert("이메일을 확인하세요.")
+                                emailInputField.focus();
+                                return;
+                             }
+
                               // 인증코드 확인 요청
                               const { sendEmailVerifyCheck } = commonLib;
-                              sendEmailVerifyCheck(authNum);
+                              sendEmailVerifyCheck(authNum);``
 
                            });
                         }
@@ -128,7 +138,7 @@ function callbackEmailVerifyCheck(data) {
         authBoxEl.innerHTML = "<span class='confirmed'>이메일 인증이 완료되었습니다.</span>";
 
     } else { // 인증 실패
-        showEmailMessage("인증코드 전송에 실패하였습니다.", true);
+        showEmailMessage("인증코드 인증에 실패하였습니다.", true);
     }
 }
 

@@ -11,7 +11,7 @@ import org.maengle.global.annotations.ApplyCommonController;
 import org.maengle.global.search.ListData;
 import org.maengle.model.constants.ModelStatus;
 import org.maengle.model.controllers.ModelSearch;
-import org.maengle.model.repositories.ModelRepository;
+import org.maengle.model.services.ModelDeleteService;
 import org.maengle.model.services.ModelUpdateService;
 import org.maengle.model.services.ModelViewService;
 import org.springframework.stereotype.Controller;
@@ -31,11 +31,9 @@ import java.util.UUID;
 public class ModelController extends CommonController {
 
 	private final ModelUpdateService modelUpdateService;
-	private final ModelViewService modelInfoService;
+	private final ModelViewService modelViewService;
+	private final ModelDeleteService modelDeleteService;
 	private final FileInfoService fileInfoService;
-	private final ModelRepository modelRepository;
-
-
 
 	@Override
 	@ModelAttribute("mainCode")
@@ -63,7 +61,7 @@ public class ModelController extends CommonController {
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
 
-		ListData<org.maengle.model.entities.Model> data = modelInfoService.getModel(search, true);
+		ListData<org.maengle.model.entities.Model> data = modelViewService.getModel(search, true);
 		model.addAttribute("items", data.getItems());
 		model.addAttribute("pagination", data.getPagination());
 
@@ -84,7 +82,7 @@ public class ModelController extends CommonController {
 	public String update(@PathVariable("seq") Long seq, Model model) {
 		commonProcess("update", model);
 
-		RequestModel form = modelInfoService.getForm(seq);
+		RequestModel form = modelViewService.getForm(seq);
 		model.addAttribute("requestModel", form);
 
 		return "admin/model/update";
@@ -109,12 +107,14 @@ public class ModelController extends CommonController {
 		return "redirect:/admin/model";
 	}
 
-	@PostMapping("/delete/{seq}")
-	public String deleteModel(@PathVariable Long seq, @RequestParam String gid, Model model) {
-		commonProcess("delete", model);
+	@DeleteMapping
+	public String deleteModel(@RequestParam(name = "idx", required = false)List<Integer> idexes, Model model) {
 
-		modelUpdateService.deleteModel(seq, gid);
-		return "redirect:/admin/model";
+		modelDeleteService.process(idexes);
+
+		// 삭제 처리가 완료되면 부모창을 새로고침
+		model.addAttribute("script", "parent.location.reload();");
+		return "common/_execute_script";
 	}
 
 	// 공통 처리 부분
