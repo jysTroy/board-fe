@@ -348,7 +348,7 @@ main-menu .sub-menus li.on .sub-menu-items {
 
 .menus .modal-open,
 .menus .board-link,
-.model-link {
+.menus li > .menu {
     display: block;
     background-color: transparent;
     color: black;
@@ -362,24 +362,24 @@ main-menu .sub-menus li.on .sub-menu-items {
 
 .menus .modal-open:hover,
 .menus .board-link:hover,
-.model-link:hover {
+.menus li > .menu:hover {
     background-color: #2FA1FC;
     color: white;
 }
 
 /* 대분류 */
-.sub-menu {
+.sub-menus {
   padding-left: 20px;
 }
 
-.sub-menu::before {
+.sub-menus::before {
   content: "▸ ";
   margin-left: 5px;
-  color: #black;
+  color: black;
 }
 
 /* 소분류 */
-.sub-menu-items a {
+.sub-menus-items a {
   display: block;
   padding-left: 40px;
   margin-bottom: 10px;
