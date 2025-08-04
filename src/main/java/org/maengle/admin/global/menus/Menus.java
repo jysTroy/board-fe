@@ -23,7 +23,7 @@ public class Menus {
 
         // 배너 관리
         menus.put("banner", Arrays.asList(
-                new Menu("group", "배너목록", "/admin/banner"),
+                new Menu("group", "배너관리", "/admin/banner"),
                 new Menu("add", "배너등록", "/admin/banner/add")
         ));
 
