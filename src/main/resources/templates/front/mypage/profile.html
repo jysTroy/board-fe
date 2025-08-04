@@ -36,13 +36,7 @@
         </dl>
         <dl>
             <dt th:text="#{성별}"></dt>
-            <dd>
-                <span th:each="gen : ${genders}" >
-                    <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}" class="radio-input">
-                    <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
-                </span>
-                <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
-            </dd>
+            <dd th:text="${#messages.msg(loggedMember.gender.name())}" class="mypage-gender"></dd>
         </dl>
         <dl>
             <dt th:text="#{휴대전화번호}"></dt>
