@@ -3,7 +3,6 @@
 <th:block th:fragment="common" th:object="${requestModel}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-    <h2>모델 기본정보</h2>
     <table class="table-cols mb30">
         <tr>
             <th width="120">모델명</th>
