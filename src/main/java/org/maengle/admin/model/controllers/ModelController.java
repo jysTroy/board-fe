@@ -58,7 +58,7 @@ public class ModelController extends CommonController {
 		return ChatbotModel.values();
 	}
 
-	// 상품 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
+	// 모델 목록 조회, 여기 Model model은 다른거 컨트롤 좌클릭 해보기
 	@GetMapping({"", "/list"})
 	public String list(@ModelAttribute("search") ModelSearch search, Model model) {
 		commonProcess("list", model);
