@@ -42,6 +42,10 @@ function fileUploadCallback(items) {
             fileManager.delete(seq);
         }
     });
+
+    const uploadBtn = document.querySelector(".file-upload-btn");
+    uploadBtn.classList.remove("dn");
+    uploadBtn.classList.add("dn");
 }
 
 /**
@@ -51,4 +55,7 @@ function fileUploadCallback(items) {
 function fileDeleteCallback(item) {
    const targetEl = document.querySelector(".main-image");
    targetEl.innerHTML = "";
+
+   const uploadBtn = document.querySelector(".file-upload-btn");
+   uploadBtn.classList.remove("dn");
 }
