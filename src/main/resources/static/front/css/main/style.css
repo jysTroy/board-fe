@@ -23,22 +23,4 @@
 
 /* ---------- 배너 영역 ---------- E */
 
-/* ---------- 프로필 이미지가 있을 때 스타일 ---------- S */
-
-aside.main-menu a.profile-image > img {
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-aside.main-menu a.profile-image:hover > img {
-    box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
-    transform: scale(1.02);
-}
-
-/* ---------- 프로필 이미지가 있을 때 스타일 ---------- E */
 

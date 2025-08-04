@@ -322,7 +322,7 @@ aside.my-menu .profile-image {
 }
 
 /* 프로필 이미지가 있을 때 스타일 */
-aside.my-menu .profile-image a > span > img {
+aside.my-menu .profile-image img {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -332,7 +332,7 @@ aside.my-menu .profile-image a > span > img {
     cursor: pointer;
 }
 
-aside.my-menu .profile-image a:hover > span > img {
+aside.my-menu .profile-image:hover img {
     box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
     transform: scale(1.02);
 }
