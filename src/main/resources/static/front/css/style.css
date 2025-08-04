@@ -363,24 +363,58 @@ main-menu .sub-menus li.on .sub-menu-items {
     color: white;
 }
 
-/* 대분류 */
+
 .sub-menus {
   padding-left: 20px;
 }
 
-.sub-menus::before {
-  content: "▸ ";
-  margin-left: 5px;
-  color: black;
+.model-all-link {
+  color: #1E90FF;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
 }
 
-/* 소분류 */
-.sub-menus-items a {
-  display: block;
-  padding-left: 40px;
-  margin-bottom: 10px;
-  color: #666;
+.sub-menu.toggle-sub-menu {
+  color: #333333;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
+
+.sub-menu.toggle-sub-menu:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+  .sub-menu-items {
+    display: none;
+  }
+
+  .sub-menus .on .sub-menu-items {
+    display: block;
+  }
+
+ .sub-menu-items a {
+   color: #777777;
+   font-size: 13px;
+   padding-left: 12px;
+   display: block;
+   transition: color 0.2s ease;
+ }
+
+ .sub-menu-items a:hover {
+   color: #333333;
+   font-weight: 500;
+ }
+
+
 /* ---------- 사이드 메뉴 영역 E ---------- */
 
 

@@ -1,9 +1,5 @@
 /* ---------- 배너 영역 ---------- S */
 
-.mainpage-height{
-    min-height: 1000px;
-}
-
 /* 슬라이드 이미지 크기 지정 */
 .swiper.main-banner1.banners .swiper-slide img {
     width: 100%;
@@ -22,5 +18,39 @@
 }
 
 /* ---------- 배너 영역 ---------- E */
+
+
+
+.program-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 80px;
+  gap: 60px;
+  background-color: #a8e2ff;
+  color: #36354f;
+}
+
+.program-title h1 {
+  font-size: 40px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.program-text {
+  max-width: 600px;
+}
+
+.program-text h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.program-text p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
 
 
