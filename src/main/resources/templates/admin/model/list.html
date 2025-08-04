@@ -4,9 +4,9 @@
       layout:decorate="~{admin/layouts/index}">
 
 <section layout:fragment="content">
-    <h1 th:text="${pageTitle}"></h1>
+    <h2>모델 검색</h2>
 
-    <form name="frmSearch" method="GET" th:action="@{/admin/model}" autocomplete="off" th:object="${search}">
+    <form name="frmSearch" method="GET" class="form-margin" th:action="@{/admin/model}" autocomplete="off" th:object="${search}">
         <table class="table-cols">
             <tr>
                 <th width="150">키워드 검색</th>
@@ -77,7 +77,7 @@
 
                     <td>
                         <div>
-                            <a th:href="@{/admin/model/update/{seq}(seq=*{seq})}" class="sbtn edit-btn">수정하기</a>
+                            <a th:href="@{/admin/model/update/{seq}(seq=*{seq})}" class="sbtn btn black">수정하기</a>
                         </div>
                     </td>
                 </tr>
@@ -88,8 +88,7 @@
 
         </table>
             <div class="table-action">
-                <button type="button"class="process-form delete sbtn" data-form-name="frmList">
-                    선택모델 삭제하기
+                <button type="button"class="process-form delete btn sbtn" data-form-name="frmList" th:text="#{선택모델_삭제하기}">
                 </button>
             </div>
     </form>

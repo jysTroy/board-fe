@@ -503,7 +503,7 @@ aside.my-menu .menu-profile:hover {
   z-index: 11;
 }
 
-.file-images:hover .remove {
+.file-images:hover  {
     background-color: rgba(255, 0, 0, 1);
 }
 
