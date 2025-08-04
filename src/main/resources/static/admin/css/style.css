@@ -88,7 +88,8 @@ header .user-actions button {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 4px 16px;
+  margin: 10px 0;
   transition: color 0.2s;
 }
 
@@ -98,8 +99,8 @@ header .user-actions button:hover {
 }
 
 header .profile-image {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -265,6 +266,24 @@ aside a.on {
 .submit-btn:hover {
   background-color: #0076d6;
 }
+
+/* ------ 헤더 버튼 S ------ */
+
+.header-btn {
+  padding: 4px 16px;
+  background-color: #F8FAFC;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.header-btn:hover {
+  background-color: #2FA1FC;
+  color: #fff !important;
+  text-decoration: underline;
+}
+/* ------ 헤더 버튼 E ------ */
 
 /* ---------- 입력 요소 ---------- */
 input[type='text'],

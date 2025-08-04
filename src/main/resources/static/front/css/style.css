@@ -70,6 +70,7 @@ h1.main-title {
 .btn:hover {
   background-color: #2FA1FC;
   color: #fff;
+  text-decoration: underline;
 }
 
 /* ---------- 프론트 스타일 초기화 E ----------  */
@@ -204,10 +205,6 @@ header .user-actions .dot {
 header .user-actions .dot {
     color: #e6e6e6;
     margin: 0 6px;
-}
-
-header .user-actions a:hover {
-  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
@@ -420,7 +417,7 @@ main-menu .sub-menus li.on .sub-menu-items {
 
 
 /* 페이지네이션 스타일  S */
-.myboard-container .pagination {
+.pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -488,4 +485,8 @@ main-menu .sub-menus li.on .sub-menu-items {
 .profile-image:hover > img {
     box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
     transform: scale(1.02);
+}
+
+.mypage-gender {
+    font-size: 20px;
 }
