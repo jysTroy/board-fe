@@ -33,8 +33,18 @@ img {
 }
 
 h1, h2 {
-  margin: 0 0 1rem 0;
   font-weight: 700;
+}
+
+h1 {
+  font-size:
+  margin-bottom: 35px;
+}
+
+h2 {
+  border-bottom: 3px solid #1F9EFF;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 /* ---------- 헤더 ---------- */
@@ -322,11 +332,12 @@ textarea:focus {
   gap: 15px;
 }
 
-/* ---------- dn ---------- */
+/* ---------- css 편의를 위해 정의 ---------- */
 .dn { display: none !important; }
 
 .search-option {
-    width: 100px !important;
+    width: 150px;
+    margin-right: 5px;
 }
 
 .form-margin {
