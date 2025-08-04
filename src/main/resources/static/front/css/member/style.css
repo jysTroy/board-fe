@@ -411,7 +411,7 @@ input#terms-agree {
 }
 
 /* 삭제 버튼 - 이미지 오른쪽 위에 위치 */
-.file-images  {
+.file-images .remove  {
     position: absolute;
     top: 5px;
     right: 5px;
