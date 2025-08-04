@@ -3,6 +3,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/index}">
 
+<th:block layout:fragment="addCss">
+    <link rel="stylesheet" th:href="@{/front/css/board/style.css}" />
+</th:block>
+
 <main layout:fragment="content">
     <th:block th:replace="~{front/board/_board_title::common}"></th:block>
     <form name="frmSave" method="POST" th:action="@{/board/save}" autocomplete="off">
