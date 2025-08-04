@@ -17,7 +17,7 @@
     <div class="board-list-container">
         <ul class="board-list">
             <li th:each="board : ${boards}" class="board-card">
-                <a th:href="@{|/board/list/${board.bid}|}" class="board-link">
+                <a th:href="@{|/board/list/${board.bid}|}" class="board-links">
                     <div class="card-title" th:text="${board.name}">게시판 이름</div>
                 </a>
             </li>
