@@ -39,7 +39,7 @@ public class ModelViewController {
 		model.addAttribute("pagination", data.getPagination());
 
 		model.addAttribute("pageTitle", utils.getMessage("모델_목록"));
-		model.addAttribute("subCode", search.getSubCategory());
+		model.addAttribute("subCode", search.getCategory());
 
 		return "front/model/list";
 	}
