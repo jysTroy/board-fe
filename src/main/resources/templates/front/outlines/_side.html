@@ -12,12 +12,6 @@
         <img th:src="@{/common/images/logo.png}" alt="기본 프로필 이미지">
     </th:block>
 
-    <th:block th:unless="${isLogin}">
-        <a th:href="@{/}" class="logo">
-            <img src="/common/images/logo.png"/>
-        </a>
-    </th:block>
-
     <ul class="menus">
         <li>
             <a href="#"
