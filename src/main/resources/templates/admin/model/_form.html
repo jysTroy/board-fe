@@ -53,12 +53,20 @@
         <tr class="add-top-line">
             <th width="120">메인 이미지</th>
             <td>
+                <!-- 메인 이미지가 없을 경우 -->
+                <button type="button" th:text="#{이미지_선택}" th:if="*{mainImage == null} or *{mainImage.seq == null}"
+                        class="file-upload-btn submit-btn sbtn"
+                        th:data-gid="*{gid}"
+                        data-location='main'
+                        data-single="true"
+                        data-image-only="true"></button>
+
+                <!-- 메인 이미지가 있을 경우 -->
                 <div class="main-image">
-                    <div th:unless="*{mainImage != null}">
-                        <button type="button" th:text="#{이미지_선택}" class="file-upload-btn submit-btn sbtn" th:data-gid="*{gid}" data-location='main' data-single="true" data-image-only="true"></button>
-                    </div>
-                    <div th:if="*{mainImage != null}" class="file-images" th:id="*{'file-' + mainImage.seq}">
-                        <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{mainImage.seq})}" class="image show-image" th:data-seq="*{mainImage.seq}">
+                    <div  th:unless="*{mainImage == null} or *{mainImage.seq == null}" class="file-images" th:id="*{'file-' + mainImage.seq}">
+                        <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{mainImage.seq})}"
+                             class="image show-image"
+                             th:data-seq="*{mainImage.seq}">
                         <button type="button" class="remove" th:data-seq="*{mainImage.seq}">삭제</button>
                     </div>
                 </div>
