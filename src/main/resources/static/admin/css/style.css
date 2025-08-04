@@ -206,7 +206,7 @@ aside a.on {
 .table-cols td,
 .table-rows td {
   padding: 12px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 .table-rows tr:nth-child(even) td {
@@ -347,6 +347,11 @@ textarea:focus {
 
 .file-images {
   position: relative;
+}
+
+/* 삭제 버튼 처리 */
+.file-images {
+  position: relative;
   width: 250px;
   height: 250px;
   overflow: hidden;
@@ -381,4 +386,8 @@ textarea:focus {
 
 .add-top-line {
     border-top: 1px solid #ddd;
+}
+
+.uploaded .file-upload-btn {
+    display: none;
 }
