@@ -34,8 +34,8 @@ public class BannerController {
     private final BannerValidator bannerValidator;
     private final Utils utils;
 
-    @ModelAttribute("menuCode")
-    public String menuCode() {
+    @ModelAttribute("mainCode")
+    public String mainCode() {
         return "banner";
     }
 
@@ -240,6 +240,6 @@ public class BannerController {
         }
 
         model.addAttribute("pageTitle", pageTitle);
-        model.addAttribute("subMenuCode", mode);
+        model.addAttribute("subCode", mode);
     }
 }
