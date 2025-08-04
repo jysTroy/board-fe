@@ -160,11 +160,22 @@ label {
 }
 
 .frm-search button {
-    flex-shrink: 0;
+     width: 15%;
+      padding: 12px;
+      background-color: #c2e1e4;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
 }
 
 .frm-search button:hover {
-    background-color: #91c8e5;
+    background-color: #1E9EFF;
+    color: white;
 }
 
 .category-tabs {
@@ -360,7 +371,7 @@ label {
     background-color: #156fcd;
 }
 
-.btn {
+.b-btn {
     background-color: #f0f8ff;
     border: 1px solid #66b2ff;
     color: #0077cc;
@@ -371,28 +382,9 @@ label {
     transition: 0.3s;
 }
 
-.btn:hover {
+.b-btn:hover {
     background-color: #e0f0ff;
     color: #005fa3;
-}
-
-.btn-submit {
-  width: 15%;
-  padding: 12px;
-  background-color: #c2e1e4;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: block;
-  margin: 0 auto;
-}
-
-.btn-submit:hover {
-  background-color: #1E9EFF;
-  color: white;
 }
 
 .button-group {
