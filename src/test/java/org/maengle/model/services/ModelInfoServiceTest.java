@@ -30,7 +30,7 @@ class ModelInfoServiceTest {
     private ModelMapper modelMapper;
 
     @InjectMocks
-    private ModelViewService modelInfoService;
+    private ModelViewService modelViewService;
 
     @BeforeEach
     void setUp() {
@@ -58,7 +58,7 @@ class ModelInfoServiceTest {
         when(fileInfoService.getList("1234", "main")).thenReturn(List.of(mainFile));
         when(fileInfoService.getList("1234", "list")).thenReturn(List.of(listFile));
 
-        Model result = modelInfoService.get(seq);
+        Model result = modelViewService.get(seq);
 
         assertNotNull(result);
         assertEquals("1234", result.getGid());
