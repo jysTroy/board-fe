@@ -88,7 +88,8 @@ header .user-actions button {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 4px 16px;
+  margin: 10px 0;
   transition: color 0.2s;
 }
 
