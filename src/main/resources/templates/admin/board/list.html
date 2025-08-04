@@ -6,13 +6,13 @@
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
 
-    <form name="frmSearch" method="GET" th:action="@{/admin/board}" autocomplete="off" th:object="${commonSearch}">
+    <form name="frmSearch" method="GET" th:action="@{/admin/board}" autocomplete="off" th:object="${commonSearch}" class="form-margin">
         <table class="table-cols">
             <tr>
                 <th width="150">키워드 검색</th>
                 <td>
                     <div class="flex">
-                        <select name="sopt" th:field="*{sopt}" class="w180 mr5">
+                        <select name="sopt" th:field="*{sopt}" class="search-option">
                             <option value="ALL">통합검색</option>
                             <option value="BID">게시판 ID</option>
                             <option value="NAME">게시판 이름</option>

@@ -6,13 +6,13 @@
 <section layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
 
-    <form name="frmSearch" method="GET" th:action="@{/admin/model}" autocomplete="off" th:object="${search}">
+    <form name="frmSearch" method="GET" th:action="@{/admin/model}" autocomplete="off" th:object="${search}" class="form-margin">
         <table class="table-cols">
             <tr>
                 <th width="150">키워드 검색</th>
                 <td>
                     <div class="flex">
-                        <select  class="w180 mr5">
+                        <select  class="search-option">
                             <option value="ALL">통합검색</option>
                             <option value="NAME">모델명</option>
                             <option value="CATEGORY">모델 설명</option>
@@ -52,10 +52,9 @@
 
                     <!-- 체크박스 -->
                     <td align="center">
-                        <input type="checkbox" name="idx" th:value="*{seq}" th:id="${'chk-' + status.index}">
+                        <input type="checkbox" name="idx" th:value="*{status.index}" th:id="${'chk-' + status.index}">
                         <label th:for="${'chk-' + status.index}" class="standalone"></label>
                         <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}" />
-                        <input type="hidden" th:name="${'status_' + status.index}" th:value="*{modelStatus}">
                     </td>
 
                     <!-- 카테고리 -->
