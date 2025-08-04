@@ -52,8 +52,8 @@
                     <input type="text" th:name="${'name_' + status.index}" th:value="*{name}">
                 </td>
                 <td>
-                    <a th:href="@{/admin/board/update/{bid}(bid=*{bid})}" class="sbtn">게시판 수정</a>
-                    <a th:href="@{/board/list/{bid}(bid=*{bid})}" class="sbtn black" target="_blank">미리보기</a>
+                    <a th:href="@{/admin/board/update/{bid}(bid=*{bid})}" class="btn">게시판 수정</a>
+                    <a th:href="@{/board/list/{bid}(bid=*{bid})}" class="btn" target="_blank">미리보기</a>
                 </td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">
