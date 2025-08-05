@@ -111,6 +111,11 @@
   - 사용자의 메시지를 받고 AI 챗봇 API에 메시지를 전송하여 응답 수신
   - 사용자 메시지 및 챗봇 메세지, 감정 정보를 DB에 저장
   - 프론트엔드에 필요한 CSS, JS 리소스 동적 추가
+- 공통소스 : file
+  - [업로드] : FileUploadService → FileInfoService (경로 계산, URL 설정) → DB 저장
+  - [삭제] : FileDeleteService → FileInfoService (정보 조회) → File 시스템 + DB 삭제
+  - [조회] : FileInfoService 단독 → DB 조회 + 경로/URL 가공
+  - [JS 연동] : commonLib.fileManager → Ajax로 /file/upload, /file/delete → 위 서비스들 호출
 
 ### ➡️ 코드 리뷰
 - MyPageController
@@ -159,6 +164,36 @@
   - API URL, 메시지, 모델 번호를 포함한 GET 요청 생성 및 전송
   - 응답에서 시스템 메시지와 감정 정보를 추출해 DB에 업데이트
   - 멤버 정보를 MemberUtil로 가져와 연동
+ 
+- FileInfoService
+  - 파일 정보를 조회하고 가공하는 역할을 담당하는 서비스
+  - 주요 기능 get(Long seq) → 파일의 고유 번호(seq)로 FileInfo 엔티티 조회 후 URL, 경로, 이미지 여부 등의 부가 정보를 설정
+  - getList(String gid, String location, FileStatus status) → 파일 그룹(gid) 및 위치(location)에 따라 필터링된 파일 목록을 조회합니다. FileStatus로 DONE, UNDONE 필터링 가능
+  - getFileUrl(FileInfo item) → 브라우저에서 접근 가능한 파일 URL 생성.
+  - getFilePath(FileInfo item) → 서버에서의 실제 저장 경로 생성.
+  - addInfo(FileInfo item) → 파일 객체에 파일 경로, URL, 이미지 여부, 썸네일 경로 등을 설정합니다.
+  - folder(long seq) → 파일 저장 폴더를 0~9 범위로 분산 저장하도록 지정 (seq % 10).
+- FileUploadService
+  - 파일을 서버에 업로드하고 DB에 기록하는 서비스
+  - 주요 기능 uploadProcess(RequestUpload uploadForm)
+  - 파라미터에서 gid, location, single, imageOnly 등의 설정값을 추출
+  - 유효성 검사 및 옵션에 따라 기존 파일 삭제(single이면 deleteService.process(...))
+  - MultipartFile을 지정 폴더에 저장
+  - DB에 FileInfo 저장 후 경로 추가
+  - processDone(String gid) → 특정 파일 그룹에 속한 파일들을 done = true 상태로 업데이트
+  - 특이사항 저장 경로는 basePath/폴더(seq%10)/파일명(seq+확장자) 형태로 지정됨.
+  - 실패 시 DB에서 FileInfo 레코드 삭제.
+- FileDeleteService
+  - 파일을 서버 디스크와 DB에서 모두 삭제하는 서비스
+  - 주요 기능 deleteProcess(Long seq)
+  - infoService.get(seq)으로 파일 정보 조회
+  - File 객체 생성 후 실제 경로에서 파일 삭제
+  - DB에서도 삭제 처리
+  - process(String gid, String location) → 해당 gid 및 location에 포함된 파일들을 반복적으로 deleteProcess() 호출하여 일괄 삭제 → location이 없으면 전체 gid로 삭제 가능
+- [Upload] : FileUploadService → FileInfoService (경로 계산, URL 설정) → DB 저장
+- [Delete] : FileDeleteService → FileInfoService (정보 조회) → File 시스템 + DB 삭제
+- [조회] : FileInfoService 단독 → DB 조회 + 경로/URL 가공
+- [JS 연동] : commonLib.fileManager → Ajax로 /file/upload, /file/delete → 위 서비스들 호출
 
 ### ✅ 구현 이미지
 ![구현화면1](https://github.com/Team2-chatBoard/chatboard/blob/master/img/jyh/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20board%20%EA%B5%AC%ED%98%84%ED%99%94%EB%A9%B4.png)
