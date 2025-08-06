@@ -1,0 +1,416 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Segoe UI", sans-serif;;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  color: #141414;
+  background-color: #F8FAFC;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol, li, dl, dt, dd {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+  max-width: 100%;
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size:
+  margin-bottom: 35px;
+}
+
+h2 {
+  border-bottom: 3px solid #1F9EFF;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+/* ---------- 헤더 ---------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 10px 0;
+  background-color: #FEFEFF;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+@media (max-width: 600px) {
+
+   .site-header .user-actions .dot {
+        margin: 0 7px;
+   }
+}
+
+
+header .site-logo {
+    display: block;
+    width: 150px;
+    margin: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+header .user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+header .user-actions a,
+header .user-actions button {
+  font-weight: 600;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 16px;
+  margin: 10px 0;
+  transition: color 0.2s;
+}
+
+header .user-actions a:hover,
+header .user-actions button:hover {
+  color: #1E9EFF;
+}
+
+header .profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+
+.logo-box {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo-a .site-logo {
+  height: auto;
+}
+
+
+/* ---------- 레이아웃 ---------- */
+main {
+  display: flex;
+  min-height: 90vh;
+}
+
+aside {
+  width: 220px;
+  background: #ffffff;
+  border-right: 1px solid #e6e6e6;
+  padding-top: 20px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+}
+
+aside a {
+  display: block;
+  padding: 18px 20px;
+  font-size: 1.1rem;
+  color: #333;
+  border-left: 4px solid transparent;
+  transition: all 0.3s;
+}
+
+aside a:hover {
+  background: #f2f8ff;
+  color: #1E9EFF;
+}
+
+aside a.on {
+  background: #1E9EFF;
+  color: #fff;
+  font-weight: 700;
+  border-left: 4px solid #0d8bff;
+}
+
+/* ---------- 본문 영역 ---------- */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #fff;
+}
+
+.main-content nav {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.main-content nav a {
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  color: #333;
+  flex: 1;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.main-content nav a:hover {
+  background: #e9f3ff;
+}
+
+.main-content nav a.on {
+  background: #1E9EFF;
+  color: #fff;
+}
+
+/* ---------- 테이블 ---------- */
+.table-cols, .table-rows {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.table-cols th,
+.table-rows th {
+  background-color: #f0f0f0;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-cols td,
+.table-rows td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-rows tr:nth-child(even) td {
+  background: #f9f9f9;
+}
+
+.table-rows td.image-cell {
+    width: 80px;
+    height: 80px;
+    padding: 0 !important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-rows td.image-cell img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    display: block !important;
+    margin: 0 auto;
+    border: none !important;
+}
+
+/* ---------- 버튼 ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #fff;
+  border: 2px solid #1E9EFF;
+  color: #1E9EFF;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background-color: #1E9EFF;
+  color: #fff;
+}
+
+.btn.black {
+  background-color: #141414;
+  color: #fff;
+  border: none;
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background-color: #1E9EFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #0076d6;
+}
+
+/* ------ 헤더 버튼 S ------ */
+
+.header-btn {
+  padding: 4px 16px;
+  background-color: #F8FAFC;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.header-btn:hover {
+  background-color: #2FA1FC;
+  color: #fff !important;
+  text-decoration: underline;
+}
+/* ------ 헤더 버튼 E ------ */
+
+/* ---------- 입력 요소 ---------- */
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='email'],
+input[type='date'],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #1E9EFF;
+  outline: none;
+}
+
+/* ---------- 페이징 ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 30px 0;
+}
+
+.pagination a {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #1E9EFF;
+  transition: background-color 0.3s;
+}
+
+.pagination a.on,
+.pagination a:hover {
+  background-color: #1E9EFF;
+  color: #fff;
+}
+
+/* ---------- 좌우 정렬 ---------- */
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  gap: 15px;
+}
+
+/* ---------- css 편의를 위해 정의 ---------- */
+.dn { display: none !important; }
+
+.search-option {
+    width: 150px;
+    margin-right: 5px;
+}
+
+.form-margin {
+    margin-bottom: 30px;
+}
+
+/* 삭제 버튼 - 이미지 오른쪽 위에 위치 */
+
+.file-images {
+  position: relative;
+}
+
+/* 삭제 버튼 처리 */
+.file-images {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.file-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 삭제 버튼 처리 */
+.file-images .remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 0, 0, 0.55);
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 11;
+}
+
+.file-images .remove:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.add-top-line {
+    border-top: 1px solid #ddd;
+}
+
+.uploaded .file-upload-btn {
+    display: none;
+}
+
+/* 유틸리티 */
+
+.layout-width {
+    max-width: 1170px;
+    min-width: 1024px;
+    margin: 0 auto;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/index}">
+
+<main layout:fragment="content" class="join-template">
+    <div class="join-container">
+        <h1 th:text="${pageTitle}" class="join-title"></h1>
+        <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}" class="join-form">
+            <input type="hidden" name="gid" th:field="*{gid}">
+            <input type="hidden" name="socialType" th:field="*{socialType}">
+            <input type="hidden" name="socialToken" th:field="*{socialToken}">
+
+            <div th:if="*{social}">
+                <th:block th:text="*{#messages.msg('SocialType.' + socialType)}"></th:block> 회원 가입
+            </div>
+            <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+            <ul>
+                <li>
+                    <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
+                    <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+                </li>
+                <li th:if="*{!social}">
+                    <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
+                    <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+                </li>
+                <li th:if="*{!social}">
+                    <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
+                    <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}">
+                    <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div th:each="gen : ${genders}" class="gender-option">
+                        <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name()}" class="radio-input">
+                        <label th:for="${'gender-' + gen.name()}" th:text="${#messages.msg(gen.name())}"></label>
+                    </div>
+                    <div class="error" th:each="err : ${#fields.errors('gender')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div>
+                        <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}" id="email_input">
+
+                        <button type="button" class="email_verify" id="email_re_verify" th:text="#{재전송}" ></button>
+                        <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" class="email_verify" id="email_verify" th:text="#{인증코드전송}"></button>
+                    </div>
+                    <div id="email_message_box">
+                        <span id="email_message"></span>
+                    </div>
+                    <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <div class="email_auth_box">
+                        <!-- 인증번호 입력란 -->
+                        <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                            <div class="auth_box1">
+                                <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                                <span id="auth_count">03:00</span>
+                                <button type="button" class="email_verify" id="email_confirm" th:text="#{확인}" disabled></button>
+                            </div>
+                        </th:block>
+                        <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                            <span class='confirmed' th:text="#{확인된_이메일_입니다}"></span>
+                        </th:block>
+                    </div>
+                </li>
+                <li>
+                    <input type="text" name="mobile" th:field="*{mobile}" th:placeholder="#{휴대전화번호}">
+                    <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+                </li>
+                <li>
+                    <!-- 프로필 이미지를 modal로 처리한 부분 -->
+                    <button type="button" class="modal-open" id="modal-open-btn" data-target-id="modal-profile">프로필 이미지 첨부</button>
+                    <div class="modal-content" id="modal-profile" data-title="프로필 이미지" data-width="350" data-height="400">
+                        <div class="profile-image" th:classappend="*{profileImage != null} ? 'uploaded'">
+                            <div th:text="#{프로필_이미지_첨부하기}" class="file-upload-btn drag-drop-upload" th:data-gid="*{gid}" data-single="true" data-image-only="true"></div>
+                            <div class="inner">
+                                <div th:if="*{profileImage != null}" class="file-images" th:id="*{'file-' + profileImage.seq}">
+                                    <img th:src="@{/file/thumb?seq={seq}&width=250&height=250&crop=true(seq=*{profileImage.seq})}" class="image show-image" th:data-seq="*{profileImage.seq}">
+                                    <button type="button" class="remove" th:data-seq="*{profileImage.seq}">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="terms">
+                <h3 th:text="#{약관동의}" class="terms-agree-title"></h3>
+                <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
+                <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
+                <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>
+            </div>
+
+            <button type="submit" th:text="#{가입하기}" class="btn-join"></button>
+        </form>
+    </div>
+    <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+</main>
+</html>

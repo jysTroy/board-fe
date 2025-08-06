@@ -1,6 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <footer th:fragment="common">
-        <h2>헤더</h2>
-    </footer>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="common">
+    <div class="site-header layout-width">
+        <div class="left logo-box">
+            <a th:href="@{/}" class="site-logo-a"><img th:src= "@{/common/images/logo_text.png}" class="site-logo"/></a>
+        </div>
+        <div class="right">
+            <form id="site-main-search" method="get" th:action="@{/board/search}">
+                <svg width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="icon"><path fill-rule="evenodd" d="M13.28 8.18a5.1 5.1 0 11-10.2 0 5.1 5.1 0 0110.2 0zm-1.031 5.069a6.5 6.5 0 11.991-.989l4.695 4.695a.7.7 0 11-.99.99l-4.696-4.696z"></path></svg>
+                <input type="text" name="skey">
+            </form>
+            <div class="user-actions">
+                <th:block th:if="${isLogin}">
+                    <a th:href="@{/mypage}" th:text="#{마이페이지}" class="btn"></a>
+                    <th:block sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{/admin}" th:text="#{사이트_관리}" class="btn"></a>
+                    </th:block>
+                    <a th:href="@{/logout}" th:text="#{로그아웃}" class="btn"></a>
+                    <th:block th:if="${loggedMember.profileImage != null}" th:utext="${@utils.printThumb(loggedMember.profileImage.seq, 50, 50, 'profile-image')}"></th:block>
+                    <a th:href="@{/mypage}" th:text="${#messages.msg('LOGIN_MSG', loggedMember.name, loggedMember.email)}" class="btn"></a>
+
+                </th:block>
+
+                <th:block th:unless="${isLogin}">
+                    <a th:href="@{/member/join}" th:text="#{회원가입}" class="btn"></a>
+                    <svg width="3" height="3" viewBox="0 0 3 3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="dot"><circle cx="1.5" cy="1.5" r="1.5"></circle></svg>
+                    <button type="button" th:text="#{로그인}" class="btn modal-open" data-width="450" data-height="605" data-url="/member/login" th:data-title="#{맹글 놀이터}"></button>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</header>
 </html>

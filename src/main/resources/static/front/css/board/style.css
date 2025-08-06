@@ -1,0 +1,483 @@
+form[name="frmSave"] {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+
+dl {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+dt {
+    width: 100px;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 10px;
+    color: #0077cc;
+}
+
+dd {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #66b2ff;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f0f8ff;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #0077cc;
+    background-color
+    }
+
+select, input[type="password"] {
+    width: 30%;
+    padding: 10px 12px;
+    border: 1px solid #66b2ff;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f0f8ff;
+    transition: all 0.3s;
+}
+
+select:focus, input:focus {
+    border-color: #0077cc;
+    background-color: #e6f0ff;
+}
+``
+/* 체크박스 + 라벨 */
+input[type="checkbox"] {
+    margin-right: 6px;
+}
+label {
+    font-size: 13px;
+    color: #444;
+}
+
+
+.board-title-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.board-title-wrap::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.board-title a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.write-button {
+    background-color: #f0f8ff;
+    border: 1px solid #66b2ff;
+    color: #0077cc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.write-button:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.items {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.items li {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+.items .subject {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0077cc;
+    margin-bottom: 6px;
+    text-decoration: none;
+}
+
+.items .post-info {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: #666;
+}
+
+.frm-search {
+    display: flex;
+    gap: 8px;
+    max-width: 800px;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.frm-search select,
+.frm-search input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.frm-search button {
+     width: 15%;
+      padding: 12px;
+      background-color: #c2e1e4;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: block;
+      margin: 0 auto;
+}
+
+.frm-search button:hover {
+    background-color: #1E9EFF;
+    color: white;
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px 0;
+    max-width: 800px;
+}
+
+.category-tabs .tab {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #66b2ff;
+    border-radius: 20px;
+    background-color: #f0f8ff;
+    color: #0077cc;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-tabs .tab:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.category-tabs .tab.on {
+    background-color: #a8d8f0;
+    color: #000;
+    font-weight: bold;
+    border-color: #3399ff;
+}
+
+.board-view-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #fff;
+}
+
+.board-view-page .subject-wrap {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.board-view-page .post-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #555;
+    padding-bottom: 10px;
+}
+
+.board-view-page .content {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.board-view-page .links {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.board-view-page .content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 댓글 전체 영역 */
+.comment-items {
+    list-style: none;
+    padding: 0;
+    margin: 30px auto;
+    max-width: 800px;
+}
+
+/* 댓글 아이템 */
+.comment-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+/* 작성자/작성일시 라인 */
+.comment-item .top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+    color: #555;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 6px;
+}
+
+.comment-item .top-section .left {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-item .top-section .right {
+    font-style: italic;
+    color: #777;
+}
+
+/* 댓글 본문 */
+.comment-item .content-section {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #222;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+/* 수정/삭제 버튼 */
+.comment-item .controls {
+    text-align: right;
+}
+
+.comment-item .controls a {
+    font-size: 0.85rem;
+    color: #0077cc;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.comment-item .controls a:hover {
+    text-decoration: underline;
+}
+
+.comment-form {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 2px solid #dce9f8;
+    border-radius: 12px;
+    background-color: #f9fcff;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.comment-form .top-section,
+.comment-form .content-section {
+    margin-bottom: 15px;
+}
+
+.comment-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bcdcfb;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.comment-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.comment-form button {
+    padding: 10px 18px;
+    background-color: #2582e5;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #156fcd;
+}
+
+.b-btn {
+    background-color: #f0f8ff;
+    border: 1px solid #66b2ff;
+    color: #0077cc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.b-btn:hover {
+    background-color: #e0f0ff;
+    color: #005fa3;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.btn-group .btn {
+  margin-left: 8px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 5px;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2FA1FC;
+  cursor: pointer;
+}
+
+.checkbox label {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* all.html 영역  S */
+
+.board-all-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px;
+    color: #333;
+}
+
+.board-list-container {
+    max-width: 960px;
+    margin: 0px auto;
+    padding: 0 20px 50px;
+}
+
+.board-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.board-card {
+    flex: 1 1 200px;
+    max-width: 250px;
+    border: 2px solid #2196f3;
+    border-radius: 16px;
+    background-color: #e3f2fd;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.board-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.2);
+}
+
+.board-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding: 0 15px;
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0d47a1;
+    text-align: center;
+}
+
+/* all.html 영역  E */

@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="base_url" th:content="@{/}">
+    <meta name="csrf_token" th:content="${_csrf.token}">
+    <meta name="csrf_header" th:content="${_csrf.headerName}">
+    <meta name="keywords" th:content="${@utils.keywords()}">
+    <meta name="description" th:content="${@utils.description()}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css">
+
+    <!-- 슬라이드용 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
+    <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
+          th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
+    <th:block layout:fragment="addCommonCss"></th:block>
+
+    <!-- popup 처리용 -->
+    <link th:if="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/front/css/style.css?v={v}(v=${@utils.version()})}">
+
+    <link th:unless="${param.popup == null || !param.popup}" rel="stylesheet" type="text/css" th:href="@{/common/css/popup.css?v={v}(v=${@utils.version()})}">
+
+    <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCss}"
+          th:href="@{/front/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
+    <th:block layout:fragment="addCss"></th:block>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
+    <script th:src="@{/common/js/modal.js?v={v}(v=${@utils.version()})}"></script>
+    <script th:unless="${param.popup == null || !param.popup}" th:src="@{/common/js/popup.js?v={v}(v=${@utils.version()})}"></script>
+
+    <script th:src="@{/front/js/main/common.js}"></script>
+
+    <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
+    <th:block layout:fragment="addCommonScript"></th:block>
+
+    <script th:src="@{/front/js/common.js?v={v}(v=${@utils.version()})}"></script>
+    <script th:each="jsFile : ${addScript}" th:src="@{/front/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
+    <th:block layout:fragment="addScript"></th:block>
+
+    <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+</head>
+<body>
+    <!-- popup 처리용 -->
+    <th:block th:if="${param.popup == null || !param.popup}">
         <header th:replace="~{front/outlines/_header::common}"></header>
-        <main layout:fragment="content"></main>
+    </th:block>
+
+    <th:block th:if="${param.popup == null || !param.popup}">
+        <aside th:replace="~{front/outlines/_side::common}"></aside>
+    </th:block>
+
+    <main layout:fragment="content"></main>
+    <main layout:fragment="content2"></main>
+
+    <th:block th:if="${param.popup == null || !param.popup}">
         <footer th:replace="~{front/outlines/_footer::common}"></footer>
-    </body>
+    </th:block>
+    <iframe name="ifrmProcess" class="dn"></iframe>
+</body>
 </html>

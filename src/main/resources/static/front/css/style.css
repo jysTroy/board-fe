@@ -1,0 +1,496 @@
+/* ---------- 프론트 스타일 초기화 S ----------  */
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    font-family: "Segoe UI", sans-serif;;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+    color: #000;
+    background: #F8FAFC;
+    align-items: center;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+}
+
+/* 제목 공통 */
+h1.main-title {
+    font-size: 1.35rem;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #1F9EFF;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.layout-width {
+    max-width: 1170px;
+    min-width: 1024px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.btn {
+  padding: 4px 16px;
+  background-color: #F8FAFC;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background-color: #2FA1FC;
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------- 프론트 스타일 초기화 E ----------  */
+
+
+
+/* ---------- 헤더 영역 S ---------- */
+
+.site-header {
+  border-bottom: 1px solid #D3D3D3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 10px 0
+}
+
+.logo-box{
+    display: flex;
+    justify-content: center;
+}
+
+.site-logo-a {
+    display: inline-block;
+}
+
+header .site-logo {
+    display: block;
+    width: 150px;
+    margin: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+header .right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+header #site-main-search {
+    background: #f5f5f5;
+    border: 1px solid rgba(0, 0, 0, 0.5%);
+    border-radius: 8px;
+    height: 40px;
+    padding: 10px;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+header #site-main-search svg {
+    color: #a5a5a5;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+header #site-main-search input[type='text']{
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    color: #141414;
+    caret-color: #1E9EFF;
+    flex-grow: 1;
+    border: 0;
+    background: #f5f5f5;
+}
+
+header .right a, button:not(.btn) {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+}
+header .right button:not(.btn) {
+    background: transparent;
+    border: 0;
+}
+
+header nav > div {
+    display: flex;
+    height: 52px;
+    padding: 0 18px 0 30px !important;
+}
+header nav a {
+    line-height: 52px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 12px;
+    color: #000;
+    border-radius: 10px;
+}
+
+header nav a:hover {
+    color: #e0e0e0;
+}
+
+header nav a.on {
+    background-color: #1E9EFF;
+    color: #fff;
+}
+
+header .user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+header .user-actions > * {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+header .user-actions a {
+  margin: 10px 0px;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+}
+
+/*-- 도트 숨기기 --*/
+header .user-actions .dot {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+header .user-actions .dot {
+    color: #e6e6e6;
+    margin: 0 6px;
+}
+
+@media (max-width: 600px) {
+  header .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  header .user-actions {
+    align-self: flex-end;
+    justify-content: center;
+  }
+}
+
+/* ---------- 헤더 영역 E ---------- */
+
+
+
+/* ---------- 푸터 영역 S ---------- */
+
+.footer-logo{
+    width: 25px;
+}
+
+footer {
+  background-color: #FEFEFF;
+  box-shadow: 0 -4px 8px -4px rgba(0, 0, 0, 0.1);
+  color: #333;
+  padding: 20px 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0px;
+  color: #222;
+}
+
+.contact-info p {
+  margin: 4px 0;
+}
+
+.contact-info a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  margin: 20px 0;
+  color: #666;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.inner{
+    padding: 15px 0;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    font-size: 13px;
+    padding: 30px 15px;
+  }
+
+   .site-header .user-actions .dot {
+        margin: 0 7px;
+   }
+}
+
+/* ---------- 푸터 영역 ---------- E */
+
+
+
+/* ---------- 프로필 영역 ---------- S */
+
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%; /* 프로필을 원형으로 */
+    background-color: #f0f0f0; /* 배경으로 구분 */
+}
+
+/* ---------- 프로필 영역 ---------- E */
+
+
+/* ---------- 사이드 메뉴 영역 S ---------- */
+aside.main-menu {
+    position: absolute;
+    background: #FEFEFF;
+    border-radius: 8px;
+    top: 90px;
+    left: calc(50% - 830px);
+    width: 230px;
+    min-height: 500px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+aside.main-menu > ul > li .sub-menus {
+    display: none;
+}
+
+aside.main-menu > ul > li.on .sub-menus {
+    display: block;
+}
+
+main-menu .sub-menu-items {
+    display: none;
+}
+
+main-menu .sub-menus li.on .sub-menu-items {
+    display: block;
+}
+
+.menus .modal-open,
+.menus .board-link,
+.menus li > .menu {
+    display: block;
+    background-color: transparent;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.menus .modal-open:hover,
+.menus .board-link:hover,
+.menus li > .menu:hover {
+    background-color: #2FA1FC;
+    color: white;
+}
+
+
+.sub-menus {
+  padding-left: 20px;
+}
+
+.model-all-link {
+  color: #1E90FF;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.sub-menu.toggle-sub-menu {
+  color: #333333;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.sub-menu.toggle-sub-menu:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+  .sub-menu-items {
+    display: none;
+  }
+
+  .sub-menus .on .sub-menu-items {
+    display: block;
+  }
+
+ .sub-menu-items a {
+   color: #777777;
+   font-size: 13px;
+   padding-left: 12px;
+   display: block;
+   transition: color 0.2s ease;
+ }
+
+ .sub-menu-items a:hover {
+   color: #333333;
+   font-weight: 500;
+ }
+
+ .board-side {
+    display: block;
+ }
+
+
+/* ---------- 사이드 메뉴 영역 E ---------- */
+
+
+
+/* 페이지네이션 스타일  S */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 6px;
+}
+
+.pagination a {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  color: #007bff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination a.on {
+  background-color: #007bff;
+  color: white;
+}
+/* 페이지네이션 스타일  E */
+
+/* ---------- 프로필 이미지가 없을 때 대체 링크 스타일 ---------- S */
+
+.menu-profile {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    color: #888;
+    text-align: center;
+    line-height: 180px;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.menu-profile:hover {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: #eef6ff;
+    cursor: pointer;
+}
+
+/* ---------- 프로필 이미지가 없을 때 대체 링크 스타일 ---------- E */
+
+.profile-image > img {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(100, 150, 200, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profile-image:hover > img {
+    box-shadow: 0 3px 6px rgba(33, 150, 243, 0.5);
+    transform: scale(1.02);
+}
+
+.mypage-gender {
+    font-size: 20px;
+}

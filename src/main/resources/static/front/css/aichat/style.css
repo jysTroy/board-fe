@@ -1,0 +1,119 @@
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  height: 600px; /* 스크롤바 확인용 */
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  overflow-y: auto;
+  word-break: break-word;
+  margin-bottom: 10px;
+  background-color: #f7f1e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 스크롤바 CSS */
+.chat-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background-color: #5a9bd4;
+  border-radius: 12px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 12px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  margin: 4px 0;
+}
+
+/* 메세지 위치 */
+.message.user {
+  align-self: flex-end;
+}
+
+.message.system {
+  align-self: flex-start;
+}
+/* 메세지 위치 */
+
+/* 메세지 형태 */
+.message-text {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+/* 메세지 형태 */
+
+
+.message.user .message-text {
+  background-color: #dcf8c6; /* 연두색 (사용자 메시지) */
+  border-bottom-right-radius: 2px;
+}
+
+.message.system .message-text {
+  background-color: #b9e0fd; /* 하늘색 (ai 메시지) */
+  border-bottom-left-radius: 2px;
+}
+
+.message.system .chatbot-emotion {
+  font-size: 3em;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* 사용자는 emotion 없어서 없으면 안보이게 처리 */
+.message.user .chatbot-emotion {
+    display: none;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+}
+
+.input-section input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-section input:focus {
+  border-color: #1E9EFF;
+  box-shadow: 0 0 5px rgba(30, 158, 255, 0.5);
+}
+
+.input-section button {
+  padding: 0 20px;
+  background-color: #fff;
+  color: black;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-section button:hover {
+  background-color: #1E9EFF;
+  color: white;
+}
